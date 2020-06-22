@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 const mongoose = require('mongoose');
-const { response } = require('express');
 
 const connection = mongoose.connect('mongodb://localhost', {
   useNewUrlParser: true,
