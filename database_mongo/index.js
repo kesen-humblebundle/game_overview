@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 const mongoose = require('mongoose');
+const { response } = require('express');
 
 const connection = mongoose.connect('mongodb://localhost', {
   useNewUrlParser: true,
@@ -22,5 +23,29 @@ connection.then((db) => {
 
   const Overview = mongoose.model('Overview', overviewSchema);
 
+  const addOverview = (doc) => {
+    return new Promise((resolve, reject) => {
+      Overview.collection.save(doc, (err, doc) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(doc);
+      });
+    });
+  };
+
+  const addManyOverviews = (array) => {
+    return new Promise((resolve, reject) => {
+      Overview.collection.insertMany(array, (err, docs) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(docs);
+      });
+    });
+  };
+
+  module.exports.addOverview = addOverview;
+  module.exports.addManyOverviews = addManyOverviews;
   module.exports.db = db;
 });

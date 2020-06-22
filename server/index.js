@@ -10,8 +10,14 @@ app.use(express.static('../public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
-  res.send('I got the request');
+app.get('/system_req/:product_id', (req, res) => {
+  res.send('no data to send just yet');
+  res.end();
+});
+
+app.get('/system_req/:product_id/platforms', (req, res) => {
+  console.log(req.params);
+  res.send('no data here either');
   res.end();
 });
 
