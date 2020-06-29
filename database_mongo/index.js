@@ -24,11 +24,11 @@ connection.then((db) => {
 
   const addOverview = (doc) => {
     return new Promise((resolve, reject) => {
-      Overview.collection.save(doc, (err, doc) => {
+      Overview.collection.save(doc, (err, result) => {
         if (err) {
           reject(err);
         }
-        resolve(doc);
+        resolve(result);
       });
     });
   };
