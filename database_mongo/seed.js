@@ -99,3 +99,4 @@ createSystemrequirementss();
 createSteamRatings();
 createDevelopers();
 createPublishers();
+//TODO -Figure out icons for platform, os
