@@ -12,13 +12,11 @@ app.use(bodyParser.json());
 
 app.get('/system_req/:product_id', (req, res) => {
   res.send('no data to send just yet');
-  res.end();
 });
 
 app.get('/system_req/:product_id/platforms', (req, res) => {
   console.log(req.params);
   res.send('no data here either');
-  res.end();
 });
 
 app.listen(process.env.SERVER_PORT, (err) => {

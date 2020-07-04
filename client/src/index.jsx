@@ -1,5 +1,7 @@
+/* eslint-disable no-undef */
+/* eslint-disable import/extensions */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App.jsx';
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('Overview'));
