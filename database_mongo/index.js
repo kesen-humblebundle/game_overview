@@ -22,5 +22,29 @@ connection.then((db) => {
 
   const Overview = mongoose.model('Overview', overviewSchema);
 
+  const addOverview = (doc) => {
+    return new Promise((resolve, reject) => {
+      Overview.collection.save(doc, (err, result) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(result);
+      });
+    });
+  };
+
+  const addManyOverviews = (array) => {
+    return new Promise((resolve, reject) => {
+      Overview.collection.insertMany(array, (err, docs) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(docs);
+      });
+    });
+  };
+
+  module.exports.addOverview = addOverview;
+  module.exports.addManyOverviews = addManyOverviews;
   module.exports.db = db;
 });

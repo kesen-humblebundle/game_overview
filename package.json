@@ -10,7 +10,8 @@
   "scripts": {
     "test": "jest",
     "build": "webpack --watch -d",
-    "server": "nodemon ./server/index.js --ignore node_modules"
+    "server": "nodemon ./server/index.js --ignore node_modules",
+    "seedDB": "node ./database_mongo/seed.js"
   },
   "dependencies": {
     "body-parser": "^1.19.0",

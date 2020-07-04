@@ -1,0 +1,51 @@
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #1b1e1b;
+  color: #7a8086;
+  font-family: 'Sofia Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
+.overview {
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 239px;
+  width: 100%;
+  font-weight: bold;
+  font-size: 13.5px;
+}
+
+.quarter {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 274px;
+  height: 157px;
+}
+
+.specModule {
+  height: 36px;
+}
+
+.specModule p,
+.specModule h4 {
+  margin: 0;
+  padding: 0;
+}
+
+h4 {
+  color: white;
+}
+.iconBox {
+  height: 51px;
+}
+
+.icon {
+  height: 46px;
+}
