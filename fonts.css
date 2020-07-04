@@ -1,15 +1,12 @@
-/* @font-face {
-  font-family: 'Sofia Pro';
-  src: url('https://humblebundle-a.akamaihd.net/static/hashed/a294c7b2895267014ac902206c4bd4c75b586a04.otf')
-    format('opentype');
-  font-weight: 900;
-  font-style: normal;
-} */
-/* url('https://humblebundle-a.akamaihd.net/static/hashed/3a133bc4b813b62e00caab2a415e504a00ed5d6a.woff')
+@font-face {
+  font-family: 'hb-icons';
+  src: url('//humblebundle-a.akamaihd.net/static/hashed/071f4da130bedf8448e5575b6d89440431a1cd8c.woff2')
+      format('woff2'),
+    url('//humblebundle-a.akamaihd.net/static/hashed/3a133bc4b813b62e00caab2a415e504a00ed5d6a.woff')
       format('woff'),
-    url('https://humblebundle-a.akamaihd.net/static/hashed/039dbf6de0bb4dde323934985402db5c79cb98e3.ttf')
+    url('//humblebundle-a.akamaihd.net/static/hashed/039dbf6de0bb4dde323934985402db5c79cb98e3.ttf')
       format('truetype'),
-    url('https://humblebundle-a.akamaihd.net/static/hashed/66a67fe0ca0ecada353d59e025e0791d62a1ebd4.otf')
+    url('//humblebundle-a.akamaihd.net/static/hashed/66a67fe0ca0ecada353d59e025e0791d62a1ebd4.otf')
       format('opentype');
   font-weight: normal;
   font-style: normal;
@@ -18,7 +15,7 @@
   font-family: 'Sofia Pro';
   src: url('//humblebundle-a.akamaihd.net/static/hashed/34c59909d0360e2d5e43bcb210176a753e1866b0.woff2')
       format('woff2'),
-    url('https://humblebundle-a.akamaihd.net/static/hashed/11d59a3ff5cdd3390fb93fbd9615dc0fb56a8c65.woff')
+    url('//humblebundle-a.akamaihd.net/static/hashed/11d59a3ff5cdd3390fb93fbd9615dc0fb56a8c65.woff')
       format('woff'),
     url('//humblebundle-a.akamaihd.net/static/hashed/7e9bccdbfb3878e6a5453bf99993eed610d0e41d.ttf')
       format('truetype'),
@@ -65,56 +62,4 @@
       format('opentype');
   font-weight: normal;
   font-style: italic;
-} */
-
-/* body {
-  padding: 0;
-  margin: 0;
-  background-color: #1b1e1b;
-  color: #7a8086;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-} */
-
-/* h1 {
-  text-align: center;
-} */
-/* .overview {
-  border-top: 1px solid gray;
-  border-bottom: 1px solid gray;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 239px;
-  width: 100%;
-  font-weight: 900;
-  font-size: 14px;
-} */
-
-/* .quarter {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-width: 274px;
-  height: 157px;
-} */
-
-/* .specModule {
-  height: 36px;
-} */
-
-/* .specModule p,
-.specModule h4 {
-  margin: 0;
-  padding: 0;
 }
-
-h4 {
-  color: white;
-}
-.iconBox {
-  height: 51px;
-}
-
-.icon {
-  height: 46px;
-} */
