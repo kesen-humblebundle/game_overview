@@ -2,7 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 const SteamStyled = styled.div`
-  height: 36px;
+  /* height: 157px; */
+  @media (max-width: 959px) {
+    height: 34px;
+    margin-top: 20px;
+  }
 `;
 
 const ParaStyled = styled.p`
