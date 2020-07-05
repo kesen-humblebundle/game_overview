@@ -11,6 +11,27 @@ import SteamRating from './SteamRating.jsx';
 import SystemReqs from './SystemReqs.jsx';
 
 const AppWrapper = styled.div`
+  /* @font-face {
+    font-family: 'Sofia Pro';
+    src: url('../sofiaNorm.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Sofia Pro';
+    src: url('../sofiaBold') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+  } */
+
+  /* @font-face {
+    font-family: 'Sofia Pro';
+    src: url('https://humblebundle-a.akamaihd.net/static/hashed/9370f719a25957b05ace466b39c2a2d4b33734c6.ttf')
+      format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  } */
   background-color: #1b1e1b;
   color: #7a8086;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -25,12 +46,13 @@ const OverviewStyled = styled.div`
   justify-content: center;
   height: 239px;
   width: 100%;
-  font-weight: 900;
+  font-weight: bold;
   font-size: 14px;
 `;
 
 const QuarterStyled = styled.div`
   display: flex;
+  flex-shrink: 1;
   flex-direction: column;
   justify-content: space-between;
   min-width: 274px;

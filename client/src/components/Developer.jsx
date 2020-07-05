@@ -5,12 +5,12 @@ const DevStyled = styled.div`
   height: 36px;
 `;
 
-const ParaStyled = styled.p`
+const HeaderStyled = styled.h4`
   margin: 0;
   padding: 0;
 `;
 
-const H4Styled = styled.h4`
+const SpecStyled = styled.h4`
   color: white;
   margin: 0;
   padding: 0;
@@ -19,8 +19,8 @@ const H4Styled = styled.h4`
 const Developer = (props) => {
   return (
     <DevStyled>
-      <ParaStyled>DEVELOPER</ParaStyled>
-      <H4Styled>Some Content</H4Styled>
+      <HeaderStyled>DEVELOPER</HeaderStyled>
+      <SpecStyled>Some Content</SpecStyled>
     </DevStyled>
   );
 };
