@@ -33,7 +33,7 @@ const AppWrapper = styled.div`
     font-style: normal;
   } */
   background-color: #1b1e1b;
-  color: #7a8086;
+  color: #a1a7b2;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   width: 100%;
 `;
