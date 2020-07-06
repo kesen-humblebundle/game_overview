@@ -35,7 +35,7 @@ const AppWrapper = styled.div`
   background-color: #1b1e1b;
   color: #7a8086;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  width: 100vw;
+  width: 100%;
 `;
 
 const OverviewStyled = styled.div`
