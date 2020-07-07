@@ -67,7 +67,6 @@ class App extends React.Component {
   render() {
     return (
       <AppWrapper>
-        {/* <h1>Future Overview Service</h1> */}
         <OverviewStyled>
           <QuarterStyled>
             <Platforms />
