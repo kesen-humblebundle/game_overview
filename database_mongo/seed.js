@@ -3,7 +3,7 @@ const faker = require('faker');
 const icons = require('./iconURLs.js');
 
 const platformsArray = ['steam', 'gog', 'epic', 'key', 'uPlay', 'origin', 'drmFree', 'epic'];
-const OSarray = ['windows', 'linux', 'mac'];
+const OSarray = ['windows', 'linux', 'mac', 'oculusRift', 'htcVive', 'winMixedReal'];
 const videoCards = ['AMD Radeon', 'NVIDIA GeForce'];
 const processors = ['Intel Core i5', 'Intel Core i7', 'AMD FX-'];
 
@@ -18,10 +18,12 @@ const assignPlatforms = () => {
     while (platformsSubArr.length < length) {
       const steamRnd = Math.random() * 100;
       let rndPlatformIndex = Math.floor(Math.random() * platformsArray.length);
+
       if (steamRnd > 25) {
         rndPlatformIndex = 0;
       }
       const platform = platformsArray[rndPlatformIndex];
+
       if (!platformsSubArr.includes(platformsArray[rndPlatformIndex])) {
         platformsSubArr.push(platform);
       }
@@ -31,15 +33,54 @@ const assignPlatforms = () => {
 
   const urlsArray = [];
   // eslint-disable-next-line no-restricted-syntax
-  for (let plats of resultsArray) {
-    plats = plats.map((platform) => {
+  for (let platforms of resultsArray) {
+    platforms = platforms.map((platform) => {
       return icons[platform];
     });
-    urlsArray.push(plats);
+    urlsArray.push(platforms);
   }
   console.log(urlsArray);
 
   return urlsArray;
+};
+
+const assignOS = () => {
+  const osArray = [];
+
+  for (let i = 0; i < 100; i++) {
+    const gameOSArray = [];
+
+    while (gameOSArray.length < 1) {
+      const windowsProb = Math.random() * 100;
+      const macProb = Math.random() * 100;
+      const linuxProb = Math.random() * 100;
+      const virtualProb = Math.random() * 100;
+      const winMixedRealProb = Math.random() * 100;
+
+      if (windowsProb < 60) {
+        gameOSArray.push(icons.windows);
+      }
+      if (macProb < 40) {
+        gameOSArray.push(icons.mac);
+      }
+      if (linuxProb < 40) {
+        gameOSArray.push(icons.linux);
+      }
+      if (gameOSArray.length < 1 && virtualProb > 50) {
+        gameOSArray.push(icons.oculusRift);
+        gameOSArray.push(icons.htcVive);
+        if (winMixedRealProb < 30) {
+          gameOSArray.push(icons.winMixedReal);
+          gameOSArray.unshift(icons.windows);
+        }
+      }
+    }
+    if (gameOSArray.length === 1 && gameOSArray === icons.linux) {
+      gameOSArray.push(icons.windows);
+    }
+    osArray.push(gameOSArray);
+  }
+  console.log(osArray);
 };
 
 const createSteamRatings = () => {
@@ -141,7 +182,8 @@ const createLinks = () => {
   return linksArr;
 };
 
-assignPlatforms();
+assignOS();
+// assignPlatforms();
 // createLinks();
 // createSystemrequirements();
 // createSteamRatings();

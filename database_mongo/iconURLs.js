@@ -22,7 +22,9 @@ const icons = {
   drmFree:
     'https://res.cloudinary.com/overview/image/upload/t_icon/v1593704464/platformicons/DRM_FreeTrans_qp2bjy.png',
   epic:
-    'https://res.cloudinary.com/overview/image/upload/t_icon/v1593704463/platformicons/EpicTrans_pg6pco.png'
+    'https://res.cloudinary.com/overview/image/upload/t_icon/v1593704463/platformicons/EpicTrans_pg6pco.png',
+  winMixedReal:
+    'https://res.cloudinary.com/overview/image/upload/t_icon/v1594146204/platformicons/WinMixRealityTrans_zdhzzc.png'
 };
 
 module.exports = icons;
