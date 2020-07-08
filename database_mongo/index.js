@@ -1,50 +1,44 @@
 /* eslint-disable no-console */
 const mongoose = require('mongoose');
 
-const connection = mongoose.connect('mongodb://localhost', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
-
-connection.then((db) => {
-  console.log('mongoose connected!');
-
-  const overviewSchema = new mongoose.Schema({
-    game_id: Number,
-    platforms: Array,
-    os: Array,
-    developer: String,
-    publisher: String,
-    system_req: Object,
-    links: Array,
-    steam_rating: Number
+mongoose
+  .connect('mongodb://localhost:27017/overview', {
+    useUnifiedTopology: true,
+    useNewUrlParser: true
+  })
+  .catch((err) => {
+    throw err;
   });
 
-  const Overview = mongoose.model('Overview', overviewSchema);
-
-  const addOverview = (doc) => {
-    return new Promise((resolve, reject) => {
-      Overview.collection.save(doc, (err, result) => {
-        if (err) {
-          reject(err);
-        }
-        resolve(result);
-      });
-    });
-  };
-
-  const addManyOverviews = (array) => {
-    return new Promise((resolve, reject) => {
-      Overview.collection.insertMany(array, (err, docs) => {
-        if (err) {
-          reject(err);
-        }
-        resolve(docs);
-      });
-    });
-  };
-
-  module.exports.addOverview = addOverview;
-  module.exports.addManyOverviews = addManyOverviews;
-  module.exports.db = db;
+mongoose.connection.on('error', (err) => {
+  throw err;
 });
+// db.once('open', () => {
+//   console.log('Connected to mongoDB');
+// });
+
+const overviewSchema = new mongoose.Schema({
+  product_id: Number,
+  platforms: Array,
+  os: Array,
+  developer: String,
+  publisher: String,
+  system_req: Object,
+  links: Array,
+  steam_rating: Number
+});
+
+const Overview = mongoose.model('Overview', overviewSchema);
+
+const addManyOverviews = (array) => {
+  // return new Promise((resolve, reject) => {
+  Overview.insertMany(array, (err, docs) => {
+    if (err) {
+      throw err;
+    }
+    console.log('seeded DB!');
+  });
+  // });
+};
+
+module.exports = addManyOverviews;

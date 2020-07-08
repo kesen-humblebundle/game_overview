@@ -33,9 +33,9 @@ const AppWrapper = styled.div`
     font-style: normal;
   } */
   background-color: #1b1e1b;
-  color: #7a8086;
+  color: #a1a7b2;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  width: 100vw;
+  width: 100%;
 `;
 
 const OverviewStyled = styled.div`
@@ -67,7 +67,6 @@ class App extends React.Component {
   render() {
     return (
       <AppWrapper>
-        {/* <h1>Future Overview Service</h1> */}
         <OverviewStyled>
           <QuarterStyled>
             <Platforms />
