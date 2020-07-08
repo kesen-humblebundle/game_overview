@@ -1,6 +1,7 @@
 /* eslint-disable no-plusplus */
 const faker = require('faker');
 const icons = require('./iconURLs.js');
+const addManyOverviews = require('./index.js');
 
 const platformsArray = ['steam', 'gog', 'epic', 'key', 'uPlay', 'origin', 'drmFree', 'epic'];
 const OSarray = ['windows', 'linux', 'mac', 'oculusRift', 'htcVive', 'winMixedReal'];
@@ -39,7 +40,6 @@ const assignPlatforms = () => {
     });
     urlsArray.push(platforms);
   }
-  console.log(urlsArray);
 
   return urlsArray;
 };
@@ -80,8 +80,11 @@ const assignOS = () => {
     }
     osArray.push(gameOSArray);
   }
-  console.log(osArray);
+
+  return osArray;
 };
+
+const productOSes = assignOS();
 
 const createSteamRatings = () => {
   const ratingsArray = [];
@@ -89,11 +92,11 @@ const createSteamRatings = () => {
     const rating = Math.ceil(Math.random() * 100);
     ratingsArray.push(rating);
   }
-  console.log(ratingsArray);
+
   return ratingsArray;
 };
 
-const createSystemrequirements = () => {
+const createSystemRequirements = () => {
   const requirementsDocs = [];
 
   for (let j = 0; j < 100; j++) {
@@ -103,7 +106,8 @@ const createSystemrequirements = () => {
       linux: {}
     };
 
-    for (let i = 0; i < OSarray.length; i++) {
+    for (let i = 0; i < 3; i++) {
+      // this next line is for creating a version for any particular OS
       requirements[OSarray[i]].OS = `${OSarray[i]} ${Math.ceil(Math.random() * 5 + 5)} ${faker.fake(
         '{{random.word}}'
       )}`;
@@ -119,10 +123,23 @@ const createSystemrequirements = () => {
       requirements[OSarray[i]].DirectX = `Version ${Math.ceil(Math.random() * 4) + 8}`;
       requirements[OSarray[i]].Network = 'Broadband Internet';
       requirements[OSarray[i]].Storage = `${Math.ceil(Math.random() * 10 + 10) * 5} GB`;
+      if (
+        productOSes[j].includes(icons.oculusRift) ||
+        productOSes[j].includes(icons.htcVive) ||
+        productOSes[j].includes(icons.winMixedReal)
+      ) {
+        requirements.vrSupport = {
+          headsets: faker.fake(
+            `{{commerce.productName}}, {{commerce.productName}}, {{commerce.productName}}`
+          ),
+          input: faker.fake(`{{commerce.productAdjective}}, {{commerce.productName}}`),
+          playArea: faker.fake(`{{company.catchPhraseAdjective}}`)
+        };
+      }
     }
     requirementsDocs.push(requirements);
   }
-  console.log(requirementsDocs);
+
   return requirementsDocs;
 };
 
@@ -135,7 +152,7 @@ const createDevelopers = () => {
       developersArray.push(developer);
     }
   }
-  console.log(developersArray);
+
   return developersArray;
 };
 
@@ -154,7 +171,7 @@ const createPublishers = () => {
       publishersArray.push(publisher);
     }
   }
-  console.log(publishersArray);
+
   return publishersArray;
 };
 
@@ -170,23 +187,56 @@ const createLinks = () => {
     }
     linksArr.push(linksSubArray);
   }
-  // for (let i = 0; i < 100; i++) {
-  //   const limit = Math.ceil(Math.random() * 3);
-  //   const linksSubArray = [];
-  //   for (let j = 0; j < limit; j++) {
-  //     linksSubArray.push(faker.fake(`{{company.companyName}}`));
-  //   }
-  //   linksArr.push(linksSubArray);
-  // }
-  console.log(linksArr.length);
+
   return linksArr;
 };
 
-assignOS();
-// assignPlatforms();
-// createLinks();
-// createSystemrequirements();
-// createSteamRatings();
-// createDevelopers();
-// createPublishers();
-//TODO -Figure out icons for platform, os
+const productPlatforms = assignPlatforms();
+const productLinks = createLinks();
+const productSysReq = createSystemRequirements();
+const productSteamRate = createSteamRatings();
+const productDevelopers = createDevelopers();
+const productPublishers = createPublishers();
+
+const seed = () => {
+  const docsArray = [];
+
+  for (let i = 0; i < 100; i++) {
+    const newDoc = {};
+
+    newDoc.product_id = i + 1;
+    newDoc.platforms = productPlatforms[i];
+    newDoc.os = productOSes[i];
+    newDoc.developer = productDevelopers[i];
+    newDoc.publisher = productPublishers[i];
+    if (!productOSes[i].includes(icons.windows)) {
+      if (
+        !productOSes[i].includes(icons.oculusRift) &&
+        !productOSes[i].includes(icons.htcVive) &&
+        !productOSes[i].includes(icons.winMixedReal)
+      ) {
+        delete productSysReq[i].windows;
+      }
+    }
+    if (!productOSes[i].includes(icons.mac)) {
+      delete productSysReq[i].mac;
+    }
+    if (!productOSes[i].includes(icons.linux)) {
+      delete productSysReq[i].linux;
+    }
+    newDoc.system_req = productSysReq[i];
+    newDoc.links = productLinks[i];
+    if (productPlatforms[i].includes(icons.steam)) {
+      newDoc.steam_rating = productSteamRate[i];
+    } else {
+      newDoc.steam_rating = null;
+    }
+    docsArray.push(newDoc);
+  }
+
+  return docsArray;
+};
+
+const seedData = seed();
+
+addManyOverviews(seedData);
