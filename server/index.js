@@ -2,7 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 // const {} = require('../database_mongo/index.js');
-const data = require('../database_mongo/seed.js');
+// const data = require('../database_mongo/seed.js');
 
 const app = express();
 

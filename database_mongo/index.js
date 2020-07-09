@@ -30,15 +30,4 @@ const overviewSchema = new mongoose.Schema({
 
 const Overview = mongoose.model('Overview', overviewSchema);
 
-const addManyOverviews = (array) => {
-  // return new Promise((resolve, reject) => {
-  Overview.insertMany(array, (err, docs) => {
-    if (err) {
-      throw err;
-    }
-    console.log('seeded DB!');
-  });
-  // });
-};
-
-module.exports = addManyOverviews;
+module.exports = Overview;

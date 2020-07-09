@@ -1,7 +1,7 @@
 /* eslint-disable no-plusplus */
 const faker = require('faker');
 const icons = require('./iconURLs.js');
-const addManyOverviews = require('./index.js');
+const Overview = require('./index.js');
 
 const platformsArray = ['steam', 'gog', 'epic', 'key', 'uPlay', 'origin', 'drmFree', 'epic'];
 const OSarray = ['windows', 'linux', 'mac', 'oculusRift', 'htcVive', 'winMixedReal'];
@@ -235,6 +235,17 @@ const seed = () => {
   }
 
   return docsArray;
+};
+
+const addManyOverviews = (array) => {
+  // return new Promise((resolve, reject) => {
+  Overview.insertMany(array, (err, docs) => {
+    if (err) {
+      throw err;
+    }
+    console.log('seeded DB!');
+  });
+  // });
 };
 
 const seedData = seed();
