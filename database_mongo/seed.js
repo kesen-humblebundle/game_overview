@@ -238,14 +238,12 @@ const seed = () => {
 };
 
 const addManyOverviews = (array) => {
-  // return new Promise((resolve, reject) => {
   Overview.insertMany(array, (err, docs) => {
     if (err) {
       throw err;
     }
     console.log('seeded DB!');
   });
-  // });
 };
 
 const seedData = seed();
