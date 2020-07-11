@@ -16,6 +16,7 @@ app.get('/system_req/:product_id', (req, res) => {
     if (err) {
       throw err;
     }
+    res.set({ 'Access-Control-Allow-Origin': '*' });
     res.json(doc[0]);
   });
 });
@@ -28,6 +29,7 @@ app.get('/system_req/platforms/:product_id', (req, res) => {
       throw err;
     }
     console.log('Platforms', doc[0]);
+    res.set({ 'Access-Control-Allow-Origin': '*' });
     res.json(doc[0].platforms);
   });
 });
