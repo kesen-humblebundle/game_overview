@@ -17,10 +17,14 @@ const H4Styled = styled.h4`
 `;
 
 const Platforms = (props) => {
+  const platforms = props.platforms;
+  const platformsArray = platforms.map((platform, index) => {
+    return <img src={platform} alt="platform icon" width="21px" key={index}></img>;
+  });
   return (
     <PlatformsStyled>
       <ParaStyled>PLATFORM</ParaStyled>
-      <H4Styled>Some Content</H4Styled>
+      {platformsArray}
     </PlatformsStyled>
   );
 };

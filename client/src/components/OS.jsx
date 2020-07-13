@@ -17,10 +17,14 @@ const H4Styled = styled.h4`
 `;
 
 const OS = (props) => {
+  const OS = props.os;
+  const osArray = OS.map((os, index) => {
+    return <img src={os} alt="os icon" width="21px" key={index}></img>;
+  });
   return (
     <OSStyled>
       <ParaStyled>OPERATING SYSTEM</ParaStyled>
-      <H4Styled>Some Content</H4Styled>
+      {osArray}
     </OSStyled>
   );
 };

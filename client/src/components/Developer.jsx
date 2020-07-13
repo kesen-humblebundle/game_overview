@@ -10,17 +10,21 @@ const HeaderStyled = styled.h4`
   padding: 0;
 `;
 
-const SpecStyled = styled.h4`
+const SpecStyled = styled.a`
   color: white;
   margin: 0;
   padding: 0;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const Developer = (props) => {
   return (
     <DevStyled>
       <HeaderStyled>DEVELOPER</HeaderStyled>
-      <SpecStyled>Some Content</SpecStyled>
+      <SpecStyled>{props.developer}</SpecStyled>
     </DevStyled>
   );
 };

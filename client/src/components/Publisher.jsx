@@ -10,17 +10,21 @@ const ParaStyled = styled.p`
   padding: 0;
 `;
 
-const H4Styled = styled.h4`
+const H4Styled = styled.a`
   color: white;
   margin: 0;
   padding: 0;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const Publisher = (props) => {
   return (
     <PubStyled>
       <ParaStyled>PUBLISHER</ParaStyled>
-      <H4Styled>Some Content</H4Styled>
+      <H4Styled>{props.publisher}</H4Styled>
     </PubStyled>
   );
 };

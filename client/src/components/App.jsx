@@ -51,6 +51,7 @@ const OverviewStyled = styled.div`
 `;
 
 const QuarterStyled = styled.div`
+  line-height: 1.35;
   display: flex;
   flex-shrink: 1;
   flex-direction: column;
@@ -61,7 +62,55 @@ const QuarterStyled = styled.div`
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      product_id: window.location.pathname,
+      open: false,
+      overview: {
+        platforms: [],
+        os: [
+          'https://res.cloudinary.com/overview/image/upload/t_icon/v1593704464/platformicons/WindowsTrans_ara7pa.png'
+        ],
+        links: ['Sawayn - Dach', 'Kirlin, VonRueden and Veum', 'Tillman - Wehner'],
+        _id: '5f06634ec9e05c2f42bd380a',
+        product_id: 21,
+        developer: 'Kuhn - Bailey',
+        publisher: 'Graphical User Interface Future',
+        system_req: {
+          windows: {
+            OS: 'windows 10 Future',
+            Processor: 'Intel Core i7 7000',
+            Memory: '8 GB',
+            Graphics: 'NVIDIA GeForce 840 4GB / AMD Radeon 550 4GB',
+            DirectX: 'Version 11',
+            Network: 'Broadband Internet',
+            Storage: '90 GB'
+          }
+        },
+        steam_rating: null,
+        __v: 0
+      }
+    };
+    this.fetchOverview = this.fetchOverview.bind(this);
+  }
+
+  fetchOverview(id) {
+    let fetchURL = `http://127.0.0.1:3002/system_req${id}`;
+
+    fetch(fetchURL)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log('From Overview', data);
+        this.setState({ overview: data });
+      })
+      .catch((err) => {
+        throw err;
+      });
+  }
+
+  componentDidMount() {
+    this.fetchOverview(this.state.product_id);
   }
 
   render() {
@@ -69,18 +118,18 @@ class App extends React.Component {
       <AppWrapper>
         <OverviewStyled>
           <QuarterStyled>
-            <Platforms />
-            <OS />
+            <Platforms platforms={this.state.overview.platforms} os={this.state.overview.os} />
+            <OS os={this.state.overview.os} />
             <Genre />
           </QuarterStyled>
           <QuarterStyled>
-            <Developer />
-            <Publisher />
-            <SystemReqs />
+            <Developer developer={this.state.overview.developer} />
+            <Publisher publisher={this.state.overview.publisher} />
+            <SystemReqs open={this.state.open} />
           </QuarterStyled>
           <QuarterStyled>
-            <SteamRating />
-            <Links />
+            <SteamRating rating={this.state.overview.steam_rating} />
+            <Links links={this.state.overview.links} />
           </QuarterStyled>
           <QuarterStyled> </QuarterStyled>
         </OverviewStyled>

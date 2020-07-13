@@ -8,7 +8,7 @@ const icons = {
   windows:
     'https://res.cloudinary.com/overview/image/upload/t_icon/v1593704464/platformicons/WindowsTrans_ara7pa.png',
   linux:
-    'https://res.cloudinary.com/overview/image/upload/t_icon/v1593704463/platformicons/LinuxTrans_ymupfs.pngl',
+    'https://res.cloudinary.com/overview/image/upload/t_icon/v1593704463/platformicons/LinuxTrans_ymupfs.png',
   mac:
     'https://res.cloudinary.com/overview/image/upload/t_icon/v1593704463/platformicons/MacTrans_kifqju.png',
   htcVive:

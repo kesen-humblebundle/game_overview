@@ -10,17 +10,28 @@ const ParaStyled = styled.p`
   padding: 0;
 `;
 
-const H4Styled = styled.h4`
+const LinkStyled = styled.a`
   color: white;
   margin: 0;
   padding: 0;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const Links = (props) => {
+  const linksArray = props.links.map((link, index) => {
+    return (
+      <LinkStyled key={index} link={link}>
+        {link}
+      </LinkStyled>
+    );
+  });
   return (
     <LinksStyled>
       <ParaStyled>LINKS</ParaStyled>
-      <H4Styled>Some Content</H4Styled>
+      {linksArray}
     </LinksStyled>
   );
 };
