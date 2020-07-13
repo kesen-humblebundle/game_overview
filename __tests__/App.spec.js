@@ -27,8 +27,6 @@ describe('<App />', () => {
     const app = renderer.create(<AppWrapper />).toJSON();
 
     expect(app).toHaveStyleRule('width', '100%');
-    expect(app).toHaveStyleRule('background-color', '#1b1e1b');
-    expect(app).toHaveStyleRule('color', '#a1a7b2');
   });
 
   it('renders one Developer component', () => {

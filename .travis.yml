@@ -1,2 +1,11 @@
 language: node_js
-node.js: - 14
+node_js:
+  - 14
+
+cache: npm
+
+install:
+  - npm install
+
+script:
+  - npm test
