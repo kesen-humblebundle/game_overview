@@ -10,17 +10,21 @@ const ParaStyled = styled.p`
   padding: 0;
 `;
 
-const H4Styled = styled.h4`
+const H4Styled = styled.a`
   color: white;
   margin: 0;
   padding: 0;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const SystemReqs = (props) => {
   return (
     <SystemStyled>
       <ParaStyled>SYSTEM REQUIREMENTS</ParaStyled>
-      <H4Styled>Some Content</H4Styled>
+      <H4Styled>Learn More</H4Styled>
     </SystemStyled>
   );
 };

@@ -21,10 +21,12 @@ const H4Styled = styled.h4`
 `;
 
 const SteamRating = (props) => {
+  const steam = props.rating ? props.rating + '%' : '';
+
   return (
     <SteamStyled>
       <ParaStyled>STEAM RATING</ParaStyled>
-      <H4Styled>Some Content</H4Styled>
+      <H4Styled>{steam}</H4Styled>
     </SteamStyled>
   );
 };

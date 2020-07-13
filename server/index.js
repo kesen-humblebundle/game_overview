@@ -17,6 +17,7 @@ app.get('/system_req/:product_id', (req, res) => {
       throw err;
     }
     res.set({ 'Access-Control-Allow-Origin': '*' });
+    console.log(typeof doc[0]);
     res.json(doc[0]);
   });
 });
