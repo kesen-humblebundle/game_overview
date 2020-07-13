@@ -1,3 +1,5 @@
+/* eslint-disable react/sort-comp */
+/* eslint-disable no-undef */
 /* eslint-disable import/extensions */
 import React from 'react';
 import styled from 'styled-components';
@@ -94,7 +96,7 @@ class App extends React.Component {
   }
 
   fetchOverview(id) {
-    let fetchURL = `http://127.0.0.1:3002/system_req${id}`;
+    const fetchURL = `http://127.0.0.1:3002/system_req${id}`;
 
     fetch(fetchURL)
       .then((response) => {
