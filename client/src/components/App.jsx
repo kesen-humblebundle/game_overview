@@ -2,6 +2,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable import/extensions */
 import React from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 import Developer from './Developer.jsx';
 import Genre from './Genre.jsx';
@@ -98,7 +99,8 @@ class App extends React.Component {
   fetchOverview(id) {
     const fetchURL = `http://127.0.0.1:3002/system_req${id}`;
 
-    fetch(fetchURL)
+    axios
+      .get(fetchURL)
       .then((response) => {
         return response.json();
       })
