@@ -102,11 +102,8 @@ class App extends React.Component {
     axios
       .get(fetchURL)
       .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        console.log('From Overview', data);
-        this.setState({ overview: data });
+        console.log('From Overview', response.data);
+        this.setState({ overview: response.data });
       })
       .catch((err) => {
         throw err;
