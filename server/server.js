@@ -1,9 +1,8 @@
-require('dotenv').config();
 const app = require('./index.js');
 
-app.listen(process.env.SERVER_PORT, (err) => {
+app.listen(3002, (err) => {
   if (err) {
     throw err;
   }
-  console.log('server listening on port: ', process.env.SERVER_PORT);
+  console.log('server listening on port: ', 3002);
 });
