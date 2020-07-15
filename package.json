@@ -10,6 +10,8 @@
   "scripts": {
     "test": "jest",
     "build": "webpack --watch -d",
+    "p_build": "webpack -p",
+    "p_start": "node ./server/server.js",
     "start": "nodemon ./server/server.js --ignore node_modules",
     "seedDB": "node ./database_mongo/seed.js"
   },
