@@ -97,7 +97,7 @@ class App extends React.Component {
   }
 
   fetchOverview(id) {
-    const fetchURL = `http://ec2-3-16-28-16.us-east-2.compute.amazonaws.com:3002/system_req${id}`;
+    const fetchURL = `http://ec2-18-217-86-248.us-east-2.compute.amazonaws.com:3002/system_req${id}`;
 
     axios
       .get(fetchURL)
