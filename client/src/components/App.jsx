@@ -2,8 +2,8 @@
 /* eslint-disable no-undef */
 /* eslint-disable import/extensions */
 import React from 'react';
-import axios from 'axios';
 import styled from 'styled-components';
+import axios from 'axios';
 import Developer from './Developer.jsx';
 import Genre from './Genre.jsx';
 import Links from './Links.jsx';
@@ -68,6 +68,7 @@ class App extends React.Component {
     this.state = {
       product_id: window.location.pathname,
       open: false,
+      genre: ['RPG'],
       overview: {
         platforms: [],
         os: [
@@ -100,10 +101,11 @@ class App extends React.Component {
     const fetchURL = `http://ec2-18-217-86-248.us-east-2.compute.amazonaws.com:3002/system_req${id}`;
 
     axios
-      .get(fetchURL)
+      .get(fetchURL, { crossdomain: true })
       .then((response) => {
-        console.log('From Overview', response.data);
-        this.setState({ overview: response.data });
+        console.log('response??');
+        console.log('Data ?', response.data);
+        this.setState({ overview: response.data[0], genre: response.data[1] });
       })
       .catch((err) => {
         throw err;
@@ -121,7 +123,7 @@ class App extends React.Component {
           <QuarterStyled>
             <Platforms platforms={this.state.overview.platforms} os={this.state.overview.os} />
             <OS os={this.state.overview.os} />
-            <Genre />
+            <Genre genres={this.state.genre} />
           </QuarterStyled>
           <QuarterStyled>
             <Developer developer={this.state.overview.developer} />
