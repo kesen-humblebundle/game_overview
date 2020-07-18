@@ -1,8 +1,12 @@
+const path = require('path');
+require('dotenv').config({
+  path: path.resolve(__dirname, '../.env')
+});
 const app = require('./index.js');
 
-app.listen(3002, (err) => {
+app.listen(process.env.OVEVIEW_PORT, (err) => {
   if (err) {
     throw err;
   }
-  console.log('server listening on port: ', 3002);
+  console.log('server listening on port: ', process.env.OVERVIEW_PORT);
 });
