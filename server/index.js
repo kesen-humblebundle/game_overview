@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable no-console */
 const path = require('path');
 require('dotenv').config({
@@ -7,6 +8,7 @@ const axios = require('axios');
 const express = require('express');
 const bodyParser = require('body-parser');
 const Overview = require('../database_mongo/index.js');
+const { steam } = require('../database_mongo/iconURLs.js');
 // const data = require('../database_mongo/seed.js');
 
 const app = express();
@@ -23,8 +25,26 @@ app.get('/system_req/:product_id', (req, res) => {
       .then((response) => {
         const resArray = doc;
         const newGenre = response.data;
+        const steamNumber = resArray[0].steam_rating;
 
         resArray.push(newGenre);
+
+        if (steamNumber) {
+          const describeSteamRating =
+            steamNumber >= 95
+              ? 'Overwhelmingly Positive'
+              : steamNumber >= 80
+              ? 'Very Postive'
+              : steamNumber >= 70
+              ? 'Mostly Positive'
+              : steamNumber >= 40
+              ? 'Mixed'
+              : steamNumber >= 20
+              ? 'Mostly Negative'
+              : 'Very Negative';
+          resArray.push(describeSteamRating);
+        }
+
         return resArray;
       })
       .then((resArray) => {
