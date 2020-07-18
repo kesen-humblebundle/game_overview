@@ -69,6 +69,7 @@ class App extends React.Component {
       product_id: window.location.pathname,
       open: false,
       genre: ['RPG'],
+      steamDesc: '',
       overview: {
         platforms: [],
         os: [
@@ -105,7 +106,13 @@ class App extends React.Component {
       .then((response) => {
         console.log('response??');
         console.log('Data ?', response.data);
-        this.setState({ overview: response.data[0], genre: response.data[1] });
+        const newState = { overview: response.data[0], genre: response.data[1] };
+
+        if (response.data[2]) {
+          newState.steamDesc = response.data[2];
+        }
+
+        this.setState(newState);
       })
       .catch((err) => {
         throw err;
@@ -131,7 +138,10 @@ class App extends React.Component {
             <SystemReqs open={this.state.open} />
           </QuarterStyled>
           <QuarterStyled>
-            <SteamRating rating={this.state.overview.steam_rating} />
+            <SteamRating
+              rating={this.state.overview.steam_rating}
+              description={this.state.steamDesc}
+            />
             <Links links={this.state.overview.links} />
           </QuarterStyled>
           <QuarterStyled> </QuarterStyled>

@@ -238,7 +238,7 @@ const seed = () => {
 };
 
 const addManyOverviews = (array) => {
-  Overview.insertMany(array, (err, docs) => {
+  Overview.insertMany(array, (err) => {
     if (err) {
       throw err;
     }
