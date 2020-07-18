@@ -12,7 +12,12 @@ const assignPlatforms = () => {
   const resultsArray = [];
 
   for (let i = 0; i < 100; i++) {
-    const length = Math.floor(Math.random() * 3);
+    let length = Math.ceil(Math.random() * 2);
+    let probablePlatform = Math.floor(Math.random() * 100);
+
+    if (probablePlatform < 10) {
+      length = 0;
+    }
 
     const platformsSubArr = [];
 
