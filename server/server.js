@@ -4,7 +4,7 @@ require('dotenv').config({
 });
 const app = require('./index.js');
 
-app.listen(process.env.OVEVIEW_PORT, (err) => {
+app.listen(process.env.OVERVIEW_PORT, (err) => {
   if (err) {
     throw err;
   }
