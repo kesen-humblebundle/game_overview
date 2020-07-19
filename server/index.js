@@ -58,20 +58,36 @@ app.get('/system_req/:product_id', (req, res) => {
 });
 
 app.get('/system_req/platforms/:product_id', (req, res) => {
-  const id = req.params.product_id;
+  const id = decodeURI(req.params.product_id);
+  const isItArray = Array.isArray(JSON.parse(id));
+  let idArray = [];
 
-  Overview.find({ product_id: id }, (err, doc) => {
+  if (isItArray) {
+    console.log('made it!');
+    idArray = JSON.parse(id);
+  } else {
+    idArray.push(id);
+  }
+
+  Overview.find({ product_id: { $in: idArray } }, (err, docs) => {
     if (err) {
       throw err;
     }
-    console.log('Platforms', doc[0]);
-    const osPlatformsObj = {
-      product_id: id,
-      platforms: doc[0].platforms,
-      os: doc[0].os
-    };
+    console.log(docs);
+    const resultsArray = docs.map((doc) => {
+      const platformsOsObj = {
+        product_id: doc.product_id,
+        platforms: doc.platforms,
+        os: doc.os
+      };
+      return platformsOsObj;
+    });
     res.set({ 'Access-Control-Allow-Origin': '*' });
-    res.json(osPlatformsObj);
+    if (resultsArray.length > 1) {
+      res.send(resultsArray);
+    } else {
+      res.send(resultsArray[0]);
+    }
   });
 });
 

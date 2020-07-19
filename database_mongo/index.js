@@ -13,7 +13,7 @@ mongoose
 mongoose.connection.on('error', (err) => {
   throw err;
 });
-// db.once('open', () => {
+// mongoose.connection.once('open', () => {
 //   console.log('Connected to mongoDB');
 // });
 
