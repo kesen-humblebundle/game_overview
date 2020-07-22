@@ -10,15 +10,24 @@ const ParaStyled = styled.p`
   padding: 0;
 `;
 
+const ContainerStyled = styled.span`
+  height: 28px;
+`;
+
+const ImageStyled = styled.img`
+  margin-top: 3px;
+  width: 21px;
+`;
+
 const OS = (props) => {
   const OS = props.os;
   const osArray = OS.map((os, index) => {
-    return <img src={os[0]} alt="os icon" width="21px" key={index} />;
+    return <ImageStyled src={os[0]} alt="os icon" key={index} />;
   });
   return (
     <OSStyled>
       <ParaStyled>OPERATING SYSTEM</ParaStyled>
-      {osArray}
+      <ContainerStyled>{osArray}</ContainerStyled>
     </OSStyled>
   );
 };

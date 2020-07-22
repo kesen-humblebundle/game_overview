@@ -14,20 +14,45 @@ const ParaStyled = styled.p`
   padding: 0;
 `;
 
-const H4Styled = styled.h4`
+const H4Styled = styled.p`
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  font-weight: 300;
+  font-size: 13.5px;
   color: white;
   margin: 0;
-  padding: 0;
+  padding: 5px;
+  border: 1px solid white;
+  border-radius: 2px;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const IconStyled = styled.img`
+  width: 18px;
 `;
 
 const SteamRating = (props) => {
-  const steam = props.rating ? props.rating + '% ' : '';
+  console.log('props', props);
+  let icon;
+  const steam = props.rating ? props.rating + '% | ' : '';
   const description = props.rating ? props.description : '';
+  for (let i = 0; i < props.icon.length; i++) {
+    if (props.icon[i][0].indexOf('Steam') > 0) {
+      icon = props.icon[i][0];
+    }
+  }
+  console.log('Missing Icon', icon);
 
   return (
     <SteamStyled>
-      <ParaStyled>STEAM RATING</ParaStyled>
-      <H4Styled>{steam.concat(description)}</H4Styled>
+      <H4Styled>
+        {icon && <IconStyled src={icon} alt="steam icon" />}
+
+        {steam.concat(description)}
+      </H4Styled>
     </SteamStyled>
   );
 };
