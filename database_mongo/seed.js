@@ -41,7 +41,7 @@ const assignPlatforms = () => {
   // eslint-disable-next-line no-restricted-syntax
   for (let platforms of resultsArray) {
     platforms = platforms.map((platform) => {
-      return icons[platform];
+      return [icons[platform][0], icons[platform][1], icons[platform][2]];
     });
     urlsArray.push(platforms);
   }
@@ -63,25 +63,26 @@ const assignOS = () => {
       const winMixedRealProb = Math.random() * 100;
 
       if (windowsProb < 60) {
-        gameOSArray.push(icons.windows);
+        gameOSArray.push([icons.windows[0], icons.windows[1], icons.windows[2]]);
       }
       if (macProb < 40) {
-        gameOSArray.push(icons.mac);
+        gameOSArray.push([icons.mac[0], icons.mac[1], icons.mac[2]]);
       }
       if (linuxProb < 40) {
-        gameOSArray.push(icons.linux);
+        gameOSArray.push([icons.linux[0], icons.linux[1], icons.linux[2]]);
       }
       if (gameOSArray.length < 1 && virtualProb > 50) {
-        gameOSArray.push(icons.oculusRift);
-        gameOSArray.push(icons.htcVive);
+        gameOSArray.push([icons.oculusRift[0], icons.oculusRift[1], icons.oculusRift[2]]);
+        gameOSArray.push([icons.htcVive[0], icons.htcVive[1], icons.htcVive[2]]);
+
         if (winMixedRealProb < 30) {
-          gameOSArray.push(icons.winMixedReal);
-          gameOSArray.unshift(icons.windows);
+          gameOSArray.push([icons.winMixedReal[0], icons.winMixedReal[1], icons.winMixedReal[2]]);
+          gameOSArray.unshift([icons.windows[0], icons.windows[1], icons.windows[2]]);
         }
       }
     }
-    if (gameOSArray.length === 1 && gameOSArray === icons.linux) {
-      gameOSArray.push(icons.windows);
+    if (gameOSArray.length === 1 && gameOSArray[0] === icons.linux) {
+      gameOSArray.push(icons.windows[0], icons.windows[1], icons.windows[2]);
     }
     osArray.push(gameOSArray);
   }
