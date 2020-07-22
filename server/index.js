@@ -8,16 +8,23 @@ const axios = require('axios');
 const express = require('express');
 const bodyParser = require('body-parser');
 const Overview = require('../database_mongo/index.js');
-const { steam } = require('../database_mongo/iconURLs.js');
 // const data = require('../database_mongo/seed.js');
 
 const app = express();
 
-app.use(express.static('public'));
+app.use(express.static('public', { fallthrough: true }));
+app.use('/:product_id', express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.get('/:product_id', (req, res) => {
+  const product_id = req.params.product_id;
+  res.redirect(`/system_req/${product_id}`);
+  res.end();
+});
+
 app.get('/system_req/:product_id', (req, res) => {
+  console.log('got it');
   const id = req.params.product_id;
   Overview.find({ product_id: id }).then((doc) => {
     axios

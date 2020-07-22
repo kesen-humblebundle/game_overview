@@ -14,27 +14,6 @@ import SteamRating from './SteamRating.jsx';
 import SystemReqs from './SystemReqs.jsx';
 
 const AppWrapper = styled.div`
-  /* @font-face {
-    font-family: 'Sofia Pro';
-    src: url('../sofiaNorm.ttf') format('truetype');
-    font-weight: 300;
-    font-style: normal;
-  }
-
-  @font-face {
-    font-family: 'Sofia Pro';
-    src: url('../sofiaBold') format('truetype');
-    font-weight: 900;
-    font-style: normal;
-  } */
-
-  /* @font-face {
-    font-family: 'Sofia Pro';
-    src: url('https://humblebundle-a.akamaihd.net/static/hashed/9370f719a25957b05ace466b39c2a2d4b33734c6.ttf')
-      format('truetype');
-    font-weight: normal;
-    font-style: normal;
-  } */
   background-color: #1b1e1b;
   color: #a1a7b2;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -99,6 +78,9 @@ class App extends React.Component {
   }
 
   fetchOverview(id) {
+    if (id === '/') {
+      id = '/21';
+    }
     const fetchURL = `http://ec2-3-129-17-68.us-east-2.compute.amazonaws.com:3002/system_req${id}`;
     // const fetchURL = `http://127.0.0.1:3002/system_req${id}`;
 
@@ -121,7 +103,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchOverview(this.state.product_id);
+    this.fetchOverview(window.location.pathname);
   }
 
   render() {
