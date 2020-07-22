@@ -13,11 +13,11 @@ const assignPlatforms = () => {
 
   for (let i = 0; i < 100; i++) {
     let length = Math.ceil(Math.random() * 2);
-    let probablePlatform = Math.floor(Math.random() * 100);
+    // let probablePlatform = Math.floor(Math.random() * 100);
 
-    if (probablePlatform < 10) {
-      length = 0;
-    }
+    // if (probablePlatform < 10) {
+    //   length = 0;
+    // }
 
     const platformsSubArr = [];
 
@@ -210,6 +210,7 @@ const seed = () => {
   for (let i = 0; i < 100; i++) {
     const newDoc = {};
 
+    newDoc.steam_rating = null;
     newDoc.product_id = i + 1;
     newDoc.platforms = productPlatforms[i];
     newDoc.os = productOSes[i];
@@ -232,14 +233,15 @@ const seed = () => {
     }
     newDoc.system_req = productSysReq[i];
     newDoc.links = productLinks[i];
-    if (productPlatforms[i].includes(icons.steam)) {
-      newDoc.steam_rating = productSteamRate[i];
-    } else {
-      newDoc.steam_rating = null;
+    for (let j = 0; j < productPlatforms[i].length; j++) {
+      // console.log(i, productPlatforms[i][j]);
+      if (newDoc.platforms[j].includes(icons.steam[0])) {
+        newDoc['steam_rating'] = productSteamRate[i];
+      }
     }
     docsArray.push(newDoc);
   }
-
+  console.log(docsArray);
   return docsArray;
 };
 

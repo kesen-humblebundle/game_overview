@@ -7,31 +7,61 @@ const PlatformsStyled = styled.div`
 
 const ParaStyled = styled.p`
   margin: 0;
+  margin-bottom: 2px;
   padding: 0;
 `;
 
-const PlatformStyled = styled.div`
+// const StyledContainer = styled.p`
+//   border-top: 1px solid #a1a7b2;
+//   border-bottom: 1px solid #a1a7b2;
+//   border-radius: 3px;
+//   height: 28px;
+// `;
+
+const PlatformStyled = styled.span`
   display: inline-block;
+  justify-content: space-around;
+  align-items: center;
   margin: auto;
-  padding: 0;
+  padding: 0 3px;
+  height: 28px;
   background: #313532;
-  border-radius: 5px;
-  border: 1px solid grey;
+  border-radius: 3px 0 0 3px;
+  border: 1px solid #a1a7b2;
+`;
+
+const OSStyled = styled.span`
+  display: inline-block;
+  justify-content: space-around;
+  align-items: center;
+  margin: auto;
+  padding: 0 3px;
+  height: 28px;
+  background: #1b1d1a;
+  border-radius: 0 3px 3px 0;
+  border: 1px solid #a1a7b2;
+  border-left: none;
+`;
+
+const ImageStyled = styled.img`
+  margin-top: 3.25px;
+  width: 21px;
 `;
 
 const Platforms = (props) => {
   const platforms = props.platforms;
   const os = props.os;
   const platformsArray = platforms.map((platform, index) => {
-    return <img src={platform[0]} alt="platform icon" width="21px" key={index}></img>;
+    return <ImageStyled src={platform[0]} alt="platform icon" key={index} />;
   });
   const osArray = os.map((osIcon, index) => {
-    return <img src={osIcon} alt="os icon" width="21px" key={index}></img>;
+    return <ImageStyled src={osIcon[0]} alt="os icon" key={index} />;
   });
   return (
     <PlatformsStyled>
       <ParaStyled>PLATFORM</ParaStyled>
       <PlatformStyled>{platformsArray}</PlatformStyled>
+      <OSStyled>{osArray}</OSStyled>
     </PlatformsStyled>
   );
 };
