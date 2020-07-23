@@ -35,24 +35,25 @@ const IconStyled = styled.img`
 `;
 
 const SteamRating = (props) => {
-  console.log('props', props);
   let icon;
   const steam = props.rating ? props.rating + '% | ' : '';
   const description = props.rating ? props.description : '';
   for (let i = 0; i < props.icon.length; i++) {
     if (props.icon[i][0].indexOf('Steam') > 0) {
       icon = props.icon[i][0];
+    } else {
+      icon = false;
     }
   }
-  console.log('Missing Icon', icon);
-
   return (
     <SteamStyled>
-      <H4Styled>
-        {icon && <IconStyled src={icon} alt="steam icon" />}
+      {icon && (
+        <H4Styled>
+          <IconStyled src={icon} alt="steam icon" />
 
-        {steam.concat(description)}
-      </H4Styled>
+          {steam.concat(description)}
+        </H4Styled>
+      )}
     </SteamStyled>
   );
 };
