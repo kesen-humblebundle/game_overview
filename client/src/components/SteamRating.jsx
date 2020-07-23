@@ -9,12 +9,7 @@ const SteamStyled = styled.div`
   }
 `;
 
-const ParaStyled = styled.p`
-  margin: 0;
-  padding: 0;
-`;
-
-const H4Styled = styled.p`
+const ContainerStyled = styled.p`
   display: inline-flex;
   align-items: center;
   box-sizing: border-box;
@@ -31,31 +26,29 @@ const H4Styled = styled.p`
 `;
 
 const IconStyled = styled.img`
+  margin-right: 3px;
   width: 18px;
 `;
 
 const SteamRating = (props) => {
-  let icon;
+  let icon = false;
   const steam = props.rating ? props.rating + '% | ' : '';
   const description = props.rating ? props.description : '';
-  for (let i = 0; i < props.icon.length; i++) {
-    if (props.icon[i][0].indexOf('Steam') > 0) {
-      icon = props.icon[i][0];
-    } else {
-      icon = false;
+  if (props.icon.length) {
+    for (let i = 0; i < props.icon.length; i++) {
+      if (props.icon[i][0].indexOf('Steam') > 0) {
+        icon = (
+          <ContainerStyled>
+            <IconStyled src={props.icon[i][0]} alt="steam icon" />
+
+            {steam.concat(description)}
+          </ContainerStyled>
+        );
+      }
     }
   }
-  return (
-    <SteamStyled>
-      {icon && (
-        <H4Styled>
-          <IconStyled src={icon} alt="steam icon" />
 
-          {steam.concat(description)}
-        </H4Styled>
-      )}
-    </SteamStyled>
-  );
+  return <SteamStyled>{icon}</SteamStyled>;
 };
 
 export default SteamRating;

@@ -50,9 +50,15 @@ class App extends React.Component {
       genre: ['RPG'],
       steamDesc: '',
       overview: {
-        platforms: [],
+        platforms: [
+          'https://res.cloudinary.com/overview/image/upload/t_icon/v1595370318/platformicons/SteamTransWhite_jqsk2l.png',
+          'https://res.cloudinary.com/overview/image/upload/t_icon/v1595370318/platformicons/SteamTransMed_a8lxui.png',
+          'https://res.cloudinary.com/overview/image/upload/t_icon/v1595370318/platformicons/SteamTransDark_gqamod.png'
+        ],
         os: [
-          'https://res.cloudinary.com/overview/image/upload/t_icon/v1593704464/platformicons/WindowsTrans_ara7pa.png'
+          'https://res.cloudinary.com/overview/image/upload/t_icon/v1595370319/platformicons/WindowsTransWhite_jyl6ij.png',
+          'https://res.cloudinary.com/overview/image/upload/t_icon/v1595370319/platformicons/WindowsTransMed_wyuamc.png',
+          'https://res.cloudinary.com/overview/image/upload/t_icon/v1595370318/platformicons/WindowsTransDark_tsafuk.png'
         ],
         links: ['Sawayn - Dach', 'Kirlin, VonRueden and Veum', 'Tillman - Wehner'],
         _id: '5f06634ec9e05c2f42bd380a',
@@ -70,7 +76,7 @@ class App extends React.Component {
             Storage: '90 GB'
           }
         },
-        steam_rating: null,
+        steam_rating: 55,
         __v: 0
       }
     };
@@ -81,8 +87,8 @@ class App extends React.Component {
     if (id === '/') {
       id = '/21';
     }
-    const fetchURL = `http://ec2-3-129-17-68.us-east-2.compute.amazonaws.com:3002/system_req${id}`;
-    // const fetchURL = `http://127.0.0.1:3002/system_req${id}`;
+    // const fetchURL = `http://ec2-3-129-17-68.us-east-2.compute.amazonaws.com:3002/system_req${id}`;
+    const fetchURL = `http://127.0.0.1:3002/system_req${id}`;
 
     axios
       .get(fetchURL, { crossdomain: true })
