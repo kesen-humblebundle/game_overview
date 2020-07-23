@@ -11,13 +11,6 @@ const ParaStyled = styled.p`
   padding: 0;
 `;
 
-// const StyledContainer = styled.p`
-//   border-top: 1px solid #a1a7b2;
-//   border-bottom: 1px solid #a1a7b2;
-//   border-radius: 3px;
-//   height: 28px;
-// `;
-
 const PlatformStyled = styled.span`
   display: inline-block;
   justify-content: space-around;
@@ -51,12 +44,14 @@ const ImageStyled = styled.img`
 const Platforms = (props) => {
   const platforms = props.platforms;
   const os = props.os;
+
   const platformsArray = platforms.map((platform, index) => {
     return <ImageStyled src={platform[0]} alt="platform icon" key={index} />;
   });
   const osArray = os.map((osIcon, index) => {
     return <ImageStyled src={osIcon[0]} alt="os icon" key={index} />;
   });
+
   return (
     <PlatformsStyled>
       <ParaStyled>PLATFORM</ParaStyled>
