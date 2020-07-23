@@ -81,8 +81,8 @@ const assignOS = () => {
         }
       }
     }
-    if (gameOSArray.length === 1 && gameOSArray[0] === icons.linux) {
-      gameOSArray.push(icons.windows[0], icons.windows[1], icons.windows[2]);
+    if (gameOSArray.length === 1 && gameOSArray[0][0] === icons.linux[0]) {
+      gameOSArray.push([icons.windows[0], icons.windows[1], icons.windows[2]]);
     }
     osArray.push(gameOSArray);
   }
@@ -94,6 +94,7 @@ const productOSes = assignOS();
 
 const createSteamRatings = () => {
   const ratingsArray = [];
+
   while (ratingsArray.length < 100) {
     const rating = Math.ceil(Math.random() * 100);
     ratingsArray.push(rating);
