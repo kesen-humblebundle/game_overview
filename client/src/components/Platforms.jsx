@@ -12,11 +12,11 @@ const ParaStyled = styled.p`
 `;
 
 const PlatformStyled = styled.span`
-  display: inline-block;
-  justify-content: space-around;
+  display: inline-flex;
   align-items: center;
+  box-sizing: content-box;
   margin: auto;
-  padding: 0 3px;
+  padding: 0px 3px;
   height: 28px;
   background: #313532;
   border-radius: 3px 0 0 3px;
@@ -24,9 +24,9 @@ const PlatformStyled = styled.span`
 `;
 
 const OSStyled = styled.span`
-  display: inline-block;
-  justify-content: space-around;
+  display: inline-flex;
   align-items: center;
+  box-sizing: content-box;
   margin: auto;
   padding: 0 3px;
   height: 28px;
@@ -37,7 +37,7 @@ const OSStyled = styled.span`
 `;
 
 const ImageStyled = styled.img`
-  margin-top: 3.25px;
+  margin: 2px 0 3.25px 0;
   width: 21px;
 `;
 
