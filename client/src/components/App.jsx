@@ -51,8 +51,8 @@ class App extends React.Component {
     if (id === '/') {
       id = '/21';
     }
-    const fetchURL = `http://ec2-3-129-17-68.us-east-2.compute.amazonaws.com:3002/system_req${id}`;
-    // const fetchURL = `http://127.0.0.1:3002/system_req${id}`;
+    // const fetchURL = `http://ec2-3-129-17-68.us-east-2.compute.amazonaws.com:3002/system_req${id}`;
+    const fetchURL = `http://127.0.0.1:3002/system_req${id}`;
     axios
       .get(fetchURL, { crossdomain: true })
       .then((response) => {
@@ -91,14 +91,15 @@ class App extends React.Component {
             <SystemReqs open={this.state.open} />
           </QuarterStyled>
           <QuarterStyled>
+            <Links links={this.state.overview.links} />
+          </QuarterStyled>
+          <QuarterStyled>
             <SteamRating
               icon={this.state.overview.platforms}
               rating={this.state.overview.steam_rating}
               description={this.state.steamDesc}
             />
-            <Links links={this.state.overview.links} />
           </QuarterStyled>
-          <QuarterStyled> </QuarterStyled>
         </OverviewStyled>
       </AppWrapper>
     );
