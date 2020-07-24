@@ -13,6 +13,8 @@ import Platforms from './Platforms.jsx';
 import Publisher from './Publisher.jsx';
 import SteamRating from './SteamRating.jsx';
 import SystemReqs from './SystemReqs.jsx';
+import Portal from './Portal.js';
+import SystemReqDiv from './SystemReqDiv.jsx';
 
 const AppWrapper = styled.div`
   background-color: #1b1e1b;
@@ -101,6 +103,9 @@ class App extends React.Component {
             />
           </QuarterStyled>
         </OverviewStyled>
+        {/* <Portal>
+          <SystemReqDiv />
+        </Portal> */}
       </AppWrapper>
     );
   }
