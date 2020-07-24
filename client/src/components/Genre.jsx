@@ -18,8 +18,8 @@ const SpanStyled = styled.span`
 
 const Genre = (props) => {
   console.log(props);
-  const genres = props.genres.map((genre) => {
-    return <SpanStyled> {genre}</SpanStyled>;
+  const genres = props.genres.map((genre, index) => {
+    return <SpanStyled key={index}> {genre}</SpanStyled>;
   });
   return (
     <GenreStyled>

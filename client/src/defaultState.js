@@ -5,14 +5,18 @@ const defaultState = {
   steamDesc: 'Mixed',
   overview: {
     platforms: [
-      'https://res.cloudinary.com/overview/image/upload/t_icon/v1595370318/platformicons/SteamTransWhite_jqsk2l.png',
-      'https://res.cloudinary.com/overview/image/upload/t_icon/v1595370318/platformicons/SteamTransMed_a8lxui.png',
-      'https://res.cloudinary.com/overview/image/upload/t_icon/v1595370318/platformicons/SteamTransDark_gqamod.png'
+      [
+        'https://res.cloudinary.com/overview/image/upload/t_icon/v1595370318/platformicons/SteamTransWhite_jqsk2l.png',
+        'https://res.cloudinary.com/overview/image/upload/t_icon/v1595370318/platformicons/SteamTransMed_a8lxui.png',
+        'https://res.cloudinary.com/overview/image/upload/t_icon/v1595370318/platformicons/SteamTransDark_gqamod.png'
+      ]
     ],
     os: [
-      'https://res.cloudinary.com/overview/image/upload/t_icon/v1595370319/platformicons/WindowsTransWhite_jyl6ij.png',
-      'https://res.cloudinary.com/overview/image/upload/t_icon/v1595370319/platformicons/WindowsTransMed_wyuamc.png',
-      'https://res.cloudinary.com/overview/image/upload/t_icon/v1595370318/platformicons/WindowsTransDark_tsafuk.png'
+      [
+        'https://res.cloudinary.com/overview/image/upload/t_icon/v1595370319/platformicons/WindowsTransWhite_jyl6ij.png',
+        'https://res.cloudinary.com/overview/image/upload/t_icon/v1595370319/platformicons/WindowsTransMed_wyuamc.png',
+        'https://res.cloudinary.com/overview/image/upload/t_icon/v1595370318/platformicons/WindowsTransDark_tsafuk.png'
+      ]
     ],
     links: ['Sawayn - Dach', 'Kirlin, VonRueden and Veum', 'Tillman - Wehner'],
     _id: '5f06634ec9e05c2f42bd380a',
