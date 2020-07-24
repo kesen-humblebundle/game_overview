@@ -10,6 +10,8 @@ import Adapter from 'enzyme-adapter-react-16';
 import App from '../client/src/components/App.jsx';
 import AppWrapper from '../client/src/components/App.jsx';
 import Developer from '../client/src/components/Developer.jsx';
+import Portal from '../client/src/components/Portal.js';
+import SystemReqDiv from '../client/src/components/SystemReqDiv.jsx';
 // import DevStyled from '../client/src/components/Developer.jsx';
 // import SpecStyled from '../client/src/components/Developer.jsx';
 import Genre from '../client/src/components/Genre.jsx';
@@ -23,12 +25,6 @@ import SystemReqs from '../client/src/components/SystemReqs.jsx';
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('<App />', () => {
-  it('renders with correct css width, color, background-color', () => {
-    const app = renderer.create(<AppWrapper />).toJSON();
-
-    expect(app).toHaveStyleRule('width', '100%');
-  });
-
   it('renders one Developer component', () => {
     const wrapper = shallow(<App />);
 

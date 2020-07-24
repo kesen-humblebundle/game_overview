@@ -58,8 +58,8 @@ class App extends React.Component {
     axios
       .get(fetchURL, { crossdomain: true })
       .then((response) => {
-        console.log('response??');
-        console.log('Data ?', response.data);
+        // console.log('response??');
+        // console.log('Data ?', response.data);
         const newState = { overview: response.data[0], genre: response.data[1] };
 
         if (response.data[2]) {
@@ -78,7 +78,7 @@ class App extends React.Component {
   }
 
   render() {
-    console.log('platforms', this.state.overview.platforms);
+    // console.log('platforms', this.state.overview.platforms);
     return (
       <AppWrapper>
         <OverviewStyled>
