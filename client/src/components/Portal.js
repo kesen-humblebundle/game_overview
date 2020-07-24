@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { mount } from 'enzyme';
 
 const Portal = ({ children }) => {
   const sysReq = document.getElementById('SystemRequirements');
