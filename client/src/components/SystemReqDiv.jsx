@@ -48,6 +48,8 @@ class SystemReqDiv extends React.Component {
           <StyledSpan>SYSTEM REQUIREMENTS</StyledSpan>
           <StyledSysReq>
             <StyledSpan>Minimum:</StyledSpan>
+            <br />
+
             <SystemBlock />
           </StyledSysReq>
         </StyledMain>

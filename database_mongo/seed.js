@@ -12,13 +12,7 @@ const assignPlatforms = () => {
   const resultsArray = [];
 
   for (let i = 0; i < 100; i++) {
-    let length = Math.ceil(Math.random() * 2);
-    // let probablePlatform = Math.floor(Math.random() * 100);
-
-    // if (probablePlatform < 10) {
-    //   length = 0;
-    // }
-
+    const length = Math.ceil(Math.random() * 2);
     const platformsSubArr = [];
 
     while (platformsSubArr.length < length) {
@@ -26,7 +20,7 @@ const assignPlatforms = () => {
       let rndPlatformIndex = Math.floor(Math.random() * platformsArray.length);
 
       if (steamRnd > 25) {
-        rndPlatformIndex = 0;
+        platformsSubArr.unshift(platformsArray[0]);
       }
       const platform = platformsArray[rndPlatformIndex];
 
@@ -74,9 +68,10 @@ const assignOS = () => {
       if (gameOSArray.length < 1 && virtualProb > 50) {
         gameOSArray.push([icons.oculusRift[0], icons.oculusRift[1], icons.oculusRift[2]]);
         gameOSArray.push([icons.htcVive[0], icons.htcVive[1], icons.htcVive[2]]);
-
         if (winMixedRealProb < 30) {
           gameOSArray.push([icons.winMixedReal[0], icons.winMixedReal[1], icons.winMixedReal[2]]);
+        }
+        if (windowsProb >= 60) {
           gameOSArray.unshift([icons.windows[0], icons.windows[1], icons.windows[2]]);
         }
       }
@@ -130,23 +125,24 @@ const createSystemRequirements = () => {
       requirements[OSarray[i]].DirectX = `Version ${Math.ceil(Math.random() * 4) + 8}`;
       requirements[OSarray[i]].Network = 'Broadband Internet';
       requirements[OSarray[i]].Storage = `${Math.ceil(Math.random() * 10 + 10) * 5} GB`;
-      if (
-        productOSes[j].includes(icons.oculusRift) ||
-        productOSes[j].includes(icons.htcVive) ||
-        productOSes[j].includes(icons.winMixedReal)
-      ) {
-        requirements.vrSupport = {
-          headsets: faker.fake(
-            `{{commerce.productName}}, {{commerce.productName}}, {{commerce.productName}}`
-          ),
-          input: faker.fake(`{{commerce.productAdjective}}, {{commerce.productName}}`),
-          playArea: faker.fake(`{{company.catchPhraseAdjective}}`)
-        };
-      }
+      // console.log('Product oses j', productOSes[j][i]);
+      // if (
+      //   productOSes[j][i].includes(icons.oculusRift[0]) ||
+      //   productOSes[j][i].includes(icons.htcVive[0]) ||
+      //   productOSes[j][i].includes(icons.winMixedReal[0])
+      // ) {
     }
+    requirements.vrSupport = {
+      headsets: faker.fake(
+        `{{commerce.productName}}, {{commerce.productName}}, {{commerce.productName}}`
+      ),
+      input: faker.fake(`{{commerce.productAdjective}}, {{commerce.productName}}`),
+      playArea: faker.fake(`{{company.catchPhraseAdjective}}`)
+    };
+
     requirementsDocs.push(requirements);
   }
-
+  console.log(requirementsDocs);
   return requirementsDocs;
 };
 
@@ -217,21 +213,43 @@ const seed = () => {
     newDoc.os = productOSes[i];
     newDoc.developer = productDevelopers[i];
     newDoc.publisher = productPublishers[i];
-    if (!productOSes[i].includes(icons.windows)) {
-      if (
-        !productOSes[i].includes(icons.oculusRift) &&
-        !productOSes[i].includes(icons.htcVive) &&
-        !productOSes[i].includes(icons.winMixedReal)
-      ) {
+    console.log('before picking sysreqs', productOSes[i]);
+
+    const mac = productOSes[i].some((osArray) => {
+      return osArray[0] === icons.mac[0];
+    });
+    const linux = productOSes[i].some((osArray) => {
+      return osArray[0] === icons.linux[0];
+    });
+    const windows = productOSes[i].some((osArray) => {
+      return osArray[0] === icons.windows[0];
+    });
+    const virtual = productOSes[i].some((osArray) => {
+      return (
+        osArray[0] === icons.oculusRift[0] ||
+        osArray[0] === icons.htcVive[0] ||
+        osArray[0] === icons.winMixedReal[0]
+      );
+    });
+
+    if (!mac) {
+      delete productSysReq[i].mac;
+    }
+
+    if (!windows) {
+      if (!virtual && !linux) {
         delete productSysReq[i].windows;
       }
     }
-    if (!productOSes[i].includes(icons.mac)) {
-      delete productSysReq[i].mac;
-    }
-    if (!productOSes[i].includes(icons.linux)) {
+
+    if (!linux) {
       delete productSysReq[i].linux;
     }
+
+    if (!virtual) {
+      delete productSysReq[i].vrSupport;
+    }
+
     newDoc.system_req = productSysReq[i];
     newDoc.links = productLinks[i];
     for (let j = 0; j < productPlatforms[i].length; j++) {
@@ -242,7 +260,7 @@ const seed = () => {
     }
     docsArray.push(newDoc);
   }
-  console.log(docsArray);
+  // console.log(docsArray);
   return docsArray;
 };
 

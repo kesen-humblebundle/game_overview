@@ -24,7 +24,7 @@ const SystemReqs = (props) => {
   return (
     <SystemStyled>
       <ParaStyled>SYSTEM REQUIREMENTS</ParaStyled>
-      <H4Styled>Learn More</H4Styled>
+      <H4Styled href="#SystemRequirements">Learn More</H4Styled>
     </SystemStyled>
   );
 };
