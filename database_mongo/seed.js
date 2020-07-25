@@ -125,12 +125,6 @@ const createSystemRequirements = () => {
       requirements[OSarray[i]].DirectX = `Version ${Math.ceil(Math.random() * 4) + 8}`;
       requirements[OSarray[i]].Network = 'Broadband Internet';
       requirements[OSarray[i]].Storage = `${Math.ceil(Math.random() * 10 + 10) * 5} GB`;
-      // console.log('Product oses j', productOSes[j][i]);
-      // if (
-      //   productOSes[j][i].includes(icons.oculusRift[0]) ||
-      //   productOSes[j][i].includes(icons.htcVive[0]) ||
-      //   productOSes[j][i].includes(icons.winMixedReal[0])
-      // ) {
     }
     requirements.vrSupport = {
       headsets: faker.fake(
@@ -142,7 +136,7 @@ const createSystemRequirements = () => {
 
     requirementsDocs.push(requirements);
   }
-  console.log(requirementsDocs);
+  // console.log(requirementsDocs);
   return requirementsDocs;
 };
 
