@@ -13,6 +13,8 @@ import Platforms from './Platforms.jsx';
 import Publisher from './Publisher.jsx';
 import SteamRating from './SteamRating.jsx';
 import SystemReqs from './SystemReqs.jsx';
+import Portal from './Portal.js';
+import SystemReqDiv from './SystemReqDiv.jsx';
 
 const AppWrapper = styled.div`
   background-color: #1b1e1b;
@@ -51,14 +53,15 @@ class App extends React.Component {
     if (id === '/') {
       id = '/21';
     }
+    
     const fetchURL = `http://ec2-3-129-17-68.us-east-2.compute.amazonaws.com:3002/system_req${id}`;
     // const fetchURL = `http://127.0.0.1:3002/system_req${id}`;
 
     axios
       .get(fetchURL, { crossdomain: true })
       .then((response) => {
-        console.log('response??');
-        console.log('Data ?', response.data);
+        // console.log('response??');
+        // console.log('Data ?', response.data);
         const newState = { overview: response.data[0], genre: response.data[1] };
 
         if (response.data[2]) {
@@ -77,7 +80,7 @@ class App extends React.Component {
   }
 
   render() {
-    console.log('platforms', this.state.overview.platforms);
+    // console.log('platforms', this.state.overview.platforms);
     return (
       <AppWrapper>
         <OverviewStyled>
@@ -102,6 +105,9 @@ class App extends React.Component {
             />
           </QuarterStyled>
         </OverviewStyled>
+        <Portal>
+          <SystemReqDiv sysReq={this.state.overview.system_req} />
+        </Portal>
       </AppWrapper>
     );
   }

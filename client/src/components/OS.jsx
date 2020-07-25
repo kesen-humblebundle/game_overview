@@ -20,9 +20,9 @@ const ImageStyled = styled.img`
 `;
 
 const OS = (props) => {
-  const OS = props.os;
-  const osArray = OS.map((os, index) => {
-    return <ImageStyled src={os[0]} alt="os icon" key={index} />;
+  const os = props.os;
+  const osArray = os.map((osArr, index) => {
+    return <ImageStyled src={osArr[0]} alt="os icon" key={index} />;
   });
   return (
     <OSStyled>
