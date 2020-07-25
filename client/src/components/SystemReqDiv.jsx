@@ -37,11 +37,11 @@ class SystemReqDiv extends React.Component {
 
   render() {
     console.log(this.props);
-    // let keysArr = Object.keys(this.props.sysReq);
-    // console.log(keysArr);
-    // let systems = keysArr.map((key) => {
-    //   return <SystemBlock sys={this.props.sysReq[key]} name={key} />;
-    // });
+    let keysArr = Object.keys(this.props.sysReq);
+    console.log(keysArr);
+    let systems = keysArr.map((key) => {
+      return <SystemBlock sys={this.props.sysReq[key]} name={key} />;
+    });
     return (
       <StyledWrapper>
         <StyledMain>
@@ -49,8 +49,7 @@ class SystemReqDiv extends React.Component {
           <StyledSysReq>
             <StyledSpan>Minimum:</StyledSpan>
             <br />
-
-            <SystemBlock />
+            {systems}
           </StyledSysReq>
         </StyledMain>
       </StyledWrapper>

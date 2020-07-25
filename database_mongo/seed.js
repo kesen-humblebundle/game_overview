@@ -14,14 +14,14 @@ const assignPlatforms = () => {
   for (let i = 0; i < 100; i++) {
     const length = Math.ceil(Math.random() * 2);
     const platformsSubArr = [];
+    const steamRnd = Math.random() * 100;
+
+    if (steamRnd > 25) {
+      platformsSubArr.unshift(platformsArray[0]);
+    }
 
     while (platformsSubArr.length < length) {
-      const steamRnd = Math.random() * 100;
-      let rndPlatformIndex = Math.floor(Math.random() * platformsArray.length);
-
-      if (steamRnd > 25) {
-        platformsSubArr.unshift(platformsArray[0]);
-      }
+      const rndPlatformIndex = Math.ceil(Math.random() * platformsArray.length - 1);
       const platform = platformsArray[rndPlatformIndex];
 
       if (!platformsSubArr.includes(platformsArray[rndPlatformIndex])) {
@@ -64,6 +64,9 @@ const assignOS = () => {
       }
       if (linuxProb < 40) {
         gameOSArray.push([icons.linux[0], icons.linux[1], icons.linux[2]]);
+        if (windowsProb >= 60 && (virtualProb <= 50 || winMixedRealProb >= 30)) {
+          gameOSArray.unshift([icons.windows[0], icons.windows[1], icons.windows[2]]);
+        }
       }
       if (gameOSArray.length < 1 && virtualProb > 50) {
         gameOSArray.push([icons.oculusRift[0], icons.oculusRift[1], icons.oculusRift[2]]);
