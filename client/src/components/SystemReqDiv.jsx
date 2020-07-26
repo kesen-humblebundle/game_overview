@@ -12,7 +12,7 @@ const StyledWrapper = styled.div`
   width: 100%;
   overflow: hidden;
   height: ${(props) => {
-    return props.open ? `${Object.keys(props.sysReq).length * 230 + 50}px` : '304px';
+    return props.open ? `${Object.keys(props.sysReq).length * 220 + 140}px` : '304px';
   }};
 `;
 const StyledMain = styled.div`
@@ -24,7 +24,7 @@ const StyledMain = styled.div`
   font-weight: 400;
   line-height: 1.35;
   min-height: ${(props) => {
-    return props.open ? `${Object.keys(props.sysReq).length * 230 + 50}px` : '304px';
+    return props.open ? `${Object.keys(props.sysReq).length * 220 + 140}px` : '304px';
   }};
   padding: 35px 0;
   width: 1140px;
