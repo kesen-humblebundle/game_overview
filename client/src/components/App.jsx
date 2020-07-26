@@ -26,9 +26,10 @@ const AppWrapper = styled.div`
 const OverviewStyled = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  width: 1140px;
   height: 239px;
-  width: 100%;
+  margin: auto;
   font-weight: bold;
   font-size: 14px;
 `;
@@ -36,7 +37,7 @@ const OverviewStyled = styled.div`
 const QuarterStyled = styled.div`
   line-height: 1.35;
   display: flex;
-  flex-shrink: 1;
+  /* flex-shrink: 1; */
   flex-direction: column;
   justify-content: space-between;
   min-width: 274px;
