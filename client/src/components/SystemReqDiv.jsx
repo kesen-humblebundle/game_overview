@@ -1,25 +1,34 @@
 import React from 'react';
 import styled from 'styled-components';
+import { GoTriangleDown, GoTriangleUp } from 'react-icons/go';
+import { IconContext } from 'react-icons';
 import SystemBlock from './SystemBlock.jsx';
 
 const StyledWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   background: #1b1d1a;
   width: 100%;
   overflow: hidden;
-  height: 304px;
+  height: ${(props) => {
+    return props.open ? `${Object.keys(props.sysReq).length * 230 + 50}px` : '304px';
+  }};
 `;
 const StyledMain = styled.div`
   position: relative;
   margin: 0 auto;
+  flex: 1;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 15px;
   font-weight: 400;
   line-height: 1.35;
+  min-height: ${(props) => {
+    return props.open ? `${Object.keys(props.sysReq).length * 230 + 50}px` : '304px';
+  }};
   padding: 35px 0;
   width: 1140px;
-  height: 304px;
   color: #a1a7b2;
-  z-index: 1;
   background: #1b1d1a;
   &:after {
     position: absolute;
@@ -27,13 +36,16 @@ const StyledMain = styled.div`
     height: 100%;
     width: 100%;
     content: '';
-    background: linear-gradient(
+    background: ${(props) =>
+      props.open
+        ? 'transparent'
+        : `linear-gradient(
       0deg,
       rgba(27, 29, 26, 1) 0%,
       rgba(27, 29, 26, 1) 42%,
       rgba(27, 29, 26, 0) 58%,
       rgba(27, 29, 26, 0) 100%
-    );
+    )`};
   }
 `;
 
@@ -66,7 +78,16 @@ const StyledLink = styled.a`
 class SystemReqDiv extends React.Component {
   constructor(props) {
     super(props);
-    this.state = false;
+    this.state = {
+      open: false
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(e) {
+    this.setState((prevState) => {
+      return { open: !prevState.open };
+    });
   }
 
   render() {
@@ -74,17 +95,25 @@ class SystemReqDiv extends React.Component {
     let keysArr = Object.keys(this.props.sysReq);
     console.log(keysArr);
     let systems = keysArr.map((key) => {
-      return <SystemBlock sys={this.props.sysReq[key]} name={key} />;
+      return <SystemBlock sys={this.props.sysReq[key]} name={key} key={key} />;
     });
+
     return (
-      <StyledWrapper>
-        <StyledMain>
+      <StyledWrapper open={this.state.open} sysReq={this.props.sysReq}>
+        <StyledMain open={this.state.open} sysReq={this.props.sysReq}>
           <StyledH4>SYSTEM REQUIREMENTS</StyledH4>
           <StyledSysReq>
             <StyledH5>Minimum:</StyledH5>
             {systems}
           </StyledSysReq>
-          <StyledLink href="#">Show more system requirements</StyledLink>
+          <IconContext.Provider
+            value={{ style: { verticalAlign: 'middle', paddingBottom: '3px' } }}
+          >
+            <StyledLink href="#SystemRequirements" onClick={this.handleClick}>
+              Show more system requirements{' '}
+              {this.state.open ? <GoTriangleUp /> : <GoTriangleDown />}
+            </StyledLink>
+          </IconContext.Provider>
         </StyledMain>
       </StyledWrapper>
     );
