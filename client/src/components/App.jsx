@@ -26,9 +26,10 @@ const AppWrapper = styled.div`
 const OverviewStyled = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  width: 1140px;
   height: 239px;
-  width: 100%;
+  margin: auto;
   font-weight: bold;
   font-size: 14px;
 `;
@@ -36,7 +37,7 @@ const OverviewStyled = styled.div`
 const QuarterStyled = styled.div`
   line-height: 1.35;
   display: flex;
-  flex-shrink: 1;
+  /* flex-shrink: 1; */
   flex-direction: column;
   justify-content: space-between;
   min-width: 274px;
@@ -54,8 +55,8 @@ class App extends React.Component {
       id = '/21';
     }
 
-    // const fetchURL = `http://ec2-3-129-17-68.us-east-2.compute.amazonaws.com:3002/system_req${id}`;
-    const fetchURL = `http://127.0.0.1:3002/system_req${id}`;
+    const fetchURL = `http://ec2-3-129-17-68.us-east-2.compute.amazonaws.com:3002/system_req${id}`;
+    // const fetchURL = `http://127.0.0.1:3002/system_req${id}`;
 
     axios
       .get(fetchURL, { crossdomain: true })
