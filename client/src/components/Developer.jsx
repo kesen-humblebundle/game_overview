@@ -14,8 +14,8 @@ const SpecStyled = styled.a`
   color: white;
   margin: 0;
   padding: 0;
-  cursor: pointer;
   &:hover {
+    cursor: pointer;
     text-decoration: underline;
   }
 `;
