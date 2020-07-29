@@ -12,8 +12,6 @@ import AppWrapper from '../client/src/components/App.jsx';
 import Developer from '../client/src/components/Developer.jsx';
 import Portal from '../client/src/components/Portal.js';
 import SystemReqDiv from '../client/src/components/SystemReqDiv.jsx';
-// import DevStyled from '../client/src/components/Developer.jsx';
-// import SpecStyled from '../client/src/components/Developer.jsx';
 import Genre from '../client/src/components/Genre.jsx';
 import Links from '../client/src/components/Links.jsx';
 import OS from '../client/src/components/OS.jsx';
@@ -25,6 +23,12 @@ import SystemReqs from '../client/src/components/SystemReqs.jsx';
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('<App />', () => {
+  it('renders one SystemReqDiv', () => {
+    const wrapper = shallow(<App />);
+
+    expect(wrapper.find(SystemReqDiv)).toHaveLength(1);
+  });
+
   it('renders one Developer component', () => {
     const wrapper = shallow(<App />);
 
