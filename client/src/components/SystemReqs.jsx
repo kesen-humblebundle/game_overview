@@ -25,7 +25,9 @@ const SystemReqs = (props) => {
   return (
     <SystemStyled>
       <ParaStyled>SYSTEM REQUIREMENTS</ParaStyled>
-      <AStyled href="#SystemRequirements">Learn More</AStyled>
+      <AStyled href="#SystemRequirements" onClick={props.clearHash}>
+        Learn More
+      </AStyled>
     </SystemStyled>
   );
 };
