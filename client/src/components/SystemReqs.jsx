@@ -5,12 +5,12 @@ const SystemStyled = styled.div`
   height: 36px;
 `;
 
-const ParaStyled = styled.p`
+const StyledP = styled.p`
   margin: 0;
   padding: 0;
 `;
 
-const AStyled = styled.a`
+const StyledPNext = styled.p`
   color: white;
   margin: 0;
   padding: 0;
@@ -24,8 +24,8 @@ const AStyled = styled.a`
 const SystemReqs = (props) => {
   return (
     <SystemStyled>
-      <ParaStyled>SYSTEM REQUIREMENTS</ParaStyled>
-      <AStyled href="#SystemRequirements">Learn More</AStyled>
+      <StyledP>SYSTEM REQUIREMENTS</StyledP>
+      <StyledPNext onClick={props.jump}>Learn More</StyledPNext>
     </SystemStyled>
   );
 };

@@ -65,7 +65,7 @@ const StyledSysReq = styled.div`
   width: 100%;
 `;
 
-const StyledLink = styled.a`
+const StyledLink = styled.p`
   position: absolute;
   bottom: 119px;
   z-index: 10;
@@ -109,10 +109,15 @@ class SystemReqDiv extends React.Component {
           <IconContext.Provider
             value={{ style: { verticalAlign: 'middle', paddingBottom: '3px' } }}
           >
-            <StyledLink href="#SystemRequirements" onClick={this.handleClick}>
-              Show more system requirements{' '}
-              {this.state.open ? <GoTriangleUp /> : <GoTriangleDown />}
-            </StyledLink>
+            {this.state.open ? (
+              <StyledLink id="SystemRequirements" onClick={this.handleClick}>
+                Show less system requirements <GoTriangleUp />
+              </StyledLink>
+            ) : (
+              <StyledLink id="SystemRequirements" onClick={this.handleClick}>
+                Show more system requirements <GoTriangleDown />
+              </StyledLink>
+            )}
           </IconContext.Provider>
         </StyledMain>
       </StyledWrapper>
