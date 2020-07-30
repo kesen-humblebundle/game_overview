@@ -48,6 +48,7 @@ class App extends React.Component {
     super(props);
     this.state = defaultState;
     this.fetchOverview = this.fetchOverview.bind(this);
+    this.jumpToSysReq = this.jumpToSysReq.bind(this);
   }
 
   fetchOverview(id) {
@@ -76,6 +77,10 @@ class App extends React.Component {
       });
   }
 
+  jumpToSysReq() {
+    window.scrollTo(0, 1700);
+  }
+
   componentDidMount() {
     this.fetchOverview(window.location.pathname);
   }
@@ -93,7 +98,7 @@ class App extends React.Component {
           <QuarterStyled>
             <Developer developer={this.state.overview.developer} />
             <Publisher publisher={this.state.overview.publisher} />
-            <SystemReqs open={this.state.open} />
+            <SystemReqs open={this.state.open} jump={this.jumpToSysReq} />
           </QuarterStyled>
           <QuarterStyled>
             <Links links={this.state.overview.links} />
