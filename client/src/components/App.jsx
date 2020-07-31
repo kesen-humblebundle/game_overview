@@ -75,7 +75,7 @@ class App extends React.Component {
   }
 
   jumpToSysReq() {
-    window.scrollTo(0, 2350);
+    window.scrollTo(0, document.body.scrollHeight - 1000);
   }
 
   componentDidMount() {
