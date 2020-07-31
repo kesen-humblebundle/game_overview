@@ -139,7 +139,7 @@ const createSystemRequirements = () => {
 
     requirementsDocs.push(requirements);
   }
-  // console.log(requirementsDocs);
+
   return requirementsDocs;
 };
 
@@ -210,7 +210,6 @@ const seed = () => {
     newDoc.os = productOSes[i];
     newDoc.developer = productDevelopers[i];
     newDoc.publisher = productPublishers[i];
-    console.log('before picking sysreqs', productOSes[i]);
 
     const mac = productOSes[i].some((osArray) => {
       return osArray[0] === icons.mac[0];
@@ -257,7 +256,7 @@ const seed = () => {
     }
     docsArray.push(newDoc);
   }
-  // console.log(docsArray);
+
   return docsArray;
 };
 

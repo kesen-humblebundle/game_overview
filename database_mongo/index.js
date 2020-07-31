@@ -13,9 +13,6 @@ mongoose
 mongoose.connection.on('error', (err) => {
   throw err;
 });
-// mongoose.connection.once('open', () => {
-//   console.log('Connected to mongoDB');
-// });
 
 const overviewSchema = new mongoose.Schema({
   product_id: Number,
