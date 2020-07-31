@@ -73,6 +73,9 @@ const StyledLink = styled.p`
   text-decoration: none;
   font-weight: 500;
   font-size: 15px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 class SystemReqDiv extends React.Component {
@@ -91,9 +94,7 @@ class SystemReqDiv extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     let keysArr = Object.keys(this.props.sysReq);
-    console.log(keysArr);
     let systems = keysArr.map((key) => {
       return <SystemBlock sys={this.props.sysReq[key]} name={key} key={key} />;
     });

@@ -37,7 +37,6 @@ const OverviewStyled = styled.div`
 const QuarterStyled = styled.div`
   line-height: 1.35;
   display: flex;
-  /* flex-shrink: 1; */
   flex-direction: column;
   justify-content: space-between;
   min-width: 274px;
@@ -62,8 +61,6 @@ class App extends React.Component {
     axios
       .get(fetchURL, { crossdomain: true })
       .then((response) => {
-        // console.log('response??');
-        // console.log('Data ?', response.data);
         const newState = { overview: response.data[0], genre: response.data[1] };
 
         if (response.data[2]) {
@@ -78,7 +75,7 @@ class App extends React.Component {
   }
 
   jumpToSysReq() {
-    window.scrollTo(0, 1700);
+    window.scrollTo(0, 2350);
   }
 
   componentDidMount() {
@@ -86,7 +83,6 @@ class App extends React.Component {
   }
 
   render() {
-    // console.log('platforms', this.state.overview.platforms);
     return (
       <AppWrapper>
         <OverviewStyled>
