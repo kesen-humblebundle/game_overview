@@ -28,7 +28,7 @@ const OverviewStyled = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 1140px;
-  height: 257px;
+  height: 239px;
   margin: auto;
   font-weight: bold;
   font-size: 14px;
