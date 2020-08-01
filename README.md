@@ -21,13 +21,16 @@
 
 ## Usage
 
+> must have mongodb installed
 > start mongodb
-> npm seedDB
+> in terminal, root directory of project - npm run seedDB
 > npm run build
 > npm start
 > navigate to -
 
 - https://127.0.0.1:3002
+
+> it will default to product id of 21, but you can add any id from 1 - 100 by adding a slash followed by the number
 
 ## Requirements
 
@@ -38,9 +41,16 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
 ## Development
 
+> points of note include:
+> using React Portals to render to 2 divs
+> creating a set of icon-like images to use in place of unavailable icons, 3 color variations for each
+> creating 100 sets of random data to be displayed in service using faker.js, seeding into MongoDB
+> having various OSes and Platforms show up with similar frequency to the Humble Bundle site
+
+- https://docs.google.com/document/d/13szAGho6CJYVl-xcwYetM6qGHoC2zH8Ik-sWd9i2-80/edit#
+
 ### Installing Dependencies
 
 From within the root directory:
 
-> npm install -g webpack
 > npm install
