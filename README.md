@@ -42,6 +42,7 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 ## Development
 
 > points of note include:
+> using styled-components
 > using React Portals to render to 2 divs
 > creating a set of icon-like images to use in place of unavailable icons, 3 color variations for each
 > creating 100 sets of random data to be displayed in service using faker.js, seeding into MongoDB
