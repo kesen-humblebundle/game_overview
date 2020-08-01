@@ -3,6 +3,7 @@
 > This is a service representing the game system requirements and other specifications
 > on the product page of our Humble Bundle clone. It fetches info about a particular
 > product and displays relavent info in the same manner as the original site.
+> A second div displays system requirements for a given id and includes a dropown to view more.
 
 ## Related Projects
 
@@ -36,6 +37,8 @@
 
 An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
+> Node v14.2 used for this project
+
 - Node 6.13.0
 - etc
 
@@ -43,10 +46,18 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
 > points of note include:
 > using styled-components
+> retrieving product id from browser - window.location.pathname
 > using React Portals to render to 2 divs
 > creating a set of icon-like images to use in place of unavailable icons, 3 color variations for each
-> creating 100 sets of random data to be displayed in service using faker.js, seeding into MongoDB
+> generating 100 sets of random data to be displayed in service using faker.js, seeding into MongoDB
+> visit links to see sample response data:
+
+- https://gist.github.com/Chris-Hesterman/4733262383bab09b7ce1cdbe596efbda
+- https://gist.github.com/Chris-Hesterman/4733262383bab09b7ce1cdbe596efbda
+
 > having various OSes and Platforms show up with similar frequency to the Humble Bundle site
+> implementing dropdown window in System Requirements div with gradient sandwiched between text
+> deploying to AWS ec2 instance
 
 - https://docs.google.com/document/d/13szAGho6CJYVl-xcwYetM6qGHoC2zH8Ik-sWd9i2-80/edit#
 
