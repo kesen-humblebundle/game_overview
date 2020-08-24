@@ -31,7 +31,9 @@ app.get('/system_req/:product_id', (req, res) => {
       .get(`http://ec2-54-224-38-115.compute-1.amazonaws.com:5150/genre/${id}`)
       .then((response) => {
         const resArray = doc;
+        console.log('resArray: ', resArray);
         const newGenre = response.data;
+        console.log('newGenre: ', newGenre);
         const steamNumber = resArray[0].steam_rating;
 
         resArray.push(newGenre);
@@ -41,14 +43,14 @@ app.get('/system_req/:product_id', (req, res) => {
             steamNumber >= 95
               ? 'Overwhelmingly Positive'
               : steamNumber >= 80
-              ? 'Very Postive'
-              : steamNumber >= 70
-              ? 'Mostly Positive'
-              : steamNumber >= 40
-              ? 'Mixed'
-              : steamNumber >= 20
-              ? 'Mostly Negative'
-              : 'Very Negative';
+                ? 'Very Postive'
+                : steamNumber >= 70
+                  ? 'Mostly Positive'
+                  : steamNumber >= 40
+                    ? 'Mixed'
+                    : steamNumber >= 20
+                      ? 'Mostly Negative'
+                      : 'Very Negative';
           resArray.push(describeSteamRating);
         }
 
@@ -96,6 +98,44 @@ app.get('/system_req/platforms/:product_id', (req, res) => {
       res.send(resultsArray[0]);
     }
   });
+});
+
+//Extended CRUD for SDC
+
+//GET
+app.get('/readOnly/:product_id', (req, res) => {
+  const id = req.params.product_id;
+
+  if (id > 100 || id < 1) {
+    console.log('Product id must be 1-100 inclusive. Invalid product_id: ', id);
+    res.status(404);
+  } else {
+    Overview.find({ product_id: id })
+    .then(doc => {
+      const productInfo = doc;
+      console.log('success in GET readOnly: ', productInfo);
+      res.send(productInfo);
+    })
+    .catch(err => {
+      console.log('error in GET readOnly: ', err);
+      res.status(404).send(err);
+    })
+  }
+});
+
+//POST
+app.post('/newItem/:product_id', (req, res) => {
+  
+});
+
+//PUT
+app.put('updateItem/:product_id', (req, res) => {
+  
+});
+
+//DELETE
+app.delete('deleteItem/:product_id', (req, res) => {
+  
 });
 
 module.exports = app;
