@@ -1,8 +1,12 @@
 /* eslint-disable no-console */
 const mongoose = require('mongoose');
+const path = require('path');
+require('dotenv').config({
+  path: path.resolve(__dirname, '../.env')
+});
 
 mongoose
-  .connect('mongodb://localhost:27017/overview', {
+  .connect(process.env.DATABASE, {
     useUnifiedTopology: true,
     useNewUrlParser: true
   })
