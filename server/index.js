@@ -111,31 +111,80 @@ app.get('/readOnly/:product_id', (req, res) => {
     res.status(404);
   } else {
     Overview.find({ product_id: id })
-    .then(doc => {
-      const productInfo = doc;
-      console.log('success in GET readOnly: ', productInfo);
-      res.send(productInfo);
-    })
-    .catch(err => {
-      console.log('error in GET readOnly: ', err);
-      res.status(404).send(err);
-    })
+      .then(doc => {
+        const productInfo = doc;
+        console.log('success in GET readOnly: ', productInfo);
+        res.send(productInfo);
+      })
+      .catch(err => {
+        console.log('error in GET readOnly: ', err);
+        res.status(404).send(err);
+      })
   }
 });
 
+/*
+  product_id: Number,
+  platforms: Array,
+  os: Array,
+  developer: String,
+  publisher: String,
+  system_req: Object,
+  links: Array,
+  steam_rating: Number
+*/
+
 //POST
 app.post('/newItem/:product_id', (req, res) => {
-  
+  const newItem = req.body;
+  Overview.insertOne({product_id: newItem.id, platforms: newItem.platorms, os: newItem.os, developer: newItem.developer, publisher: newItem.publisher, system_req: newItem.system_req, links: newItem.links, steam_rating: newItem.steam_rating})
+    .then(doc => {
+      const productInfo = doc;
+      console.log('success POSTing newItem to db: ', productInfo);
+      res.send(productInfo);
+    })
+    .catch(err => {
+      console.log('error posting newItem to db: ', err);
+      res.status(404).send(err);
+    })
 });
 
 //PUT
 app.put('updateItem/:product_id', (req, res) => {
-  
+  const id = req.params.product_id;
+  const newInfo = req.body;
+
+  Overview.updateOne({product_id: id}, {newInfo})
+    .then(doc => {
+      const productInfo = doc;
+      console.log(`Success updating item ${id}: `, productInfo);
+      res.send(productInfo);
+    })
+    .catch(err => {
+      console.log(`error updating item ${id}: `, err);
+      res.status(404).send(err);
+    })
 });
 
 //DELETE
 app.delete('deleteItem/:product_id', (req, res) => {
-  
+  const id = req.params.product_id;
+
+  if (id > 100 || id < 1) {
+    console.log('Product id must be 1-100 inclusive. Invalid product_id: ', id);
+    res.status(404);
+  } else {
+    Overview.deleteOne({product_id: id})
+      .then(doc => {
+        const deleted = doc;
+        console.log(`successfuly deleted item ${id}: `, deleted);
+        res.send(deleted);
+      })
+      .catch(err => {
+        console.log('error in deleteItem: ', err);
+        res.status(404).send(err);
+      });
+  }
 });
 
 module.exports = app;
