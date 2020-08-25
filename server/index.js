@@ -113,7 +113,7 @@ app.get('/readOnly/:product_id', (req, res) => {
     Overview.find({ product_id: id })
       .then(doc => {
         const productInfo = doc;
-        console.log('success in GET readOnly: ', productInfo);
+        console.log('success in GET readOnly');
         res.send(productInfo);
       })
       .catch(err => {
