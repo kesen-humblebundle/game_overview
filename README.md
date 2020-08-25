@@ -17,21 +17,34 @@
 ## Table of Contents
 
 1. Usage
-2. Requirements
-3. Development
+2. Testing
+3. Requirements
+4. Development
 
 ## Usage
 
-> must have mongodb installed
-> start mongodb
-> in terminal, root directory of project - npm run seedDB
-> npm run build
-> npm start
-> navigate to -
+1. Must have mongodb installed
+2. Start mongodb
+3. Make sure to create a .env file at the root level with the following format:
+```
+OVERVIEW_PORT=3002
+DATABASE='mongodb://localhost:27017/overview'
+```
+4. In terminal, from root directory of project > npm run seedDB
+5. npm run build
+6. npm start
+7. Navigate to: https://127.0.0.1:3002
 
-- https://127.0.0.1:3002
+> The service will default to a product id of 21, but you can switch to any id from 1 - 100 inclusive by adding a slash followed by the number to the end of step 7
 
-> it will default to product id of 21, but you can add any id from 1 - 100 by adding a slash followed by the number
+## Testing
+This service uses jest and enzyme. 
+
+From terminal in root directory:
+
+To run all tests: > npm test
+
+To run only the tests associated with CRUD routes: > npm run testCRUD
 
 ## Requirements
 
