@@ -72,6 +72,16 @@ const updateData = {
   steam_rating: 77
 }
 
+const badUpdateData = {
+  platforms: ['11 3/4'],
+  os: ['mac', 'windows'],
+  developer: 'Developer3',
+  publisher: 'Publisher3',
+  system_req: {},
+  links: ['link3'],
+  steam_rating: 77
+}
+
 describe('CRUD routes', () => {
   beforeAll(async () => {
     await mongoose.connect(process.env.DATABASE, { useNewUrlParser: true, useCreateIndex: true }, (err) => {
@@ -158,6 +168,13 @@ describe('CRUD routes', () => {
     expect(response.body.nModified).toBe(1);
     expect(item11PreUpdate.body[0].platforms[0]).toBe('9 3/4');
     expect(item11PostUpdate.body[0].platforms[0]).toBe('11 3/4');
+    done();
+  });
+
+  it('should get a 404 error when posting data without a product_id field', async (done) => {
+    const response = await request.put('/updateItem').send(badUpdateData);
+
+    expect(response.status).toBe(404);
     done();
   });
 

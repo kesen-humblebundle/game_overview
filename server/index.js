@@ -142,8 +142,12 @@ app.post('/newItem', (req, res) => {
 app.put('/updateItem', (req, res) => {
   const newInfo = req.body;
   const id = newInfo.product_id;
-  
-  Overview.updateOne({product_id: id}, newInfo)
+
+  if (!id) {
+    console.log('product_id required to update item');
+    res.status(404).send()
+  } else {
+    Overview.updateOne({product_id: id}, newInfo)
     .then(doc => {
       const productInfo = doc;
       console.log(`Success updating item ${id}`);
@@ -153,6 +157,7 @@ app.put('/updateItem', (req, res) => {
       console.log(`error updating item ${id}: `, err);
       res.status(404).send(err);
     })
+  }
 });
 
 //DELETE
