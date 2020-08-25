@@ -108,7 +108,7 @@ app.get('/readOnly/:product_id', (req, res) => {
 
   if (id > 100 || id < 1) {
     console.log('Product id must be 1-100 inclusive. Invalid product_id: ', id);
-    res.status(404);
+    res.status(404).send();
   } else {
     Overview.find({ product_id: id })
       .then(doc => {
@@ -150,7 +150,7 @@ app.post('/newItem/:product_id', (req, res) => {
 });
 
 //PUT
-app.put('updateItem/:product_id', (req, res) => {
+app.put('/updateItem/:product_id', (req, res) => {
   const id = req.params.product_id;
   const newInfo = req.body;
 
@@ -167,12 +167,14 @@ app.put('updateItem/:product_id', (req, res) => {
 });
 
 //DELETE
-app.delete('deleteItem/:product_id', (req, res) => {
+app.delete('/deleteItem/:product_id', (req, res) => {
+  console.log('in server: ', req.params);
   const id = req.params.product_id;
+  console.log('delete id: ', id);
 
   if (id > 100 || id < 1) {
     console.log('Product id must be 1-100 inclusive. Invalid product_id: ', id);
-    res.status(404);
+    res.status(404).send();
   } else {
     Overview.deleteOne({product_id: id})
       .then(doc => {
