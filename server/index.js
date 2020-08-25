@@ -113,7 +113,6 @@ app.get('/readOnly/:product_id', (req, res) => {
     Overview.find({ product_id: id })
       .then(doc => {
         const productInfo = doc;
-        console.log('success in GET readOnly');
         res.send(productInfo);
       })
       .catch(err => {
@@ -123,25 +122,14 @@ app.get('/readOnly/:product_id', (req, res) => {
   }
 });
 
-/*
-  product_id: Number,
-  platforms: Array,
-  os: Array,
-  developer: String,
-  publisher: String,
-  system_req: Object,
-  links: Array,
-  steam_rating: Number
-*/
 
 //POST
 app.post('/newItem', (req, res) => {
   const newItem = req.body;
-  console.log('newItem: ', newItem);
+
   Overview.create(newItem)
     .then(doc => {
       const productInfo = doc;
-      console.log('success POSTing newItem to db');
       res.status(201).send(productInfo);
     })
     .catch(err => {
@@ -158,7 +146,7 @@ app.put('/updateItem', (req, res) => {
   Overview.updateOne({product_id: id}, newInfo)
     .then(doc => {
       const productInfo = doc;
-      console.log(`Success updating item ${id}: `, productInfo);
+      console.log(`Success updating item ${id}`);
       res.send(productInfo);
     })
     .catch(err => {
@@ -169,9 +157,7 @@ app.put('/updateItem', (req, res) => {
 
 //DELETE
 app.delete('/deleteItem/:product_id', (req, res) => {
-  console.log('in server: ', req.params);
   const id = req.params.product_id;
-  console.log('delete id: ', id);
 
   if (id > 100 || id < 1) {
     console.log('Product id must be 1-100 inclusive. Invalid product_id: ', id);
@@ -180,7 +166,7 @@ app.delete('/deleteItem/:product_id', (req, res) => {
     Overview.deleteOne({product_id: id})
       .then(doc => {
         const deleted = doc;
-        console.log(`successfuly deleted item ${id}: `, deleted);
+        console.log(`successfuly deleted item ${id}`);
         res.send(deleted);
       })
       .catch(err => {

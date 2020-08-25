@@ -8,8 +8,8 @@
     "node": ">=6.13.0"
   },
   "scripts": {
-    "test": "jest",
-    "testCRUD": "jest ./__tests__/crud.test.js --runInBand",
+    "test": "jest --forceExit",
+    "testCRUD": "jest ./__tests__/crud.test.js --runInBand --forceExit",
     "build": "webpack --watch -d",
     "p_build": "webpack -p",
     "p_start": "node ./server/server.js",

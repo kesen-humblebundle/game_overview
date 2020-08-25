@@ -2,18 +2,18 @@ const mongoose = require('mongoose');
 const app = require('../server/index.js');
 const supertest = require('supertest');
 const request = supertest(app);
-
 const path = require('path');
+
 require('dotenv').config({
   path: path.resolve(__dirname, '../.env')
 });
 
+//switch to test db
 process.env.DATABASE = 'mongodb://localhost:27017/overviewTest';
 
 const Overview = require('../database_mongo/index.js');
 
 import "babel-polyfill";
-
 
 
 //fake data
@@ -133,13 +133,14 @@ describe('CRUD routes', () => {
   //POST
   it('should POST to the /newItem endpoint', async (done) => {
     const response = await request.post('/newItem').send(postData);
+    const response2 = await request.get('/readOnly/13');
 
     expect(response.status).toBe(201);
-    expect(response.body.platforms[0]).toBe('11 3/4');
+    expect(response2.body[0].platforms[0]).toBe('11 3/4');
     done();
   });
 
-  it('should get a 404 error when posting data with an invalid field', async (done) => {
+  it('should get a 404 error when posting data with an invalid product_id field', async (done) => {
     const response = await request.post('/newItem').send(badPostData);
 
     expect(response.status).toBe(404);
@@ -151,7 +152,6 @@ describe('CRUD routes', () => {
   it('should update the correct item through the /updateItem endpoint', async (done) => {
     const item11PreUpdate = await request.get('/readOnly/11');
     const response = await request.put('/updateItem').send(updateData);
-    console.log('put response: ', response.body);
     const item11PostUpdate = await request.get('/readOnly/11');
 
     expect(response.status).toBe(200);
