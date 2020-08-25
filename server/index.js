@@ -135,13 +135,14 @@ app.get('/readOnly/:product_id', (req, res) => {
 */
 
 //POST
-app.post('/newItem/:product_id', (req, res) => {
+app.post('/newItem', (req, res) => {
   const newItem = req.body;
-  Overview.insertOne({product_id: newItem.id, platforms: newItem.platorms, os: newItem.os, developer: newItem.developer, publisher: newItem.publisher, system_req: newItem.system_req, links: newItem.links, steam_rating: newItem.steam_rating})
+  console.log('newItem: ', newItem);
+  Overview.create(newItem)
     .then(doc => {
       const productInfo = doc;
-      console.log('success POSTing newItem to db: ', productInfo);
-      res.send(productInfo);
+      console.log('success POSTing newItem to db');
+      res.status(201).send(productInfo);
     })
     .catch(err => {
       console.log('error posting newItem to db: ', err);
@@ -150,11 +151,11 @@ app.post('/newItem/:product_id', (req, res) => {
 });
 
 //PUT
-app.put('/updateItem/:product_id', (req, res) => {
-  const id = req.params.product_id;
+app.put('/updateItem', (req, res) => {
   const newInfo = req.body;
-
-  Overview.updateOne({product_id: id}, {newInfo})
+  const id = newInfo.product_id;
+  
+  Overview.updateOne({product_id: id}, newInfo)
     .then(doc => {
       const productInfo = doc;
       console.log(`Success updating item ${id}: `, productInfo);

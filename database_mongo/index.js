@@ -19,7 +19,10 @@ mongoose.connection.on('error', (err) => {
 });
 
 const overviewSchema = new mongoose.Schema({
-  product_id: Number,
+  product_id: {
+    type: Number,
+    required: true
+  },
   platforms: Array,
   os: Array,
   developer: String,

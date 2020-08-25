@@ -40,7 +40,29 @@ const fakeData2 = {
 }
 
 const postData = {
-  product_id: 13,
+  product_id: '13',
+  platforms: ['11 3/4'],
+  os: ['mac', 'windows'],
+  developer: 'Developer3',
+  publisher: 'Publisher3',
+  system_req: {},
+  links: ['link3'],
+  steam_rating: 77
+}
+
+const badPostData = {
+  product_id: 'NaN',
+  platforms: ['11 3/4'],
+  os: ['mac', 'windows'],
+  developer: 'Developer3',
+  publisher: 'Publisher3',
+  system_req: {},
+  links: ['link3'],
+  steam_rating: 77
+}
+
+const updateData = {
+  product_id: 11,
   platforms: ['11 3/4'],
   os: ['mac', 'windows'],
   developer: 'Developer3',
@@ -63,7 +85,6 @@ describe('CRUD routes', () => {
   beforeEach(async (done) => {
     await Overview.create([fakeData1, fakeData2])
       .then(docs => {
-        console.log('success inserting fake data into test db');
         done();
       })
       .catch(err => {
@@ -74,7 +95,6 @@ describe('CRUD routes', () => {
   afterEach(async (done) => {
     await Overview.deleteMany({"os": ['mac', 'windows']})
       .then(docs => {
-        console.log('success deleting fake data from test db');
         done();
       })
       .catch(err => {
@@ -111,21 +131,41 @@ describe('CRUD routes', () => {
   });
 
   //POST
-  // it('should POST to the /newItem/:product_id endpoint', async (done) => {
-  //   const response = await request.post('/newItem/13');
+  it('should POST to the /newItem endpoint', async (done) => {
+    const response = await request.post('/newItem').send(postData);
 
-  //   expect(response.status).toBe(200);
-  //   expect(response.body[0].platforms[0]).toBe('11 3/4');
-  //   done();
-  // });
+    expect(response.status).toBe(201);
+    expect(response.body.platforms[0]).toBe('11 3/4');
+    done();
+  });
+
+  it('should get a 404 error when posting data with an invalid field', async (done) => {
+    const response = await request.post('/newItem').send(badPostData);
+
+    expect(response.status).toBe(404);
+    expect(response.body._message).toBe('Overview validation failed');
+    done();
+  });
+
+  //PUT
+  it('should update the correct item through the /updateItem endpoint', async (done) => {
+    const item11PreUpdate = await request.get('/readOnly/11');
+    const response = await request.put('/updateItem').send(updateData);
+    console.log('put response: ', response.body);
+    const item11PostUpdate = await request.get('/readOnly/11');
+
+    expect(response.status).toBe(200);
+    expect(response.body.nModified).toBe(1);
+    expect(item11PreUpdate.body[0].platforms[0]).toBe('9 3/4');
+    expect(item11PostUpdate.body[0].platforms[0]).toBe('11 3/4');
+    done();
+  });
 
 
   //DELETE
   it('should DELETE the correct record from /deleteItem/:product_id', async (done) => {
     const response = await request.delete('/deleteItem/11');
-    //console.log('delete response: ', response);
     const deleted = await request.get('/readOnly/11')
-    console.log('deleted: ', deleted.body);
 
     expect(response.status).toBe(200);
     expect(deleted.body.length).toBe(0);
