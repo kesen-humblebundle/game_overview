@@ -1,4 +1,4 @@
-# Chris-app-overview
+# Game Overview Service
 
 > This is a service representing the game system requirements and other specifications
 > on the product page of our Humble Bundle clone. It fetches info about a particular
