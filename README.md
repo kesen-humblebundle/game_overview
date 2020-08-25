@@ -20,6 +20,7 @@
 2. Testing
 3. Requirements
 4. Development
+5. CRUD Routes
 
 ## Usage
 
@@ -73,6 +74,51 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 > deploying to AWS ec2 instance
 
 - https://docs.google.com/document/d/13szAGho6CJYVl-xcwYetM6qGHoC2zH8Ik-sWd9i2-80/edit#
+
+## CRUD Routes
+```
+GET
+Endpoint: /readOnly/:product_id
+
+Response format:
+  product_id: Number,
+  platforms: Array,
+  os: Array,
+  developer: String,
+  publisher: String,
+  system_req: Object,
+  links: Array,
+  steam_rating: Number
+
+
+POST
+Endpoint: /newItem
+
+-Requires an object to be sent in request body. product_id field is required:
+
+  product_id: {
+    type: Number,
+    required: true
+  },
+  platforms: Array,
+  os: Array,
+  developer: String,
+  publisher: String,
+  system_req: Object,
+  links: Array,
+  steam_rating: Number
+
+
+PUT
+Endpoint: /updateItem
+
+-Requires an object to be sent in request body with fields you would like updated. product_id is required to identify the item to update.
+
+
+DELETE
+Endpoint: /deleteItem/:product_id
+```
+
 
 ### Installing Dependencies
 
