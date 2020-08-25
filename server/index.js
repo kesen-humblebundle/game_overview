@@ -31,7 +31,9 @@ app.get('/system_req/:product_id', (req, res) => {
       .get(`http://ec2-54-224-38-115.compute-1.amazonaws.com:5150/genre/${id}`)
       .then((response) => {
         const resArray = doc;
+        console.log('resArray: ', resArray);
         const newGenre = response.data;
+        console.log('newGenre: ', newGenre);
         const steamNumber = resArray[0].steam_rating;
 
         resArray.push(newGenre);
@@ -41,14 +43,14 @@ app.get('/system_req/:product_id', (req, res) => {
             steamNumber >= 95
               ? 'Overwhelmingly Positive'
               : steamNumber >= 80
-              ? 'Very Postive'
-              : steamNumber >= 70
-              ? 'Mostly Positive'
-              : steamNumber >= 40
-              ? 'Mixed'
-              : steamNumber >= 20
-              ? 'Mostly Negative'
-              : 'Very Negative';
+                ? 'Very Postive'
+                : steamNumber >= 70
+                  ? 'Mostly Positive'
+                  : steamNumber >= 40
+                    ? 'Mixed'
+                    : steamNumber >= 20
+                      ? 'Mostly Negative'
+                      : 'Very Negative';
           resArray.push(describeSteamRating);
         }
 
@@ -96,6 +98,87 @@ app.get('/system_req/platforms/:product_id', (req, res) => {
       res.send(resultsArray[0]);
     }
   });
+});
+
+//Extended CRUD for SDC
+
+//GET
+app.get('/readOnly/:product_id', (req, res) => {
+  const id = req.params.product_id;
+
+  if (id > 100 || id < 1) {
+    console.log('Product id must be 1-100 inclusive. Invalid product_id: ', id);
+    res.status(404).send();
+  } else {
+    Overview.find({ product_id: id })
+      .then(doc => {
+        const productInfo = doc;
+        res.send(productInfo);
+      })
+      .catch(err => {
+        console.log('error in GET readOnly: ', err);
+        res.status(404).send(err);
+      })
+  }
+});
+
+
+//POST
+app.post('/newItem', (req, res) => {
+  const newItem = req.body;
+
+  Overview.create(newItem)
+    .then(doc => {
+      const productInfo = doc;
+      res.status(201).send(productInfo);
+    })
+    .catch(err => {
+      console.log('error posting newItem to db: ', err);
+      res.status(404).send(err);
+    })
+});
+
+//PUT
+app.put('/updateItem', (req, res) => {
+  const newInfo = req.body;
+  const id = newInfo.product_id;
+
+  if (!id) {
+    console.log('product_id required to update item');
+    res.status(404).send()
+  } else {
+    Overview.updateOne({product_id: id}, newInfo)
+    .then(doc => {
+      const productInfo = doc;
+      console.log(`Success updating item ${id}`);
+      res.send(productInfo);
+    })
+    .catch(err => {
+      console.log(`error updating item ${id}: `, err);
+      res.status(404).send(err);
+    })
+  }
+});
+
+//DELETE
+app.delete('/deleteItem/:product_id', (req, res) => {
+  const id = req.params.product_id;
+
+  if (id > 100 || id < 1) {
+    console.log('Product id must be 1-100 inclusive. Invalid product_id: ', id);
+    res.status(404).send();
+  } else {
+    Overview.deleteOne({product_id: id})
+      .then(doc => {
+        const deleted = doc;
+        console.log(`successfuly deleted item ${id}`);
+        res.send(deleted);
+      })
+      .catch(err => {
+        console.log('error in deleteItem: ', err);
+        res.status(404).send(err);
+      });
+  }
 });
 
 module.exports = app;

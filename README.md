@@ -17,21 +17,35 @@
 ## Table of Contents
 
 1. Usage
-2. Requirements
-3. Development
+2. Testing
+3. Requirements
+4. Development
+5. CRUD Routes
 
 ## Usage
 
-> must have mongodb installed
-> start mongodb
-> in terminal, root directory of project - npm run seedDB
-> npm run build
-> npm start
-> navigate to -
+1. Must have mongodb installed
+2. Start mongodb
+3. Make sure to create a .env file at the root level with the following format:
+```
+OVERVIEW_PORT=3002
+DATABASE='mongodb://localhost:27017/overview'
+```
+4. In terminal, from root directory of project > npm run seedDB
+5. npm run build
+6. npm start
+7. Navigate to: https://127.0.0.1:3002
 
-- https://127.0.0.1:3002
+> The service will default to a product id of 21, but you can switch to any id from 1 - 100 inclusive by adding a slash followed by the number to the end of step 7
 
-> it will default to product id of 21, but you can add any id from 1 - 100 by adding a slash followed by the number
+## Testing
+This service uses jest and enzyme. 
+
+From terminal in root directory:
+
+To run all tests: > npm test
+
+To run only the tests associated with CRUD routes: > npm run testCRUD
 
 ## Requirements
 
@@ -60,6 +74,51 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 > deploying to AWS ec2 instance
 
 - https://docs.google.com/document/d/13szAGho6CJYVl-xcwYetM6qGHoC2zH8Ik-sWd9i2-80/edit#
+
+## CRUD Routes
+```
+GET
+Endpoint: /readOnly/:product_id
+
+Response format:
+  product_id: Number,
+  platforms: Array,
+  os: Array,
+  developer: String,
+  publisher: String,
+  system_req: Object,
+  links: Array,
+  steam_rating: Number
+
+
+POST
+Endpoint: /newItem
+
+-Requires an object to be sent in request body. product_id field is required:
+
+  product_id: {
+    type: Number,
+    required: true
+  },
+  platforms: Array,
+  os: Array,
+  developer: String,
+  publisher: String,
+  system_req: Object,
+  links: Array,
+  steam_rating: Number
+
+
+PUT
+Endpoint: /updateItem
+
+-Requires an object to be sent in request body with fields you would like updated. product_id is required to identify the item to update.
+
+
+DELETE
+Endpoint: /deleteItem/:product_id
+```
+
 
 ### Installing Dependencies
 
