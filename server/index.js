@@ -102,22 +102,26 @@ app.get('/system_req/platforms/:product_id', (req, res) => {
 
 //Extended CRUD for SDC
 
+//valid record ids
+const max = 100;
+const min = 1;
+
 //GET
 app.get('/readOnly/:product_id', (req, res) => {
   const id = req.params.product_id;
 
-  if (id > 100 || id < 1) {
+  if (id > max || id < min) {
     console.log('Product id must be 1-100 inclusive. Invalid product_id: ', id);
     res.status(404).send();
   } else {
     Overview.find({ product_id: id })
       .then(doc => {
-        const productInfo = doc;
+        const productInfo = doc; //clean up data maybe
         res.send(productInfo);
       })
       .catch(err => {
         console.log('error in GET readOnly: ', err);
-        res.status(404).send(err);
+        res.status(500).send(err);
       })
   }
 });
@@ -134,7 +138,7 @@ app.post('/newItem', (req, res) => {
     })
     .catch(err => {
       console.log('error posting newItem to db: ', err);
-      res.status(404).send(err);
+      res.status(500).send(err);
     })
 });
 
@@ -143,11 +147,11 @@ app.put('/updateItem', (req, res) => {
   const newInfo = req.body;
   const id = newInfo.product_id;
 
-  if (!id) {
+  if (!id) {  //|| 0
     console.log('product_id required to update item');
     res.status(404).send()
   } else {
-    Overview.updateOne({product_id: id}, newInfo)
+    Overview.updateOne({product_id: id}, newInfo) //have a separate validation func for put/post
     .then(doc => {
       const productInfo = doc;
       console.log(`Success updating item ${id}`);
@@ -155,7 +159,7 @@ app.put('/updateItem', (req, res) => {
     })
     .catch(err => {
       console.log(`error updating item ${id}: `, err);
-      res.status(404).send(err);
+      res.status(500).send(err);
     })
   }
 });
@@ -164,7 +168,7 @@ app.put('/updateItem', (req, res) => {
 app.delete('/deleteItem/:product_id', (req, res) => {
   const id = req.params.product_id;
 
-  if (id > 100 || id < 1) {
+  if (id > max || id < min) {  //max/min could be vars so they could be changed in one place
     console.log('Product id must be 1-100 inclusive. Invalid product_id: ', id);
     res.status(404).send();
   } else {
@@ -176,7 +180,7 @@ app.delete('/deleteItem/:product_id', (req, res) => {
       })
       .catch(err => {
         console.log('error in deleteItem: ', err);
-        res.status(404).send(err);
+        res.status(500).send(err);  //all catches should be 500s (server err)
       });
   }
 });
