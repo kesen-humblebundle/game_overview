@@ -17,7 +17,7 @@ import "babel-polyfill";
 
 
 //fake data
-const fakeData1 = {     ///fake data in another file
+const fakeData1 = {   
   product_id: 11,
   platforms: ['9 3/4'],
   os: ['mac', 'windows'],
@@ -146,7 +146,7 @@ describe('CRUD routes', () => {
     const response2 = await request.get('/readOnly/13');
 
     expect(response.status).toBe(201);
-    expect(response2.body[0].product_id).toBe(13);  //should just check for id 13, not a random key
+    expect(response2.body[0].product_id).toBe(13);  
     done();
   });
 
@@ -154,7 +154,6 @@ describe('CRUD routes', () => {
     const response = await request.post('/newItem').send(badPostData);
 
     expect(response.status).toBe(500);
-    //expect(response.body._message).toBe('Overview validation failed');  //don't ever check error msg (unless it's meaningful)
     done();
   });
 

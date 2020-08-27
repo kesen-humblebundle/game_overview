@@ -151,7 +151,7 @@ app.put('/updateItem', (req, res) => {
     console.log('product_id required to update item');
     res.status(404).send()
   } else {
-    Overview.updateOne({product_id: id}, newInfo) //have a separate validation func for put/post
+    Overview.updateOne({product_id: id}, newInfo) //have a separate validation func for put/post?
     .then(doc => {
       const productInfo = doc;
       console.log(`Success updating item ${id}`);
@@ -168,7 +168,7 @@ app.put('/updateItem', (req, res) => {
 app.delete('/deleteItem/:product_id', (req, res) => {
   const id = req.params.product_id;
 
-  if (id > max || id < min) {  //max/min could be vars so they could be changed in one place
+  if (id > max || id < min) { 
     console.log('Product id must be 1-100 inclusive. Invalid product_id: ', id);
     res.status(404).send();
   } else {
@@ -180,7 +180,7 @@ app.delete('/deleteItem/:product_id', (req, res) => {
       })
       .catch(err => {
         console.log('error in deleteItem: ', err);
-        res.status(500).send(err);  //all catches should be 500s (server err)
+        res.status(500).send(err);
       });
   }
 });
