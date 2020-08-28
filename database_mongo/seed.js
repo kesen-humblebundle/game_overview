@@ -195,7 +195,7 @@ const createLinks = () => {
 };
 
 
-
+//seed script
 
 var recordCounter = 1;
 
@@ -263,7 +263,6 @@ const seed = () => {
     newDoc.system_req = productSysReq[i];
     newDoc.links = productLinks[i];
     for (let j = 0; j < productPlatforms[i].length; j++) {
-      // console.log(i, productPlatforms[i][j]);
       if (newDoc.platforms[j].includes(icons.steam[0])) {
         newDoc['steam_rating'] = productSteamRate[i];
       }
@@ -275,12 +274,9 @@ const seed = () => {
 };
 
 
-//create seed data chunk, currently: 10,000 records
+//create seed data chunk
 const seedData = seed();
 
-//MongoDB seed
-//addManyOverviews(seedData);
-//assignPlatforms();
 
 //CouchDB seed
 const addManyOverviewsCouch = (array) => {
@@ -296,7 +292,6 @@ const addManyOverviewsPostgres = (array) => {
 }
 
 //addManyOverviewsPostgres(seedData);
-
 
 
 
