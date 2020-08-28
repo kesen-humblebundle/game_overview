@@ -26,44 +26,46 @@ app.get('/:product_id', (req, res) => {
 app.get('/system_req/:product_id', (req, res) => {
   console.log('got it');
   const id = req.params.product_id;
-  Overview.find({ product_id: id }).then((doc) => {
-    axios
-      .get(`http://ec2-54-224-38-115.compute-1.amazonaws.com:5150/genre/${id}`)
-      .then((response) => {
-        const resArray = doc;
-        console.log('resArray: ', resArray);
-        const newGenre = response.data;
-        console.log('newGenre: ', newGenre);
-        const steamNumber = resArray[0].steam_rating;
+  console.log('id: ', id);
+  Overview.find({ product_id: id })
+    .then((doc) => {
+      console.log('doc: ', doc);
+      // axios.get(`http://ec2-54-224-38-115.compute-1.amazonaws.com:5150/genre/${id}`)
+      //   .then((response) => {
+          const resArray = doc;
+          //console.log('resArray: ', resArray);
+          const newGenre = ['horror']; //response.data
+          //console.log('newGenre: ', newGenre);
+          const steamNumber = resArray[0].steam_rating;
 
-        resArray.push(newGenre);
+          resArray.push(newGenre);
 
-        if (steamNumber) {
-          const describeSteamRating =
-            steamNumber >= 95
-              ? 'Overwhelmingly Positive'
-              : steamNumber >= 80
-                ? 'Very Postive'
-                : steamNumber >= 70
-                  ? 'Mostly Positive'
-                  : steamNumber >= 40
-                    ? 'Mixed'
-                    : steamNumber >= 20
-                      ? 'Mostly Negative'
-                      : 'Very Negative';
-          resArray.push(describeSteamRating);
-        }
+          if (steamNumber) {
+            const describeSteamRating =
+              steamNumber >= 95
+                ? 'Overwhelmingly Positive'
+                : steamNumber >= 80
+                  ? 'Very Postive'
+                  : steamNumber >= 70
+                    ? 'Mostly Positive'
+                    : steamNumber >= 40
+                      ? 'Mixed'
+                      : steamNumber >= 20
+                        ? 'Mostly Negative'
+                        : 'Very Negative';
+            resArray.push(describeSteamRating);
+          }
 
-        return resArray;
-      })
-      .then((resArray) => {
-        res.set({ 'Access-Control-Allow-Origin': '*' });
-        res.send(resArray);
-      })
-      .catch((error) => {
-        throw error;
-      });
-  });
+          return resArray;
+        })
+        .then((resArray) => {
+          res.set({ 'Access-Control-Allow-Origin': '*' });
+          res.send(resArray);
+        })
+        .catch((error) => {
+          throw error;
+        });
+    //});
 });
 
 app.get('/system_req/platforms/:product_id', (req, res) => {
@@ -151,16 +153,16 @@ app.put('/updateItem', (req, res) => {
     console.log('product_id required to update item');
     res.status(404).send()
   } else {
-    Overview.updateOne({product_id: id}, newInfo) //have a separate validation func for put/post?
-    .then(doc => {
-      const productInfo = doc;
-      console.log(`Success updating item ${id}`);
-      res.send(productInfo);
-    })
-    .catch(err => {
-      console.log(`error updating item ${id}: `, err);
-      res.status(500).send(err);
-    })
+    Overview.updateOne({ product_id: id }, newInfo) //have a separate validation func for put/post?
+      .then(doc => {
+        const productInfo = doc;
+        console.log(`Success updating item ${id}`);
+        res.send(productInfo);
+      })
+      .catch(err => {
+        console.log(`error updating item ${id}: `, err);
+        res.status(500).send(err);
+      })
   }
 });
 
@@ -168,11 +170,11 @@ app.put('/updateItem', (req, res) => {
 app.delete('/deleteItem/:product_id', (req, res) => {
   const id = req.params.product_id;
 
-  if (id > max || id < min) { 
+  if (id > max || id < min) {
     console.log('Product id must be 1-100 inclusive. Invalid product_id: ', id);
     res.status(404).send();
   } else {
-    Overview.deleteOne({product_id: id})
+    Overview.deleteOne({ product_id: id })
       .then(doc => {
         const deleted = doc;
         console.log(`successfuly deleted item ${id}`);
