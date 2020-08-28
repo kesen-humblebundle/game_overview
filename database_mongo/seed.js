@@ -120,13 +120,13 @@ const createSystemRequirements = () => {
       )}`;
       requirements[OSarray[i]].Processor = `${processors[Math.floor(Math.random() * 3)]} ${
         Math.ceil(Math.random() * 10) * 1000
-      }`;
+        }`;
       requirements[OSarray[i]].Memory = `${Math.ceil(Math.random() * 2) * 2 * 4} GB`;
       requirements[OSarray[i]].Graphics = `${videoCards[1]} ${
         Math.ceil(Math.random() * 100) * 10
-      } ${Math.ceil(Math.random() * 2) * 2}GB / ${videoCards[0]} ${
+        } ${Math.ceil(Math.random() * 2) * 2}GB / ${videoCards[0]} ${
         Math.ceil(Math.random() * 100) * 10
-      } ${Math.ceil(Math.random() * 2) * 2}GB`;
+        } ${Math.ceil(Math.random() * 2) * 2}GB`;
       requirements[OSarray[i]].DirectX = `Version ${Math.ceil(Math.random() * 4) + 8}`;
       requirements[OSarray[i]].Network = 'Broadband Internet';
       requirements[OSarray[i]].Storage = `${Math.ceil(Math.random() * 10 + 10) * 5} GB`;
@@ -193,26 +193,36 @@ const createLinks = () => {
   return linksArr;
 };
 
-//generators
-const productPlatforms = assignPlatforms();
-const productLinks = createLinks();
-const productSysReq = createSystemRequirements();
-const productSteamRate = createSteamRatings();
-const productDevelopers = createDevelopers();
-const productPublishers = createPublishers();
+
+
+
+var recordCounter = 1;
 
 const seed = () => {
+
+  //generators
+  const productPlatforms = assignPlatforms();
+  const productLinks = createLinks();
+  const productSysReq = createSystemRequirements();
+  const productSteamRate = createSteamRatings();
+  const productDevelopers = createDevelopers();
+  const productPublishers = createPublishers();
+
+
+  //docs builder
   const docsArray = [];
 
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < recordsNum; i++) {
     const newDoc = {};
 
     newDoc.steam_rating = null;
-    newDoc.product_id = i + 1;
+    newDoc.product_id = recordCounter;
     newDoc.platforms = productPlatforms[i];
     newDoc.os = productOSes[i];
     newDoc.developer = productDevelopers[i];
     newDoc.publisher = productPublishers[i];
+
+    recordCounter++;
 
     const mac = productOSes[i].some((osArray) => {
       return osArray[0] === icons.mac[0];
@@ -263,22 +273,13 @@ const seed = () => {
   return docsArray;
 };
 
-//mongodb insertion func
-const addManyOverviews = (array) => {
-  Overview.insertMany(array, (err) => {
-    if (err) {
-      throw err;
-    }
-    console.log('seeded DB!');
-  });
-};
 
-//create seed data chunk, currently: 100 records
-//const seedData = seed();
+//create seed data chunk, currently: 10,000 records
+const seedData = seed();
 
 //MongoDB seed
 //addManyOverviews(seedData);
-assignPlatforms();
+//assignPlatforms();
 
 //CouchDB seed
 const addManyOverviewsCouch = (array) => {
@@ -294,3 +295,18 @@ const addManyOverviewsPostgres = (array) => {
 }
 
 //addManyOverviewsPostgres(seedData);
+
+
+
+
+//mongodb insertion func
+const addManyOverviews = (array) => {
+  Overview.insertMany(array, (err) => {
+    if (err) {
+      throw err;
+    }
+    console.log(`seeded DB with ${recordsNum} records!`);
+  });
+};
+
+addManyOverviews(seedData);
