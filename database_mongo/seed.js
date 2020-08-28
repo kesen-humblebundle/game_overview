@@ -8,10 +8,12 @@ const OSarray = ['windows', 'linux', 'mac', 'oculusRift', 'htcVive', 'winMixedRe
 const videoCards = ['AMD Radeon', 'NVIDIA GeForce'];
 const processors = ['Intel Core i5', 'Intel Core i7', 'AMD FX-'];
 
+const recordsNum = 10000;
+
 const assignPlatforms = () => {
   const resultsArray = [];
 
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < recordsNum; i++) {
     const length = Math.ceil(Math.random() * 2);
     const platformsSubArr = [];
     const steamRnd = Math.random() * 100;
@@ -46,7 +48,7 @@ const assignPlatforms = () => {
 const assignOS = () => {
   const osArray = [];
 
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < recordsNum; i++) {
     const gameOSArray = [];
 
     while (gameOSArray.length < 1) {
@@ -93,7 +95,7 @@ const productOSes = assignOS();
 const createSteamRatings = () => {
   const ratingsArray = [];
 
-  while (ratingsArray.length < 100) {
+  while (ratingsArray.length < recordsNum) {
     const rating = Math.ceil(Math.random() * 100);
     ratingsArray.push(rating);
   }
@@ -104,7 +106,7 @@ const createSteamRatings = () => {
 const createSystemRequirements = () => {
   const requirementsDocs = [];
 
-  for (let j = 0; j < 100; j++) {
+  for (let j = 0; j < recordsNum; j++) {
     const requirements = {
       windows: {},
       mac: {},
@@ -146,7 +148,7 @@ const createSystemRequirements = () => {
 const createDevelopers = () => {
   const developersArray = [];
 
-  while (developersArray.length < 100) {
+  while (developersArray.length < recordsNum) {
     const developer = faker.fake(`{{company.companyName}}`);
     if (!developersArray.includes(developer)) {
       developersArray.push(developer);
@@ -159,7 +161,7 @@ const createDevelopers = () => {
 const createPublishers = () => {
   const publishersArray = [];
 
-  while (publishersArray.length < 100) {
+  while (publishersArray.length < recordsNum) {
     let publisher = faker.fake(`{{random.word}} {{random.word}}`);
     const pubArray = publisher.split(' ');
 
@@ -178,7 +180,7 @@ const createPublishers = () => {
 const createLinks = () => {
   const linksArr = [];
 
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < recordsNum; i++) {
     const limit = Math.ceil(Math.random() * 3);
     const linksSubArray = [];
     for (let j = 0; j < limit; j++) {
@@ -191,6 +193,7 @@ const createLinks = () => {
   return linksArr;
 };
 
+//generators
 const productPlatforms = assignPlatforms();
 const productLinks = createLinks();
 const productSysReq = createSystemRequirements();
@@ -260,6 +263,7 @@ const seed = () => {
   return docsArray;
 };
 
+//mongodb insertion func
 const addManyOverviews = (array) => {
   Overview.insertMany(array, (err) => {
     if (err) {
@@ -269,13 +273,16 @@ const addManyOverviews = (array) => {
   });
 };
 
-const seedData = seed();
+//create seed data chunk, currently: 100 records
+//const seedData = seed();
 
 //MongoDB seed
 //addManyOverviews(seedData);
+assignPlatforms();
 
 //CouchDB seed
 const addManyOverviewsCouch = (array) => {
+
 
 }
 
