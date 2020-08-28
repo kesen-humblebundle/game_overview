@@ -271,4 +271,19 @@ const addManyOverviews = (array) => {
 
 const seedData = seed();
 
-addManyOverviews(seedData);
+//MongoDB seed
+//addManyOverviews(seedData);
+
+//CouchDB seed
+const addManyOverviewsCouch = (array) => {
+
+}
+
+//addManyOverviewsCouch(seedData);
+
+//PostgreSQL seed
+const addManyOverviewsPostgres = (array) => {
+
+}
+
+//addManyOverviewsPostgres(seedData);
