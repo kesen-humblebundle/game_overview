@@ -8,6 +8,7 @@ const OSarray = ['windows', 'linux', 'mac', 'oculusRift', 'htcVive', 'winMixedRe
 const videoCards = ['AMD Radeon', 'NVIDIA GeForce'];
 const processors = ['Intel Core i5', 'Intel Core i7', 'AMD FX-'];
 
+//number of records to generate
 const recordsNum = 10000;
 
 const assignPlatforms = () => {
