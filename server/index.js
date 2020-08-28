@@ -33,9 +33,19 @@ app.get('/system_req/:product_id', (req, res) => {
       // axios.get(`http://ec2-54-224-38-115.compute-1.amazonaws.com:5150/genre/${id}`)
       //   .then((response) => {
           const resArray = doc;
-          //console.log('resArray: ', resArray);
-          const newGenre = ['horror']; //response.data
-          //console.log('newGenre: ', newGenre);
+
+          //genres
+          const genres = ['Action', 'Adventure', 'Indie', 'Horror', 'MMO', 'Sports', 'Strategy'];
+
+          const generateGenre = () => {
+            var genreArr = [];
+            var num = Math.floor(Math.random() * genres.length);
+            genreArr.push(genres[num]);
+            return genreArr;
+          }
+
+          const newGenre = generateGenre(); //response.data
+          
           const steamNumber = resArray[0].steam_rating;
 
           resArray.push(newGenre);
