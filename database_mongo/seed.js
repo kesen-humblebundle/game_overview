@@ -8,10 +8,13 @@ const OSarray = ['windows', 'linux', 'mac', 'oculusRift', 'htcVive', 'winMixedRe
 const videoCards = ['AMD Radeon', 'NVIDIA GeForce'];
 const processors = ['Intel Core i5', 'Intel Core i7', 'AMD FX-'];
 
+//number of records to generate
+const recordsNum = 10000;
+
 const assignPlatforms = () => {
   const resultsArray = [];
 
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < recordsNum; i++) {
     const length = Math.ceil(Math.random() * 2);
     const platformsSubArr = [];
     const steamRnd = Math.random() * 100;
@@ -46,7 +49,7 @@ const assignPlatforms = () => {
 const assignOS = () => {
   const osArray = [];
 
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < recordsNum; i++) {
     const gameOSArray = [];
 
     while (gameOSArray.length < 1) {
@@ -93,7 +96,7 @@ const productOSes = assignOS();
 const createSteamRatings = () => {
   const ratingsArray = [];
 
-  while (ratingsArray.length < 100) {
+  while (ratingsArray.length < recordsNum) {
     const rating = Math.ceil(Math.random() * 100);
     ratingsArray.push(rating);
   }
@@ -104,7 +107,7 @@ const createSteamRatings = () => {
 const createSystemRequirements = () => {
   const requirementsDocs = [];
 
-  for (let j = 0; j < 100; j++) {
+  for (let j = 0; j < recordsNum; j++) {
     const requirements = {
       windows: {},
       mac: {},
@@ -118,13 +121,13 @@ const createSystemRequirements = () => {
       )}`;
       requirements[OSarray[i]].Processor = `${processors[Math.floor(Math.random() * 3)]} ${
         Math.ceil(Math.random() * 10) * 1000
-      }`;
+        }`;
       requirements[OSarray[i]].Memory = `${Math.ceil(Math.random() * 2) * 2 * 4} GB`;
       requirements[OSarray[i]].Graphics = `${videoCards[1]} ${
         Math.ceil(Math.random() * 100) * 10
-      } ${Math.ceil(Math.random() * 2) * 2}GB / ${videoCards[0]} ${
+        } ${Math.ceil(Math.random() * 2) * 2}GB / ${videoCards[0]} ${
         Math.ceil(Math.random() * 100) * 10
-      } ${Math.ceil(Math.random() * 2) * 2}GB`;
+        } ${Math.ceil(Math.random() * 2) * 2}GB`;
       requirements[OSarray[i]].DirectX = `Version ${Math.ceil(Math.random() * 4) + 8}`;
       requirements[OSarray[i]].Network = 'Broadband Internet';
       requirements[OSarray[i]].Storage = `${Math.ceil(Math.random() * 10 + 10) * 5} GB`;
@@ -146,7 +149,7 @@ const createSystemRequirements = () => {
 const createDevelopers = () => {
   const developersArray = [];
 
-  while (developersArray.length < 100) {
+  while (developersArray.length < recordsNum) {
     const developer = faker.fake(`{{company.companyName}}`);
     if (!developersArray.includes(developer)) {
       developersArray.push(developer);
@@ -159,7 +162,7 @@ const createDevelopers = () => {
 const createPublishers = () => {
   const publishersArray = [];
 
-  while (publishersArray.length < 100) {
+  while (publishersArray.length < recordsNum) {
     let publisher = faker.fake(`{{random.word}} {{random.word}}`);
     const pubArray = publisher.split(' ');
 
@@ -178,7 +181,7 @@ const createPublishers = () => {
 const createLinks = () => {
   const linksArr = [];
 
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < recordsNum; i++) {
     const limit = Math.ceil(Math.random() * 3);
     const linksSubArray = [];
     for (let j = 0; j < limit; j++) {
@@ -191,25 +194,36 @@ const createLinks = () => {
   return linksArr;
 };
 
-const productPlatforms = assignPlatforms();
-const productLinks = createLinks();
-const productSysReq = createSystemRequirements();
-const productSteamRate = createSteamRatings();
-const productDevelopers = createDevelopers();
-const productPublishers = createPublishers();
+
+//seed script
+
+var recordCounter = 1;
 
 const seed = () => {
+
+  //generators
+  const productPlatforms = assignPlatforms();
+  const productLinks = createLinks();
+  const productSysReq = createSystemRequirements();
+  const productSteamRate = createSteamRatings();
+  const productDevelopers = createDevelopers();
+  const productPublishers = createPublishers();
+
+
+  //docs builder
   const docsArray = [];
 
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < recordsNum; i++) {
     const newDoc = {};
 
     newDoc.steam_rating = null;
-    newDoc.product_id = i + 1;
+    newDoc.product_id = recordCounter;
     newDoc.platforms = productPlatforms[i];
     newDoc.os = productOSes[i];
     newDoc.developer = productDevelopers[i];
     newDoc.publisher = productPublishers[i];
+
+    recordCounter++;
 
     const mac = productOSes[i].some((osArray) => {
       return osArray[0] === icons.mac[0];
@@ -249,7 +263,6 @@ const seed = () => {
     newDoc.system_req = productSysReq[i];
     newDoc.links = productLinks[i];
     for (let j = 0; j < productPlatforms[i].length; j++) {
-      // console.log(i, productPlatforms[i][j]);
       if (newDoc.platforms[j].includes(icons.steam[0])) {
         newDoc['steam_rating'] = productSteamRate[i];
       }
@@ -260,15 +273,36 @@ const seed = () => {
   return docsArray;
 };
 
+
+//create seed data chunk
+const seedData = seed();
+
+
+//CouchDB seed
+const addManyOverviewsCouch = (array) => {
+
+
+}
+
+//addManyOverviewsCouch(seedData);
+
+//PostgreSQL seed
+const addManyOverviewsPostgres = (array) => {
+
+}
+
+//addManyOverviewsPostgres(seedData);
+
+
+
+//mongodb insertion func
 const addManyOverviews = (array) => {
   Overview.insertMany(array, (err) => {
     if (err) {
       throw err;
     }
-    console.log('seeded DB!');
+    console.log(`seeded DB with ${recordsNum} records!`);
   });
 };
-
-const seedData = seed();
 
 addManyOverviews(seedData);

@@ -19,8 +19,7 @@
 1. Usage
 2. Testing
 3. Requirements
-4. Development
-5. CRUD Routes
+4. CRUD Routes
 
 ## Usage
 
@@ -32,11 +31,14 @@ OVERVIEW_PORT=3002
 DATABASE='mongodb://localhost:27017/overview'
 ```
 4. In terminal, from root directory of project > npm run seedDB
+
+> Seed script is currently set to load 10,000 records. Go to line 12 of database_mongo/seed.js to change this number.
+
 5. npm run build
 6. npm start
 7. Navigate to: https://127.0.0.1:3002
 
-> The service will default to a product id of 21, but you can switch to any id from 1 - 100 inclusive by adding a slash followed by the number to the end of step 7
+> The service will default to a product id of 21, but you can switch to any id from 1 - 10000 inclusive by adding a slash followed by the number to the end of step 7
 
 ## Testing
 This service uses jest and enzyme. 
@@ -56,24 +58,6 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 - Node 6.13.0
 - etc
 
-## Development
-
-> points of note include:
-> using styled-components
-> retrieving product id from browser - window.location.pathname
-> using React Portals to render to 2 divs
-> creating a set of icon-like images to use in place of unavailable icons, 3 color variations for each
-> generating 100 sets of random data to be displayed in service using faker.js, seeding into MongoDB
-> visit links to see sample response data:
-
-- https://gist.github.com/Chris-Hesterman/4733262383bab09b7ce1cdbe596efbda
-- https://gist.github.com/Chris-Hesterman/4733262383bab09b7ce1cdbe596efbda
-
-> having various OSes and Platforms show up with similar frequency to the Humble Bundle site
-> implementing dropdown window in System Requirements div with gradient sandwiched between text
-> deploying to AWS ec2 instance
-
-- https://docs.google.com/document/d/13szAGho6CJYVl-xcwYetM6qGHoC2zH8Ik-sWd9i2-80/edit#
 
 ## CRUD Routes
 ```

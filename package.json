@@ -10,6 +10,7 @@
   "scripts": {
     "test": "jest --forceExit",
     "testCRUD": "jest ./__tests__/crud.test.js --runInBand --forceExit",
+    "testDataGen": "jest ./__tests__/dataGenerator.test.js --runInBand --forceExit",
     "build": "webpack --watch -d",
     "p_build": "webpack -p",
     "p_start": "node ./server/server.js",
@@ -24,6 +25,7 @@
     "express": "^4.17.1",
     "faker": "^4.1.0",
     "mongoose": "^5.9.19",
+    "nano": "^8.2.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-icons": "^3.10.0",
