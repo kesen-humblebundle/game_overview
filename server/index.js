@@ -8,9 +8,11 @@ const axios = require('axios');
 const express = require('express');
 const bodyParser = require('body-parser');
 const Overview = require('../database_mongo/index.js');
+const morgan = require('morgan');
 // const data = require('../database_mongo/seed.js');
 
 const app = express();
+app.use(morgan('dev'));
 
 app.use(express.static('public', { fallthrough: true }));
 app.use('/:product_id', express.static('public'));
