@@ -267,22 +267,23 @@ const seed = () => {
         newDoc['steam_rating'] = productSteamRate[i];
       }
     }
+
+    //turn to json
+    JSON.stringify(newDoc);
+
     docsArray.push(newDoc);
   }
 
   return docsArray;
 };
 
+module.exports.seed = seed;
 
 //create seed data chunk
 const seedData = seed();
 
 
-//CouchDB seed
-const addManyOverviewsCouch = (array) => {
 
-
-}
 
 //addManyOverviewsCouch(seedData);
 
@@ -305,4 +306,4 @@ const addManyOverviews = (array) => {
   });
 };
 
-addManyOverviews(seedData);
+//addManyOverviews(seedData);

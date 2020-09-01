@@ -1,10 +1,32 @@
 var couch = require('./couchdb');
+var dbName = 'overview'
 
-couch.db.create('test2', function(err) {  
+var counter = 1;
+
+couch.db.create(dbName, function(err) {  
   if (err && err.statusCode != 412) {
     console.error(err);
   }
   else {
-    console.log('database test2 exists');
+    console.log(`database ${dbName} exists`);
   }
 });
+
+const db = couch.db.use(dbName);
+
+//batch insert func
+const bulkInsertCouch = (docs, cb) => {
+  db.bulk(docs)
+  .then(() => {
+    console.log(`CouchDB seeded with ${counter}/1000 record batches`);
+    counter++;
+    cb();
+  })
+  .catch(err => {
+    console.log(`error seeding CouchDB on batch ${counter}/1000: `, err);
+  })
+}
+
+
+//export that
+module.exports.bulkInsertCouch = bulkInsertCouch;
