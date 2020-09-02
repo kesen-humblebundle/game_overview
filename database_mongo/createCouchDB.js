@@ -18,7 +18,6 @@ const db = couch.db.use(dbName);
 const bulkInsertCouch = (docs, cb) => {
   db.bulk(docs)
   .then(() => {
-    console.log(`CouchDB seeded with ${counter}/1000 record batches`);
     counter++;
     cb();
   })

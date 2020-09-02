@@ -11,6 +11,10 @@ const Overview = require('../database_mongo/index.js');
 const morgan = require('morgan');
 // const data = require('../database_mongo/seed.js');
 
+
+const couch = require('../database_mongo/couchdb.js');
+const seed = require('../database_mongo/couchSeed.js');
+
 const app = express();
 app.use(morgan('dev'));
 
@@ -197,6 +201,13 @@ app.delete('/deleteItem/:product_id', (req, res) => {
         res.status(500).send(err);
       });
   }
+});
+
+//Load 10M records into couchDB
+app.post('/couch', (req, res) => {
+  seed.addManyOverviewsCouch(() => {
+    res.status(201).send();
+  });
 });
 
 module.exports = app;
