@@ -1,5 +1,5 @@
 /* eslint-disable no-plusplus */
-const faker = require('faker');
+//const faker = require('faker');
 const icons = require('./iconURLs.js');
 const Overview = require('./index.js');
 
@@ -7,6 +7,11 @@ const platformsArray = ['steam', 'gog', 'epic', 'key', 'uPlay', 'origin', 'drmFr
 const OSarray = ['windows', 'linux', 'mac', 'oculusRift', 'htcVive', 'winMixedReal'];
 const videoCards = ['AMD Radeon', 'NVIDIA GeForce'];
 const processors = ['Intel Core i5', 'Intel Core i7', 'AMD FX-'];
+const words = ['Alaska', 'Future', 'River'];
+const prodNames = ['Shirt', 'Game', 'Product'];
+const prodAdjs = ['Fast', 'Shiny', 'Terrifying', 'Smooth'];
+const catchPhraseAdjs = ['Shiny', 'Bitter', 'Lonely', 'Squeaky'];
+const compNames = ['Sawayn', 'Dach', 'Kirlin', 'VonReuden', 'Tilman', 'Wehner'];
 
 //number of records to generate
 const recordsNum = 10000;
@@ -116,9 +121,7 @@ const createSystemRequirements = () => {
 
     for (let i = 0; i < 3; i++) {
       // this next line is for creating a version for any particular OS
-      requirements[OSarray[i]].OS = `${OSarray[i]} ${Math.ceil(Math.random() * 5 + 5)} ${faker.fake(
-        '{{random.word}}'
-      )}`;
+      requirements[OSarray[i]].OS = `${OSarray[i]} ${Math.ceil(Math.random() * 5 + 5)} ${words[Math.floor(Math.random() * 3)]}`;
       requirements[OSarray[i]].Processor = `${processors[Math.floor(Math.random() * 3)]} ${
         Math.ceil(Math.random() * 10) * 1000
         }`;
@@ -133,11 +136,9 @@ const createSystemRequirements = () => {
       requirements[OSarray[i]].Storage = `${Math.ceil(Math.random() * 10 + 10) * 5} GB`;
     }
     requirements.vrSupport = {
-      headsets: faker.fake(
-        `{{commerce.productName}}, {{commerce.productName}}, {{commerce.productName}}`
-      ),
-      input: faker.fake(`{{commerce.productAdjective}}, {{commerce.productName}}`),
-      playArea: faker.fake(`{{company.catchPhraseAdjective}}`)
+      headsets: `${prodNames[Math.floor(Math.random() * 3)]}, ${prodNames[Math.floor(Math.random() * 3)]}, ${prodNames[Math.floor(Math.random() * 3)]}`,
+      input: `${prodAdjs[Math.floor(Math.random() * 4)]} ${prodNames[Math.floor(Math.random() * 3)]}`,
+      playArea: `${catchPhraseAdjs[Math.floor(Math.random() * 4)]}`
     };
 
     requirementsDocs.push(requirements);
@@ -150,10 +151,10 @@ const createDevelopers = () => {
   const developersArray = [];
 
   while (developersArray.length < recordsNum) {
-    const developer = faker.fake(`{{company.companyName}}`);
-    if (!developersArray.includes(developer)) {
+    const developer = `${compNames[Math.floor(Math.random() * 6)]}`;
+    // if (!developersArray.includes(developer)) {
       developersArray.push(developer);
-    }
+    // }
   }
 
   return developersArray;
@@ -163,16 +164,16 @@ const createPublishers = () => {
   const publishersArray = [];
 
   while (publishersArray.length < recordsNum) {
-    let publisher = faker.fake(`{{random.word}} {{random.word}}`);
+    let publisher = `${words[Math.floor(Math.random() * 3)]} ${words[Math.floor(Math.random() * 3)]}`;
     const pubArray = publisher.split(' ');
 
     pubArray[0] = pubArray[0][0].toUpperCase() + pubArray[0].slice(1);
     pubArray[1] = pubArray[1][0].toUpperCase() + pubArray[1].slice(1);
     publisher = pubArray.join(' ');
 
-    if (!publishersArray.includes(publisher)) {
+   // if (!publishersArray.includes(publisher)) {
       publishersArray.push(publisher);
-    }
+    // }
   }
 
   return publishersArray;
@@ -185,7 +186,7 @@ const createLinks = () => {
     const limit = Math.ceil(Math.random() * 3);
     const linksSubArray = [];
     for (let j = 0; j < limit; j++) {
-      const link = faker.fake(`{{company.companyName}}`);
+      const link = `${compNames[Math.floor(Math.random() * 6)]}`;
       linksSubArray.push(link);
     }
     linksArr.push(linksSubArray);
@@ -200,7 +201,7 @@ const createLinks = () => {
 var recordCounter = 1;
 
 const seed = () => {
-
+  
   //generators
   const productPlatforms = assignPlatforms();
   const productLinks = createLinks();
@@ -208,7 +209,6 @@ const seed = () => {
   const productSteamRate = createSteamRatings();
   const productDevelopers = createDevelopers();
   const productPublishers = createPublishers();
-
 
   //docs builder
   const docsArray = [];
@@ -274,13 +274,16 @@ const seed = () => {
     docsArray.push(newDoc);
   }
 
+  //console.log('seed script time');
   return docsArray;
 };
 
-module.exports.seed = seed;
-
 //create seed data chunk
 const seedData = seed();
+
+module.exports.seed = seed;
+
+
 
 
 
