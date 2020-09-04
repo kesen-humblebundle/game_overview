@@ -18,6 +18,6 @@ const addManyOverviewsCouch = () => {
     });
 }
 
-addManyOverviewsCouch();
+//addManyOverviewsCouch();
 
 module.exports.addManyOverviewsCouch = addManyOverviewsCouch;
