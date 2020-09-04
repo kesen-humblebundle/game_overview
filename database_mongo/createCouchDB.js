@@ -3,14 +3,14 @@ var dbName = 'overview'
 
 var counter = 1;
 
-couch.db.create(dbName, function(err) {  
-  if (err && err.statusCode != 412) {
-    console.error(err);
-  }
-  else {
-    console.log(`database ${dbName} exists`);
-  }
-});
+// couch.db.create(dbName, function(err) {  
+//   if (err && err.statusCode != 412) {
+//     console.error(err);
+//   }
+//   else {
+//     console.log(`database ${dbName} exists`);
+//   }
+// });
 
 const db = couch.db.use(dbName);
 
@@ -26,6 +26,25 @@ const bulkInsertCouch = (docs, cb) => {
   })
 }
 
+//query record
+const getCouchRecord = (id) => {
+  console.log('in getCouchRecord');
+  const query = {
+    selector: {
+      product_id: id
+    },
+    limit: 1
+  }
+  db.find(query, (err, body, header) => {
+    if (err) {
+      console.log(`error finding product id ${id} in couchDB: `, err);
+    } else {
+      console.log(`found product id ${id}: `, header, body);
+    }
+  });
+}
+
 
 //export that
 module.exports.bulkInsertCouch = bulkInsertCouch;
+module.exports.getCouchRecord = getCouchRecord;

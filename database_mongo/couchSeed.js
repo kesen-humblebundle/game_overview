@@ -1,11 +1,11 @@
 const data = require('./seed.js');
 const db = require('./createCouchDB.js');
-const loops = 10 //if recordsNum is set to 10,000 in seed.js, loops should be 1000 (10,000 * 1,000 === 10M)
+const loops = 1000 //if recordsNum is set to 10,000 in seed.js, loops should be 1000 (10,000 * 1,000 === 10M)
 
 
 var counter = 1;
 
-const addManyOverviewsCouch = (next) => {
+const addManyOverviewsCouch = () => {
     var batch = data.seed();
     var jsonBatch = {docs: batch};
     JSON.stringify(jsonBatch);
@@ -14,12 +14,10 @@ const addManyOverviewsCouch = (next) => {
       counter++;
       if (counter <= loops) {
         addManyOverviewsCouch();
-      } else {
-        next();
-      }
+      } 
     });
 }
 
-//addManyOverviewsCouch();
+addManyOverviewsCouch();
 
 module.exports.addManyOverviewsCouch = addManyOverviewsCouch;
