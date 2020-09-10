@@ -28,7 +28,6 @@ const bulkInsertCouch = (docs, cb) => {
 
 //query record
 const getCouchRecord = (id) => {
-  console.log('in getCouchRecord');
   const query = {
     selector: {
       product_id: id

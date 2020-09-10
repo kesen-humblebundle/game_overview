@@ -12,9 +12,10 @@ const prodNames = ['Shirt', 'Game', 'Product'];
 const prodAdjs = ['Fast', 'Shiny', 'Terrifying', 'Smooth'];
 const catchPhraseAdjs = ['Shiny', 'Bitter', 'Lonely', 'Squeaky'];
 const compNames = ['Sawayn', 'Dach', 'Kirlin', 'VonReuden', 'Tilman', 'Wehner'];
+const pubNames = ['2K Games', '3D Realms', 'Aardvark', 'Access Software', 'Accolade', 'Brash Entertainment', 'Centuri', 'Datamost'];
 
 //number of records to generate
-const recordsNum = 10000;
+const recordsNum = 10;
 
 const assignPlatforms = () => {
   const resultsArray = [];
@@ -153,7 +154,7 @@ const createDevelopers = () => {
   while (developersArray.length < recordsNum) {
     const developer = `${compNames[Math.floor(Math.random() * 6)]}`;
     // if (!developersArray.includes(developer)) {
-      developersArray.push(developer);
+    developersArray.push(developer);
     // }
   }
 
@@ -164,15 +165,15 @@ const createPublishers = () => {
   const publishersArray = [];
 
   while (publishersArray.length < recordsNum) {
-    let publisher = `${words[Math.floor(Math.random() * 3)]} ${words[Math.floor(Math.random() * 3)]}`;
-    const pubArray = publisher.split(' ');
+    let publisher = `${pubNames[Math.floor(Math.random() * 8)]}`;
+    // const pubArray = publisher.split(' ');
 
-    pubArray[0] = pubArray[0][0].toUpperCase() + pubArray[0].slice(1);
-    pubArray[1] = pubArray[1][0].toUpperCase() + pubArray[1].slice(1);
-    publisher = pubArray.join(' ');
+    // pubArray[0] = pubArray[0][0].toUpperCase() + pubArray[0].slice(1);
+    // pubArray[1] = pubArray[1][0].toUpperCase() + pubArray[1].slice(1);
+    // publisher = pubArray.join(' ');
 
-   // if (!publishersArray.includes(publisher)) {
-      publishersArray.push(publisher);
+    // if (!publishersArray.includes(publisher)) {
+    publishersArray.push(publisher);
     // }
   }
 
@@ -201,7 +202,7 @@ const createLinks = () => {
 var recordCounter = 1;
 
 const seed = () => {
-  
+
   //generators
   const productPlatforms = assignPlatforms();
   const productLinks = createLinks();
@@ -268,35 +269,15 @@ const seed = () => {
       }
     }
 
-    //turn to json
     JSON.stringify(newDoc);
-
     docsArray.push(newDoc);
   }
 
-  //console.log('seed script time');
   return docsArray;
 };
 
 //create seed data chunk
 const seedData = seed();
-
-module.exports.seed = seed;
-
-
-
-
-
-
-//addManyOverviewsCouch(seedData);
-
-//PostgreSQL seed
-const addManyOverviewsPostgres = (array) => {
-
-}
-
-//addManyOverviewsPostgres(seedData);
-
 
 
 //mongodb insertion func
@@ -310,3 +291,7 @@ const addManyOverviews = (array) => {
 };
 
 //addManyOverviews(seedData);
+
+module.exports.seed = seed;
+module.exports.pubNames = pubNames;
+module.exports.compNames = compNames;
