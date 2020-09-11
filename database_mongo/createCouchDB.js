@@ -29,10 +29,11 @@ const bulkInsertCouch = (docs, cb) => {
 //query record
 const getCouchRecord = (id) => {
   const query = {
-    selector: {
-      product_id: id
+    "selector": {
+      "product_id": id
     },
-    limit: 1
+    "limit": 1,
+    "execution_stats": true
   }
   db.find(query, (err, body, header) => {
     if (err) {

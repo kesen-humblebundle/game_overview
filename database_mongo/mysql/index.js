@@ -1,13 +1,13 @@
-// const mysql = require('mysql');
-// const Promise = require('bluebird');
+const mysql = require('mysql');
+const Promise = require('bluebird');
 
-// const connection = mysql.createConnection({
-//   host: process.env.MYSQLHOST || 'localhost',
-//   user: 'root',
-//   database: 'overview'
-// }, () => {
-//   console.log('connected to mysql');
-// });
+const connection = mysql.createConnection({
+  host: process.env.MYSQLHOST || 'localhost',
+  user: 'root',
+  database: 'overview'
+}, () => {
+  console.log('connected to mysql');
+});
 
 // const insertDev = (devName) => {
 //   Promise.resolve(connection.query(`INSERT INTO developers (name) VALUES('${devName}')`))
@@ -28,21 +28,43 @@
 //       console.log('insertPub err: ', err);
 //     })
 // };
+const record = {
+  steam_rating: 81,
+  platforms: ['steam'],
+  os: ['oculusRift', 'htcVive', 'winMixedReal'],
+  developer: 'Sawayn',
+  publisher: 'Accolade',
+  links: ['Kirlin', 'Tilman', 'Kirlin']
+};
+
+const singleInsert = (rec, next) => {
+  //console.log('rec: ', JSON.stringify(rec.os));
+  Promise.resolve(connection.query(`INSERT INTO games (platforms, os, developer, publisher, links, rating) VALUES ('${JSON.stringify(rec.platforms)}', '${JSON.stringify(rec.os)}', '${rec.developer}', '${rec.publisher}', '${JSON.stringify(rec.links)}', ${rec.steam_rating})`))
+    .then(data => {
+      console.log('success in singleInsert');
+      next();
+    })
+    .catch(err => {
+      console.log('error in singleInsert: ', err);
+      next();
+    })
+}
 
 
-// const bulkInsert = (table, next) => {
-//   console.log('inside bulkInsert');
-//   Promise.resolve(connection.query(`LOAD DATA LOCAL INFILE '../products.csv' INTO TABLE ${table};`))
-//   .then(data => {
-//     console.log('success in bulkInsert');
-//     next();
-//   })
-//   .catch(err => {
-//     console.log('error in bulkInsert: ', err);
-//   })
-// };
+const bulkInsert = (table, next) => {
+  console.log('inside bulkInsert');
+  Promise.resolve(connection.query(`LOAD DATA LOCAL INFILE '../products.csv' INTO TABLE ${table};`))
+    .then(data => {
+      console.log('success in bulkInsert');
+      next();
+    })
+    .catch(err => {
+      console.log('error in bulkInsert: ', err);
+    })
+};
 
-// module.exports.bulkInsert = bulkInsert;
+module.exports.singleInsert = singleInsert;
+module.exports.bulkInsert = bulkInsert;
 // module.exports.insertDev = insertDev;
 // module.exports.insertPub = insertPub;
 
