@@ -15,7 +15,7 @@ const compNames = ['Sawayn', 'Dach', 'Kirlin', 'VonReuden', 'Tilman', 'Wehner'];
 const pubNames = ['2K Games', '3D Realms', 'Aardvark', 'Access Software', 'Accolade', 'Brash Entertainment', 'Centuri', 'Datamost'];
 
 //number of records to generate
-const recordsNum = 1;
+const recordsNum = 10;
 
 const assignPlatforms = () => {
   const resultsArray = [];
@@ -49,14 +49,15 @@ const assignPlatforms = () => {
     urlsArray.push(platforms);
   }
 
-  return urlsArray;
+  return resultsArray;
+  //return urlsArray;
 };
 
 const assignOS = () => {
-  const osArray = [];
+  var osArray = [];
 
   for (let i = 0; i < recordsNum; i++) {
-    const gameOSArray = [];
+    var gameOSArray = [];
 
     while (gameOSArray.length < 1) {
       const windowsProb = Math.random() * 100;
@@ -66,33 +67,51 @@ const assignOS = () => {
       const winMixedRealProb = Math.random() * 100;
 
       if (windowsProb < 60) {
-        gameOSArray.push([icons.windows[0], icons.windows[1], icons.windows[2]]);
+        gameOSArray.push('windows');
       }
       if (macProb < 40) {
-        gameOSArray.push([icons.mac[0], icons.mac[1], icons.mac[2]]);
+        gameOSArray.push('mac');
       }
       if (linuxProb < 40) {
-        gameOSArray.push([icons.linux[0], icons.linux[1], icons.linux[2]]);
-        if (windowsProb >= 60 && (virtualProb <= 50 || winMixedRealProb >= 30)) {
-          gameOSArray.unshift([icons.windows[0], icons.windows[1], icons.windows[2]]);
-        }
+        gameOSArray.push('linux');
       }
       if (gameOSArray.length < 1 && virtualProb > 50) {
-        gameOSArray.push([icons.oculusRift[0], icons.oculusRift[1], icons.oculusRift[2]]);
-        gameOSArray.push([icons.htcVive[0], icons.htcVive[1], icons.htcVive[2]]);
+        gameOSArray.push('oculusRift');
+        gameOSArray.push('htcVive');
         if (winMixedRealProb < 30) {
-          gameOSArray.push([icons.winMixedReal[0], icons.winMixedReal[1], icons.winMixedReal[2]]);
-        }
-        if (windowsProb >= 60) {
-          gameOSArray.unshift([icons.windows[0], icons.windows[1], icons.windows[2]]);
+          gameOSArray.push('winMixedReal');
         }
       }
-    }
-    if (gameOSArray.length === 1 && gameOSArray[0][0] === icons.linux[0]) {
-      gameOSArray.push([icons.windows[0], icons.windows[1], icons.windows[2]]);
     }
     osArray.push(gameOSArray);
   }
+
+  //   if (windowsProb < 60) {
+  //     gameOSArray.push([icons.windows[0], icons.windows[1], icons.windows[2]]);
+  //   }
+  //   if (macProb < 40) {
+  //     gameOSArray.push([icons.mac[0], icons.mac[1], icons.mac[2]]);
+  //   }
+  //   if (linuxProb < 40) {
+  //     gameOSArray.push([icons.linux[0], icons.linux[1], icons.linux[2]]);
+  //     if (windowsProb >= 60 && (virtualProb <= 50 || winMixedRealProb >= 30)) {
+  //       gameOSArray.unshift([icons.windows[0], icons.windows[1], icons.windows[2]]);
+  //     }
+  //   }
+  //   if (gameOSArray.length < 1 && virtualProb > 50) {
+  //     gameOSArray.push([icons.oculusRift[0], icons.oculusRift[1], icons.oculusRift[2]]);
+  //     gameOSArray.push([icons.htcVive[0], icons.htcVive[1], icons.htcVive[2]]);
+  //     if (winMixedRealProb < 30) {
+  //       gameOSArray.push([icons.winMixedReal[0], icons.winMixedReal[1], icons.winMixedReal[2]]);
+  //     }
+  //     if (windowsProb >= 60) {
+  //       gameOSArray.unshift([icons.windows[0], icons.windows[1], icons.windows[2]]);
+  //     }
+  //   }
+  // }
+  // if (gameOSArray.length === 1 && gameOSArray[0][0] === icons.linux[0]) {
+  //   gameOSArray.push([icons.windows[0], icons.windows[1], icons.windows[2]]);
+
 
   return osArray;
 };
@@ -218,13 +237,13 @@ const seed = () => {
     const newDoc = {};
 
     newDoc.steam_rating = null;
-    newDoc.product_id = recordCounter;
+    //newDoc.product_id = recordCounter;
     newDoc.platforms = productPlatforms[i];
     newDoc.os = productOSes[i];
     newDoc.developer = productDevelopers[i];
     newDoc.publisher = productPublishers[i];
 
-    recordCounter++;
+    //recordCounter++;
 
     const mac = productOSes[i].some((osArray) => {
       return osArray[0] === icons.mac[0];
@@ -264,7 +283,7 @@ const seed = () => {
     // newDoc.system_req = productSysReq[i];
     newDoc.links = productLinks[i];
     for (let j = 0; j < productPlatforms[i].length; j++) {
-      if (newDoc.platforms[j].includes(icons.steam[0])) {
+      if (newDoc.platforms[j].includes('steam')) { //icons.steam[0]
         newDoc['steam_rating'] = productSteamRate[i];
       }
     }
@@ -277,6 +296,8 @@ const seed = () => {
   //console.log('doc: ', docsArray);
   return docsArray;
 };
+
+seed();
 
 //create seed data chunk
 //const seedData = seed();
