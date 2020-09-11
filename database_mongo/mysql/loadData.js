@@ -1,44 +1,43 @@
 const db = require('./index.js');
 const data = require('../seed.js');
 
-// const loadDevelopers = (names) => {
-//   for (var i = 0; i < names.length; i++) {
-//     db.insertDev(names[i]);
-//   }
-// }
-
-// loadDevelopers(data.compNames);
 
 
-// const loadPublishers = (names) => {
-//   for (var i = 0; i < names.length; i++) {
-//     db.insertPub(names[i]);
-//   }
-// }
+var counter = 1;
+var max = 1;
 
-// loadPublishers(data.pubNames);
+const bulkInsertRecords = () => {
+  var startTime = new Date();
 
+  var records = data.seed();
+  db.multiInsert(records, () => {
+    console.log(`done loading record batch ${counter} of ${max}`);
+    counter++;
+    if (counter < max) {
+      bulkInsertRecords();
+    }
+  });
 
-const bulkInsertRecords = (records) => {
-
-
-
-  //db.bulkInsert()
+  var endTime = new Date();
+  console.log(`mysql seeded in ${endTime - startTime} milliseconds`)
 }
 
-const record = {
-  steam_rating: 81,
-  platforms: ['steam'],
-  os: ['oculusRift', 'htcVive', 'winMixedReal'],
-  developer: 'Sawayn',
-  publisher: 'Accolade',
-  links: ['Kirlin', 'Tilman', 'Kirlin']
-};
+bulkInsertRecords();
 
-const singleInsertRecord = (record, next) => {
-  db.singleInsert(record, next);
-}
 
-singleInsertRecord(record, () => {
-  console.log('done');
-});
+// const testRecord = {
+//   steam_rating: 81,
+//   platforms: ['steam'],
+//   os: ['oculusRift', 'htcVive', 'winMixedReal'],
+//   developer: 'Sawayn',
+//   publisher: 'Accolade',
+//   links: ['Kirlin', 'Tilman', 'Kirlin']
+// };
+
+// const singleInsertRecord = (record, next) => {
+//   db.singleInsert(record, next);
+// }
+
+// singleInsertRecord(testRecord, () => {
+//   console.log('done');
+// });
