@@ -15,7 +15,7 @@ const compNames = ['Sawayn', 'Dach', 'Kirlin', 'VonReuden', 'Tilman', 'Wehner'];
 const pubNames = ['2K Games', '3D Realms', 'Aardvark', 'Access Software', 'Accolade', 'Brash Entertainment', 'Centuri', 'Datamost'];
 
 //number of records to generate
-const recordsNum = 100;
+const recordsNum = 650;
 
 const assignPlatforms = () => {
   const resultsArray = [];
