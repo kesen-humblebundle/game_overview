@@ -15,7 +15,7 @@ const compNames = ['Sawayn', 'Dach', 'Kirlin', 'VonReuden', 'Tilman', 'Wehner'];
 const pubNames = ['2K Games', '3D Realms', 'Aardvark', 'Access Software', 'Accolade', 'Brash Entertainment', 'Centuri', 'Datamost'];
 
 //number of records to generate
-const recordsNum = 10;
+const recordsNum = 1;
 
 const assignPlatforms = () => {
   const resultsArray = [];
@@ -110,43 +110,43 @@ const createSteamRatings = () => {
   return ratingsArray;
 };
 
-const createSystemRequirements = () => {
-  const requirementsDocs = [];
+// const createSystemRequirements = () => {
+//   const requirementsDocs = [];
 
-  for (let j = 0; j < recordsNum; j++) {
-    const requirements = {
-      windows: {},
-      mac: {},
-      linux: {}
-    };
+//   for (let j = 0; j < recordsNum; j++) {
+//     const requirements = {
+//       windows: {},
+//       mac: {},
+//       linux: {}
+//     };
 
-    for (let i = 0; i < 3; i++) {
-      // this next line is for creating a version for any particular OS
-      requirements[OSarray[i]].OS = `${OSarray[i]} ${Math.ceil(Math.random() * 5 + 5)} ${words[Math.floor(Math.random() * 3)]}`;
-      requirements[OSarray[i]].Processor = `${processors[Math.floor(Math.random() * 3)]} ${
-        Math.ceil(Math.random() * 10) * 1000
-        }`;
-      requirements[OSarray[i]].Memory = `${Math.ceil(Math.random() * 2) * 2 * 4} GB`;
-      requirements[OSarray[i]].Graphics = `${videoCards[1]} ${
-        Math.ceil(Math.random() * 100) * 10
-        } ${Math.ceil(Math.random() * 2) * 2}GB / ${videoCards[0]} ${
-        Math.ceil(Math.random() * 100) * 10
-        } ${Math.ceil(Math.random() * 2) * 2}GB`;
-      requirements[OSarray[i]].DirectX = `Version ${Math.ceil(Math.random() * 4) + 8}`;
-      requirements[OSarray[i]].Network = 'Broadband Internet';
-      requirements[OSarray[i]].Storage = `${Math.ceil(Math.random() * 10 + 10) * 5} GB`;
-    }
-    requirements.vrSupport = {
-      headsets: `${prodNames[Math.floor(Math.random() * 3)]}, ${prodNames[Math.floor(Math.random() * 3)]}, ${prodNames[Math.floor(Math.random() * 3)]}`,
-      input: `${prodAdjs[Math.floor(Math.random() * 4)]} ${prodNames[Math.floor(Math.random() * 3)]}`,
-      playArea: `${catchPhraseAdjs[Math.floor(Math.random() * 4)]}`
-    };
+//     for (let i = 0; i < 3; i++) {
+//       // this next line is for creating a version for any particular OS
+//       requirements[OSarray[i]].OS = `${OSarray[i]} ${Math.ceil(Math.random() * 5 + 5)} ${words[Math.floor(Math.random() * 3)]}`;
+//       requirements[OSarray[i]].Processor = `${processors[Math.floor(Math.random() * 3)]} ${
+//         Math.ceil(Math.random() * 10) * 1000
+//         }`;
+//       requirements[OSarray[i]].Memory = `${Math.ceil(Math.random() * 2) * 2 * 4} GB`;
+//       requirements[OSarray[i]].Graphics = `${videoCards[1]} ${
+//         Math.ceil(Math.random() * 100) * 10
+//         } ${Math.ceil(Math.random() * 2) * 2}GB / ${videoCards[0]} ${
+//         Math.ceil(Math.random() * 100) * 10
+//         } ${Math.ceil(Math.random() * 2) * 2}GB`;
+//       requirements[OSarray[i]].DirectX = `Version ${Math.ceil(Math.random() * 4) + 8}`;
+//       requirements[OSarray[i]].Network = 'Broadband Internet';
+//       requirements[OSarray[i]].Storage = `${Math.ceil(Math.random() * 10 + 10) * 5} GB`;
+//     }
+//     requirements.vrSupport = {
+//       headsets: `${prodNames[Math.floor(Math.random() * 3)]}, ${prodNames[Math.floor(Math.random() * 3)]}, ${prodNames[Math.floor(Math.random() * 3)]}`,
+//       input: `${prodAdjs[Math.floor(Math.random() * 4)]} ${prodNames[Math.floor(Math.random() * 3)]}`,
+//       playArea: `${catchPhraseAdjs[Math.floor(Math.random() * 4)]}`
+//     };
 
-    requirementsDocs.push(requirements);
-  }
+//     requirementsDocs.push(requirements);
+//   }
 
-  return requirementsDocs;
-};
+//   return requirementsDocs;
+// };
 
 const createDevelopers = () => {
   const developersArray = [];
@@ -206,7 +206,7 @@ const seed = () => {
   //generators
   const productPlatforms = assignPlatforms();
   const productLinks = createLinks();
-  const productSysReq = createSystemRequirements();
+  //const productSysReq = createSystemRequirements();
   const productSteamRate = createSteamRatings();
   const productDevelopers = createDevelopers();
   const productPublishers = createPublishers();
@@ -243,25 +243,25 @@ const seed = () => {
       );
     });
 
-    if (!mac) {
-      delete productSysReq[i].mac;
-    }
+    // if (!mac) {
+    //   delete productSysReq[i].mac;
+    // }
 
-    if (!windows) {
-      if (!virtual && !linux) {
-        delete productSysReq[i].windows;
-      }
-    }
+    // if (!windows) {
+    //   if (!virtual && !linux) {
+    //     delete productSysReq[i].windows;
+    //   }
+    // }
 
-    if (!linux) {
-      delete productSysReq[i].linux;
-    }
+    // if (!linux) {
+    //   delete productSysReq[i].linux;
+    // }
 
-    if (!virtual) {
-      delete productSysReq[i].vrSupport;
-    }
+    // if (!virtual) {
+    //   delete productSysReq[i].vrSupport;
+    // }
 
-    newDoc.system_req = productSysReq[i];
+    // newDoc.system_req = productSysReq[i];
     newDoc.links = productLinks[i];
     for (let j = 0; j < productPlatforms[i].length; j++) {
       if (newDoc.platforms[j].includes(icons.steam[0])) {
@@ -269,15 +269,17 @@ const seed = () => {
       }
     }
 
-    JSON.stringify(newDoc);
+    //JSON.stringify(newDoc);
+
     docsArray.push(newDoc);
   }
 
+  //console.log('doc: ', docsArray);
   return docsArray;
 };
 
 //create seed data chunk
-const seedData = seed();
+//const seedData = seed();
 
 
 //mongodb insertion func
