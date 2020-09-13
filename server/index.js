@@ -7,7 +7,7 @@ require('dotenv').config({
 const axios = require('axios');
 const express = require('express');
 const bodyParser = require('body-parser');
-const mysql = require('../database_mongo/mysql/index.js');
+const mysql = require('../database_mongo/mysql/dbHelpers.js');
 const morgan = require('morgan');
 const icons = require('../database_mongo/iconURLs.js');
 
