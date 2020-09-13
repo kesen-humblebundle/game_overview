@@ -91,6 +91,7 @@ describe('CRUD routes for mysql', () => {
 
   afterAll(async (done) => {
     process.env.MYSQLDB = 'overview';
+    done();
   });
 
 
@@ -111,41 +112,40 @@ describe('CRUD routes for mysql', () => {
   });
 
   //POST
-  // it('should POST to the /newItem endpoint', async (done) => {
-  //   const response = await request.post('/newItem').send(postData);
-  //   const response2 = await request.get('/readOnly/2');
+  it('should POST to the /newItem endpoint', async (done) => {
+    const response = await request.post('/newItem').send(postData);
+    const response2 = await request.get('/readOnly/2');
 
-  //   expect(response.status).toBe(201);
-  //   expect(response2.body[0].id).toBe(2);
-  //   done();
-  // });
+    expect(response.status).toBe(201);
+    expect(response2.body[0].id).toBe(2);
+    done();
+  });
 
-  // //PUT
-  // it('should update the correct item through the /updateItem endpoint', async (done) => {
-  //   const item11PreUpdate = await request.get('/readOnly/1');
-  //   const response = await request.put('/updateItem').send(updateData);
-  //   const item11PostUpdate = await request.get('/readOnly/1');
+  //PUT
+  it('should update the correct item through the /updateItem endpoint', async (done) => {
+    const item11PreUpdate = await request.get('/readOnly/1');
+    const response = await request.put('/updateItem').send(updateData);
+    const item11PostUpdate = await request.get('/readOnly/1');
 
-  //   expect(response.status).toBe(200);
-  //   expect(response.body.nModified).toBe(1);
-  //   expect(item11PreUpdate.body[0].platforms[0]).toBe('9 3/4');
-  //   expect(item11PostUpdate.body[0].platforms[0]).toBe('11 3/4');
-  //   done();
-  // });
+    expect(response.status).toBe(200);
+    expect(item11PreUpdate.body[0].platforms[0]).toBe('["platforms"]');
+    expect(item11PostUpdate.body[0].platforms[0]).toBe('["platforms3"]');
+    done();
+  });
 
-  // it('should get a 404 error when updating data without a product_id field', async (done) => {
-  //   const response = await request.put('/updateItem').send(badUpdateData);
+  it('should get a 404 error when updating data without a product_id field', async (done) => {
+    const response = await request.put('/updateItem').send(badUpdateData);
 
-  //   expect(response.status).toBe(404);
-  //   done();
-  // });
+    expect(response.status).toBe(404);
+    done();
+  });
 
 
-  // //DELETE
-  // it('should DELETE the correct record from /deleteItem/:product_id', async (done) => {
-  //   const response = await request.delete('/deleteItem/1');
+  //DELETE
+  it('should DELETE the correct record from /deleteItem/:product_id', async (done) => {
+    const response = await request.delete('/deleteItem/1');
 
-  //   expect(response.status).toBe(200);
-  //   done();
-  // });
+    expect(response.status).toBe(200);
+    done();
+  });
 });

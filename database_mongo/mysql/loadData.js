@@ -3,7 +3,7 @@ const data = require('../seed.js');
 
 
 var counter = 1;
-var max = 500;
+var max = 15385;
 
 const bulkInsertRecords = () => {
   var startTime = new Date();

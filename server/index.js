@@ -106,7 +106,7 @@ app.get('/system_req/:product_id', (req, res) => {
                     : 'Very Negative';
         resArray.push(describeSteamRating);
       }
-      console.log('resArray:', resArray);
+
       res.set({ 'Access-Control-Allow-Origin': '*' });
       res.status(200).send(resArray);
     }
@@ -176,10 +176,8 @@ app.get('/readOnly/:product_id', (req, res) => {
 
   mysql.getRecord(id, (err, rec) => {
     if (err) {
-      console.log(err);
       res.status(404).send();
     } else {
-      console.log('server rec');
       res.status(200).send(rec);
     }
   })
