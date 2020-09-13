@@ -121,12 +121,15 @@ app.get('/system_req/platforms/:product_id', (req, res) => {
 app.get('/readOnly/:product_id', (req, res) => {
   const id = req.params.product_id;
 
-    mysql.getRecord(id, (rec) => {
-      console.log('server rec');
-      res.status(200).send(rec);
+    mysql.getRecord(id, (err, rec) => {
+      if (err) {
+        console.log(err);
+        res.status(404).send();
+      } else {
+        console.log('server rec');
+        res.status(200).send(rec);
+      }
     })
-
-
 });
 
 
@@ -134,15 +137,13 @@ app.get('/readOnly/:product_id', (req, res) => {
 app.post('/newItem', (req, res) => {
   const newItem = req.body;
 
-  Overview.create(newItem)
-    .then(doc => {
-      const productInfo = doc;
-      res.status(201).send(productInfo);
-    })
-    .catch(err => {
-      console.log('error posting newItem to db: ', err);
-      res.status(500).send(err);
-    })
+  mysql.getRecord(newItem, (err, rec) => {
+    if (err) {
+      res.status(404).send();
+    } else {
+      res.status(201).send(rec);
+    }
+  })
 });
 
 //PUT
@@ -150,20 +151,17 @@ app.put('/updateItem', (req, res) => {
   const newInfo = req.body;
   const id = newInfo.product_id;
 
-  if (!id) {  //|| 0
+  if (!id) { 
     console.log('product_id required to update item');
     res.status(404).send()
   } else {
-    Overview.updateOne({ product_id: id }, newInfo) //have a separate validation func for put/post?
-      .then(doc => {
-        const productInfo = doc;
-        console.log(`Success updating item ${id}`);
-        res.send(productInfo);
-      })
-      .catch(err => {
-        console.log(`error updating item ${id}: `, err);
-        res.status(500).send(err);
-      })
+    mysql.updateRecord(newInfo, (err, rec) => {
+      if (err) {
+        res.status(404).send();
+      } else {
+        res.status(200).send(rec);
+      }
+    })
   }
 });
 
@@ -171,21 +169,13 @@ app.put('/updateItem', (req, res) => {
 app.delete('/deleteItem/:product_id', (req, res) => {
   const id = req.params.product_id;
 
-  if (id > max || id < min) {
-    console.log('Product id must be 1-100 inclusive. Invalid product_id: ', id);
-    res.status(404).send();
-  } else {
-    Overview.deleteOne({ product_id: id })
-      .then(doc => {
-        const deleted = doc;
-        console.log(`successfuly deleted item ${id}`);
-        res.send(deleted);
-      })
-      .catch(err => {
-        console.log('error in deleteItem: ', err);
-        res.status(500).send(err);
-      });
-  }
+  mysql.deleteRecord(id, (err, rec) => {
+    if (err) {
+      res.status(404);
+    } else {
+      res.status(200).send(rec);
+    }
+  })
 });
 
 
