@@ -8,6 +8,7 @@ const axios = require('axios');
 const express = require('express');
 const bodyParser = require('body-parser');
 const Overview = require('../database_mongo/index.js');
+const mysql = require('../database_mongo/mysql/index.js');
 const morgan = require('morgan');
 const data = require('../database_mongo/seed.js');
 
@@ -116,28 +117,16 @@ app.get('/system_req/platforms/:product_id', (req, res) => {
 
 //Extended CRUD for SDC
 
-//valid record ids
-const max = 100;
-const min = 1;
-
 //GET
 app.get('/readOnly/:product_id', (req, res) => {
   const id = req.params.product_id;
 
-  if (id > max || id < min) {
-    console.log('Product id must be 1-100 inclusive. Invalid product_id: ', id);
-    res.status(404).send();
-  } else {
-    Overview.find({ product_id: id })
-      .then(doc => {
-        const productInfo = doc; //clean up data maybe
-        res.send(productInfo);
-      })
-      .catch(err => {
-        console.log('error in GET readOnly: ', err);
-        res.status(500).send(err);
-      })
-  }
+    mysql.getRecord(id, (rec) => {
+      console.log('server rec');
+      res.status(200).send(rec);
+    })
+
+
 });
 
 

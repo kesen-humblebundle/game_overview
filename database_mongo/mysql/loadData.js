@@ -21,4 +21,4 @@ const bulkInsertRecords = () => {
   });
 }
 
-bulkInsertRecords();
+//bulkInsertRecords();
