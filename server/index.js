@@ -172,6 +172,7 @@ app.get('/system_req/:product_id', (req, res) => {
 //GET
 app.get('/readOnly/:product_id', (req, res) => {
   const id = req.params.product_id;
+  console.log('id: ', id);
 
   mysql.getRecord(id, (err, rec) => {
     if (err) {
@@ -188,6 +189,7 @@ app.get('/readOnly/:product_id', (req, res) => {
 //POST
 app.post('/newItem', (req, res) => {
   const newItem = req.body;
+  console.log('newItem: ', newItem);
 
   mysql.getRecord(newItem, (err, rec) => {
     if (err) {

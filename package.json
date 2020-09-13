@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "jest --forceExit",
-    "testCRUD": "jest ./__tests__/crud.test.js --runInBand --forceExit",
+    "testCRUD": "jest ./__tests__/mysql.test.js --runInBand --forceExit",
     "testDataGen": "jest ./__tests__/dataGenerator.test.js --runInBand --forceExit",
     "build": "webpack --watch -d",
     "p_build": "webpack -p",

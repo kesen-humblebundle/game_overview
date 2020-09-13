@@ -82,9 +82,38 @@ const deleteRecord = (id, next) => {
   })
 }
 
+const createTestTable = () => {
+  const query = `CREATE TABLE games (
+    id int NOT NULL AUTO_INCREMENT,
+    platforms VARCHAR(90),
+    os VARCHAR(90),
+    developer VARCHAR(16),
+    publisher VARCHAR(20),
+    links VARCHAR(40),
+    rating int,
+    PRIMARY KEY (ID)
+  )`;
+  mysql.connection.query(query, (err) => {
+    if (err) {
+      console.log('error creating testGames: ', err);
+    }
+  });
+}
+
+const dropTestTable = () => {
+  const query = `DROP TABLE games`;
+  mysql.connection.query(query, (err) => {
+    if (err) {
+      console.log('error dropping testGames: ', err);
+    }
+  })
+}
+
 
 module.exports.multiInsert = multiInsert;
 module.exports.getRecord = getRecord;
 module.exports.updateRecord = updateRecord;
 module.exports.addRecord = addRecord;
 module.exports.deleteRecord = deleteRecord;
+module.exports.createTestTable = createTestTable;
+module.exports.dropTestTable = dropTestTable;
