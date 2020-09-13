@@ -64,6 +64,7 @@ class App extends React.Component {
     axios
       .get(fetchURL, { crossdomain: true })
       .then((response) => {
+        console.log('response: ', response);
         const newState = { overview: response.data[0], genre: response.data[1] };
 
         if (response.data[2]) {

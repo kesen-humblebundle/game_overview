@@ -60,10 +60,10 @@ const updateRecord = (record, next) => {
   connection.query(query, (err, rec) => {
     if (err) {
       console.log('error in updateRecord: ', err);
-      next();
+      next(err);
     } else {
       console.log('updateRecord: ', rec);
-      next(rec);
+      next(null, rec);
     }
   })
 }
@@ -74,10 +74,10 @@ const addRecord = (record, next) => {
   connection.query(query, (err, rec) => {
     if (err) {
       console.log('error in addRecord: ', err);
-      next();
+      next(err);
     } else {
       console.log('addRecord: ', rec);
-      next(rec);
+      next(null, rec);
     }
   })
 }
