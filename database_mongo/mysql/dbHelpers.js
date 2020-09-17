@@ -34,7 +34,7 @@ const getRecord = (id, next) => {
     } else if (rec.length === 0) {
       next('No record for that id');
     } else {
-      console.log('getRecord: ', rec);
+      //console.log('getRecord: ', rec);
       next(null, rec);
     }
   })

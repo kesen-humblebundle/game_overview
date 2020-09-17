@@ -1,0 +1,14 @@
+config:
+  target: 'http://127.0.0.1:3002/system_req'
+  phases:
+    - duration: 60
+      arrivalRate: 100
+  payload:
+      path: "./gamesGet.csv"
+      fields:
+        - 'id'
+      order: "sequence"
+scenarios:
+  - flow:
+      - get:
+          url: '/{{ id }}'
