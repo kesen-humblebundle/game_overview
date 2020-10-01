@@ -1,0 +1,25 @@
+config:
+  target: 'http://127.0.0.1:3002'
+  phases:
+    - duration: 30
+      arrivalRate: 1000
+  payload:
+      path: "./gamesPOST.csv"
+      fields:
+        - 'platforms'
+        - 'os'
+        - 'developer'
+        - 'publisher'
+        - 'links'
+        - 'steam_rating'
+scenarios:
+  - flow:
+      - post:
+          url: '/newItem'
+          json:
+            platforms: "{{ platforms }}"
+            os: "{{ os }}"
+            developer: "{{ developer }}"
+            publisher: "{{ publisher }}"
+            links: "{{ links }}"
+            steam_rating: "{{ steam_rating }}"

@@ -187,9 +187,9 @@ app.get('/readOnly/:product_id', (req, res) => {
 //POST
 app.post('/newItem', (req, res) => {
   const newItem = req.body;
-  console.log('newItem: ', newItem);
+  //console.log('newItem: ', newItem);
 
-  mysql.getRecord(newItem, (err, rec) => {
+  mysql.addRecord(newItem, (err, rec) => {
     if (err) {
       res.status(404).send();
     } else {

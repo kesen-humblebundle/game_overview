@@ -6,9 +6,9 @@ require('dotenv').config({
 });
 
 const connection = mysql.createConnection({
-  host: process.env.MYSQLHOST || 'localhost',
+  host: 'ec2-18-223-123-3.us-east-2.compute.amazonaws.com', //localhost
   user: 'root',
-  database: process.env.MYSQLDB
+  database: 'overview'
 });
 
 connection.connect((err) => {

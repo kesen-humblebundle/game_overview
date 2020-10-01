@@ -1,5 +1,4 @@
 const mysql = require('./index.js');
-const Promise = require('bluebird');
 
 
 const multiInsert = (rec, next) => {
@@ -14,14 +13,13 @@ const multiInsert = (rec, next) => {
     }
   }
 
-  Promise.resolve(mysql.connection.query(query))
-    .then(data => {
-      next();
-    })
-    .catch(err => {
+  mysql.connection.query(query, (err, rec) => {
+    if (err) {
       console.log('error in multiInsert: ', err);
+    } else {
       next();
-    })
+    }
+  })
 };
 
 const getRecord = (id, next) => {
@@ -62,7 +60,7 @@ const addRecord = (record, next) => {
       console.log('error in addRecord: ', err);
       next(err);
     } else {
-      console.log('addRecord: ', rec);
+      //console.log('addRecord: ', rec);
       next(null, rec);
     }
   })
