@@ -14,6 +14,20 @@ const icons = require('../database_mongo/iconURLs.js');
 const app = express();
 app.use(morgan('dev'));
 
+//loader confirm:
+app.get('/loaderio-06e6a89abef55b0f3e7de3f5785e8cbf.txt', (req, res) => {
+  console.log('loader confirm');
+
+  res.sendFile('/Users/elzabethhayt/Desktop/RPT-21/SDC/Chris-app-service-overview/loader.txt', (err) => {
+    if (err) {
+      console.log('error sending loader confirm: ', err);
+      res.status(404).send(err);
+    } else {
+      console.log('success in loader confirm');
+    }
+  })
+});
+
 app.use(express.static('public', { fallthrough: true }));
 app.use('/:product_id', express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -166,6 +180,9 @@ app.get('/system_req/:product_id', (req, res) => {
 //     }
 //   });
 // });
+
+
+
 
 //Extended CRUD for SDC
 

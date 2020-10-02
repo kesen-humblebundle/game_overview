@@ -1,4 +1,4 @@
-const db = require('./createCouchDB.js');
+// const db = require('./createCouchDB.js');
 
-console.log('in getRecord');
-db.getCouchRecord(9000000);
+// console.log('in getRecord');
+// db.getCouchRecord(9000000);

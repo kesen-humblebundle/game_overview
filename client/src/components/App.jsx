@@ -56,10 +56,20 @@ class App extends React.Component {
     }
 
     // ************ comment out below url to run service locally
-    const fetchURL = 'ec2-18-223-123-3.us-east-2.compute.amazonaws.com';
+    //const fetchURL = `ec2-18-223-123-3.us-east-2.compute.amazonaws.com`;
 
     // ************ uncomment below url to run service locally
-    // const fetchURL = `http://127.0.0.1:3002/system_req${id}`;
+    var fetchURL = `http://127.0.0.1:3002/system_req${id}`;
+
+    //catch loader confirm
+    if (id === '/loaderio-06e6a89abef55b0f3e7de3f5785e8cbf.txt/') {
+      console.log('loader confirm front-end');
+      //local
+      fetchURL = `/loaderio-06e6a89abef55b0f3e7de3f5785e8cbf.txt`;
+
+      //deployed
+      //fetchURL = `ec2-18-223-123-3.us-east-2.compute.amazonaws.com/loaderio-06e6a89abef55b0f3e7de3f5785e8cbf.txt`;
+    }
 
     axios
       .get(fetchURL, { crossdomain: true })
@@ -84,6 +94,7 @@ class App extends React.Component {
 
   componentDidMount() {
     this.fetchOverview(window.location.pathname);
+    console.log('path: ', window.location.pathname);
   }
 
   render() {
