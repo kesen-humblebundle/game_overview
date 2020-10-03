@@ -51,22 +51,18 @@ class App extends React.Component {
   }
 
   fetchOverview(id) {
+    console.log('id: ', id);
     if (id === '/') {
       id = '/21';
     }
 
+    console.log('id: ', id);
+
     // ************ comment out below url to run service locally
-    var fetchURL = `ec2-18-223-123-3.us-east-2.compute.amazonaws.com`;
+    //const fetchURL = `ec2-18-223-123-3.us-east-2.compute.amazonaws.com`;
 
     // ************ uncomment below url to run service locally
-    // var fetchURL = `http://127.0.0.1:3002/system_req${id}`;
-
-    //catch loader confirm
-    // if (id === '/loaderio-06e6a89abef55b0f3e7de3f5785e8cbf.txt/') {
-    //   console.log('loader confirm front-end');
-
-    //   fetchURL = `/loaderio-06e6a89abef55b0f3e7de3f5785e8cbf.txt`;
-    // }
+    const fetchURL = `http://127.0.0.1:3002/system_req${id}`;
 
     axios
       .get(fetchURL, { crossdomain: true })
