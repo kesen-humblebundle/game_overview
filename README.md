@@ -1,8 +1,8 @@
 # Game Overview Service
 
-> This is a service representing the game system requirements and other specifications
-> on the product page of our Humble Bundle clone. It fetches info about a particular
-> product and displays relavent info in the same manner as the original site.
+> This service represents the system requirements/specifications module
+> on the product page of a Humble Bundle clone. It fetches info about a particular
+> game and displays relavent info in the same manner as the original site.
 > A second div displays system requirements for a given id and includes a dropown to view more.
 
 ## Related Projects
@@ -29,6 +29,7 @@ Note: Service is currently set up in deployed-mode. To run locally:
 OVERVIEW_PORT=3002
 ```
 2. Seed database with npm run seedDB
+3. In client/src/components/App.jsx, comment out line 62 and uncomment line 65.
 3. npm run build
 4. npm start
 5. Navigate to: https://127.0.0.1:3002
