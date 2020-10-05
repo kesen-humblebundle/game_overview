@@ -51,18 +51,19 @@ class App extends React.Component {
   }
 
   fetchOverview(id) {
-    console.log('id: ', id);
+    console.log('id1: ', id);
     if (id === '/') {
       id = '/21';
     }
 
-    console.log('id: ', id);
+    console.log('id2: ', id);
 
     // ************ comment out below url to run service locally
-    //const fetchURL = `ec2-18-223-123-3.us-east-2.compute.amazonaws.com`;
+    const fetchURL = `http://ec2-18-223-123-3.us-east-2.compute.amazonaws.com/system_req${id}`;
+    //ec2-18-223-123-3.us-east-2.compute.amazonaws.com
 
     // ************ uncomment below url to run service locally
-    const fetchURL = `http://127.0.0.1:3002/system_req${id}`;
+    // const fetchURL = `http://127.0.0.1:3002/system_req${id}`;
 
     axios
       .get(fetchURL, { crossdomain: true })

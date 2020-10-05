@@ -27,6 +27,7 @@ app.get('/:product_id', (req, res) => {
 
 app.get('/system_req/:product_id', (req, res) => {
   const id = req.params.product_id;
+  console.log('in server for item: ', id);
 
   mysql.getRecord(id, (err, rec) => {
     if (err) {
