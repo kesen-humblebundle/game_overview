@@ -3,3 +3,5 @@ public/bundle.js
 .env
 OHnotes.js
 schema.sql
+newrelic_agent.log
+newrelic.js

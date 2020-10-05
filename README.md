@@ -1,8 +1,8 @@
 # Game Overview Service
 
-> This is a service representing the game system requirements and other specifications
-> on the product page of our Humble Bundle clone. It fetches info about a particular
-> product and displays relavent info in the same manner as the original site.
+> This service represents the system requirements/specifications module
+> on the product page of a Humble Bundle clone. It fetches info about a particular
+> game and displays relavent info in the same manner as the original site.
 > A second div displays system requirements for a given id and includes a dropown to view more.
 
 ## Related Projects
@@ -22,21 +22,17 @@
 4. CRUD Routes
 
 ## Usage
+Note: Service is currently set up in deployed-mode. To run locally:
 
-1. Must have mongodb installed
-2. Start mongodb
-3. Make sure to create a .env file at the root level with the following format:
+1. Create a .env file at the root level with the following format:
 ```
 OVERVIEW_PORT=3002
-DATABASE='mongodb://localhost:27017/overview'
 ```
-4. In terminal, from root directory of project > npm run seedDB
-
-> Seed script is currently set to load 10,000 records. Go to line 12 of database_mongo/seed.js to change this number.
-
-5. npm run build
-6. npm start
-7. Navigate to: https://127.0.0.1:3002
+2. Seed database with npm run seedDB
+3. In client/src/components/App.jsx, comment out line 62 and uncomment line 65.
+3. npm run build
+4. npm start
+5. Navigate to: https://127.0.0.1:3002
 
 > The service will default to a product id of 21, but you can switch to any id from 1 - 10000 inclusive by adding a slash followed by the number to the end of step 7
 

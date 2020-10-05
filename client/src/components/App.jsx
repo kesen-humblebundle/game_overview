@@ -51,12 +51,15 @@ class App extends React.Component {
   }
 
   fetchOverview(id) {
+    console.log('id: ', id);
     if (id === '/') {
       id = '/21';
     }
 
+    console.log('id: ', id);
+
     // ************ comment out below url to run service locally
-    //const fetchURL = `http://ec2-3-129-17-68.us-east-2.compute.amazonaws.com:3002/system_req${id}`;
+    //const fetchURL = `ec2-18-223-123-3.us-east-2.compute.amazonaws.com`;
 
     // ************ uncomment below url to run service locally
     const fetchURL = `http://127.0.0.1:3002/system_req${id}`;
@@ -84,6 +87,7 @@ class App extends React.Component {
 
   componentDidMount() {
     this.fetchOverview(window.location.pathname);
+    console.log('path: ', window.location.pathname);
   }
 
   render() {

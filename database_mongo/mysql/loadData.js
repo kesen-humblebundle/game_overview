@@ -1,9 +1,9 @@
-const db = require('./index.js');
+const db = require('./dbHelpers.js');
 const data = require('../seed.js');
 
 
 var counter = 1;
-var max = 15385;
+var max = 500;
 
 const bulkInsertRecords = () => {
   var startTime = new Date();
@@ -21,4 +21,4 @@ const bulkInsertRecords = () => {
   });
 }
 
-//bulkInsertRecords();
+bulkInsertRecords();
