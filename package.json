@@ -33,6 +33,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-icons": "^3.10.0",
+    "redis": "^3.0.2",
     "sql-cli": "^0.6.2",
     "styled-components": "^5.1.1"
   },

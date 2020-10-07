@@ -27,6 +27,8 @@ Note: Service is currently set up in deployed-mode. To run locally:
 1. Create a .env file at the root level with the following format:
 ```
 OVERVIEW_PORT=3002
+REDIS_PORT=6379
+MYSQL_PW='your mysql password'
 ```
 2. Seed database with npm run seedDB
 3. In client/src/components/App.jsx, comment out line 62 and uncomment line 65.

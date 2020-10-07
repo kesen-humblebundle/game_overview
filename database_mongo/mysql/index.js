@@ -2,13 +2,14 @@ const mysql = require('mysql');
 const path = require('path');
 
 require('dotenv').config({
-  path: path.resolve(__dirname, '../.env')
+  path: path.resolve(__dirname, '.../.env')
 });
 
 const connection = mysql.createConnection({
-  host: 'ec2-18-223-123-3.us-east-2.compute.amazonaws.com', //localhost
-  user: 'root',
-  database: 'overview'
+  host: process.env.MYSQL_HOST, //localhost
+  user: process.env.MYSQL_U,
+  password: process.env.MYSQL_PW,
+  database: process.env.MYSQL_DB
 });
 
 connection.connect((err) => {

@@ -6,10 +6,13 @@ require('dotenv').config({
 });
 const axios = require('axios');
 const express = require('express');
+const redis = require('redis');
 const bodyParser = require('body-parser');
 const mysql = require('../database_mongo/mysql/dbHelpers.js');
 const morgan = require('morgan');
 const icons = require('../database_mongo/iconURLs.js');
+
+const client = redis.createClient(process.env.REDIS_PORT);
 
 const app = express();
 app.use(morgan('dev'));
@@ -25,7 +28,26 @@ app.get('/:product_id', (req, res) => {
   res.end();
 });
 
-app.get('/system_req/:product_id', (req, res) => {
+//cache middleware
+const cache = (req, res, next) => {
+  console.log('cache middleware');
+  const id = req.params.product_id;
+
+  client.get(id, (err, data) => {
+    if (err) {
+      throw err;
+    } 
+    if (data !== null) {
+      console.log('cached data: ', data);
+      res.send(JSON.parse(data));
+    } else {
+      next();
+    }
+  })
+}
+
+
+app.get('/system_req/:product_id', cache, (req, res) => {
   const id = req.params.product_id;
   console.log('in server for item: ', id);
 
@@ -108,6 +130,9 @@ app.get('/system_req/:product_id', (req, res) => {
         resArray.push(describeSteamRating);
       }
 
+      //cache the id, resArray for 1 minute
+      client.setex(id.toString(), 60000, JSON.stringify(resArray));
+
       res.set({ 'Access-Control-Allow-Origin': '*' });
       res.status(200).send(resArray);
     }
@@ -174,12 +199,13 @@ app.get('/system_req/:product_id', (req, res) => {
 //Extended CRUD for SDC
 
 //GET
-app.get('/readOnly/:product_id', (req, res) => {
+app.get('/readOnly/:product_id', cache, (req, res) => {
   const id = req.params.product_id;
   console.log('id: ', id);
 
   mysql.getRecord(id, (err, rec) => {
     if (err) {
+      console.log('readOnly err: ', err);
       res.status(404).send();
     } else {
       res.status(200).send(rec);
