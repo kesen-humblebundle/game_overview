@@ -34,7 +34,7 @@ OVERVIEW_PORT=3002
 4. npm start
 5. Navigate to: https://127.0.0.1:3002
 
-> The service will default to a product id of 21, but you can switch to any id from 1 - 10000 inclusive by adding a slash followed by the number to the end of step 7
+> The service will default to a product id of 21, but you can switch to any id from 1 - 10000000 inclusive by adding a slash followed by the number to the end of step 5
 
 ## Testing
 This service uses jest and enzyme. 
